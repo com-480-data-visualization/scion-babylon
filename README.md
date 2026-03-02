@@ -4,7 +4,7 @@
 | -------------- | ------ |
 | Johanna Jacome Noia Nuding | 342074 |
 | Paul Tissot-Daguette | 341190 |
-| Pol Fuentes Camacho | TODO |
+| Pol Fuentes Camacho | 346020 |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
