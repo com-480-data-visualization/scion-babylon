@@ -3,13 +3,13 @@
 This report presents the findings from the exploratory data analysis of the `international_bestsellers.csv` dataset.
 
 ## Dataset Overview
-- **Total Rows:** 7910
+- **Total Rows:** 7879 (after removing rows with missing values)
 - **Total Columns:** 10
 - **Columns:** `date`, `country`, `rank`, `title`, `author`, `nationality`, `gender`, `entry_id`, `publisher`, `publication_country`
 - **Date Range:** 2013-06-01 to 2024-03-01
 
 ## Missing Values
-The dataset is largely complete, with only a few missing values:
+The initial dataset contained the following missing values, which have now been removed to ensure clean downstream analysis:
 - `rank`: 1 missing
 - `title`: 6 missing
 - `author`: 12 missing
@@ -24,10 +24,10 @@ Because of this, the **Gender Distribution** chart displays these combinations t
 
 However, to provide a more accurate evaluation of geographic representation, the data for **Nationality** has been cleaned: entries with multiple authors have been _exploded_ (split) so each individual author is mapped to the final totals, giving us the actual geographic demographic distribution.
 
-## Unique Entities
-- **Unique Authors:** 1902
-- **Unique Books:** 3754
-- **Unique Publishers:** 750
+## Unique Entities (Cleaned Data)
+- **Unique Authors:** 1897
+- **Unique Books:** 3743
+- **Unique Publishers:** 746
 - **Unique Countries (List Source):** 45
 
 ## Summary Statistics
@@ -54,7 +54,7 @@ However, to provide a more accurate evaluation of geographic representation, the
 7. The Midnight Library (27 entries)
 8. Homeland (26 entries)
 9. The Goldfinch (25 entries)
-10. After You (24 entries)
+10. The Evening and the Morning (24 entries)
 
 ### Top 10 Nationalities (Exploded count)
 1. United States (2139)
@@ -65,8 +65,8 @@ However, to provide a more accurate evaluation of geographic representation, the
 6. Germany (604)
 7. Sweden (209)
 8. Switzerland (118)
-9. Japan (110)
-10. Australia (110)
+9. Australia (110)
+10. Norway (109)
 
 ## Visualizations
 
