@@ -2,9 +2,9 @@
 
 | Student's name | SCIPER |
 | -------------- | ------ |
-| | |
-| | |
-| | |
+| Johanna Jacome Noia Nuding | 342074 |
+| Paul Tissot-Daguette | 341190 |
+| Pol Fuentes Camacho | TODO |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
 
@@ -22,6 +22,8 @@ Please, fill the following sections about your project.
 > Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
 >
 > Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)).
+
+We found the following dataset [International Bestsellers: The Dataset](https://data.post45.org/posts/international-bestsellers/). It describes more than 7000 books along with author and publishing information. It is made available by the national endowment for the humanities (NEH) of the american government, which we think is sufficient for trustworthiness. Also, the columns are pretty simple and well-formatted, so there is probably little to now pre-processing effort to be made. We believe it will allow us to gain valuable insights for our problematic described below.
 
 ### Problematic
 
