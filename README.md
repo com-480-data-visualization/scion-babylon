@@ -42,6 +42,8 @@ We  have thought about a few different questions that we could try to answer suc
 > Pre-processing of the data set you chose
 > - Show some basic statistics and get insights about the data
 
+Please see the [Exploratory Data Analysis Report](eda_report.md) for detailed statistics, insights, and visualizations of the dataset.
+
 ### Related work
 
 
