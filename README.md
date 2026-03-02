@@ -23,13 +23,18 @@ Please, fill the following sections about your project.
 >
 > Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)).
 
-We found the following dataset [International Bestsellers: The Dataset](https://data.post45.org/posts/international-bestsellers/). It describes more than 7000 books along with author and publishing information. It is made available by the national endowment for the humanities (NEH) of the american government, which we think is sufficient for trustworthiness. Also, the columns are pretty simple and well-formatted, so there is probably little to now pre-processing effort to be made. We believe it will allow us to gain valuable insights for our problematic described below.
+We found the following dataset [International Bestsellers: The Dataset](https://data.post45.org/posts/international-bestsellers/). It describes more than 7000 books along with author and publishing information. It is made available by the national endowment for the humanities (NEH) of the american government, which we think is sufficient for trustworthiness. Also, the columns are pretty simple and well-formatted, so there is probably little to no pre-processing effort to be made. We believe it will allow us to gain valuable insights for our problematic described below.
 
 ### Problematic
 
 > Frame the general topic of your visualization and the main axis that you want to develop.
 > - What am I trying to show with my visualization?
 > - Think of an overview for the project, your motivation, and the target audience.
+Our project aims to analyze published books more closely. Mainly to think about different aspects such as representation, nationality and genders accross different genres. Our target audience would mainly be anyone interested in books. 
+We  have thought about a few different questions that we could try to answer such as:
+- What are the most published voices, where do they come from ?
+- Which gender publishes which genre of books ?
+- Are author's who indentify as women rated more harshly than their peers who indentify as male ?
 
 ### Exploratory Data Analysis
 
