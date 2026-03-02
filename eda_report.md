@@ -18,9 +18,11 @@ The dataset is largely complete, with only a few missing values:
 - `publication_country`: 23 missing
 
 ## Dealing with Co-Authorship 
-In the raw dataset, books written by multiple co-authors have their individual genders and nationalities joined together by a semicolon (for example, `m; w` or `Sweden; Sweden`). This led to mixed demographic categories in the initial visualization. 
+In the raw dataset, books written by multiple co-authors have their individual genders and nationalities joined together by a semicolon (for example, `m; w` or `Sweden; Sweden`). 
 
-To provide a more accurate evaluation of author representation, the data for **Gender** and **Nationality** has been cleaned: entries with multiple authors have been _exploded_ (split) so each individual author is mapped to the final totals, giving us the true demographic distribution.
+Because of this, the **Gender Distribution** chart displays these combinations to show the representation of different author teams (e.g. `m; m` for two men, or `m; w` for mixed).
+
+However, to provide a more accurate evaluation of geographic representation, the data for **Nationality** has been cleaned: entries with multiple authors have been _exploded_ (split) so each individual author is mapped to the final totals, giving us the actual geographic demographic distribution.
 
 ## Unique Entities
 - **Unique Authors:** 1902
