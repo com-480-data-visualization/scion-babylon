@@ -31,11 +31,12 @@ We found the following dataset [International Bestsellers: The Dataset](https://
 > - What am I trying to show with my visualization?
 > - Think of an overview for the project, your motivation, and the target audience.
 
-Our project aims to analyze published books more closely.Mainly to think about different aspects such as representation, nationality and genders accross different genres. Our target audience would mainly be anyone interested in books. 
+Our project aims to analyze published books more closely. We want to think about different aspects such as representation, nationality and genders accross different genres. Our target audience would people willing to learn more about books publishing and equality. 
+
 We  have thought about a few different questions that we could try to answer such as:
 - What are the most published voices, where do they come from ?
-- Which gender publishes which genre of books ?
-- Are author's who indentify as women rated more harshly than their peers who indentify as male ?
+- Is there a correlation between gender and genres ?
+- Is there a discrepancy in the way books are rated depending on the author's gender ?
 
 ### Exploratory Data Analysis
 
