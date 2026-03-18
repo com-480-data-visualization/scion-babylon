@@ -19,20 +19,11 @@ Please, fill the following sections about your project.
 
 ### Dataset
 
-> Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
->
-> Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)).
-
 We found the following dataset [International Bestsellers: The Dataset](https://data.post45.org/posts/international-bestsellers/). It describes more than 7000 books along with author and publishing information. It is made available by the national endowment for the humanities (NEH) of the american government, which we think is sufficient for trustworthiness. Also, the columns are pretty simple and well-formatted, so there is probably little to no pre-processing effort to be made. We believe it will allow us to gain valuable insights for our problematic described below.
 
-To enable a more detailed analysis, we thought it would be appropriate to add the [Best Books Ever Dataset](https://zenodo.org/records/4265096), which contains details about each book, but lacks information about gender and nationality. This dataset is the result of coursework from students of the Universitat Oberta de Catalunya (UOC), and is transparent about how data was collected, which is mainly scraping goodreads, a website containing a lot of information about books and used by millions of users.
+To enable a more detailed analysis, we thought it would be appropriate to add the [Best Books Ever Dataset](https://zenodo.org/records/4265096), which contains details about each book, but lacks information about gender and nationality. This dataset is the result of coursework from students of the Universitat Oberta de Catalunya (UOC), and is transparent about how data was collected, which is mainly scraping GoodReads, a website containing a lot of information about books and used by millions of users.
 
 ### Problematic
-
-> Frame the general topic of your visualization and the main axis that you want to develop.
-> - What am I trying to show with my visualization?
-> - Think of an overview for the project, your motivation, and the target audience.
-
 Our project aims to analyze published books more closely. We want to think about different aspects such as representation, nationality and genders accross different genres. Our target audience would people willing to learn more about books publishing and equality.
 
 We  have thought about a few different questions that we could try to answer such as:
@@ -45,21 +36,18 @@ Using the second dataset to enrich our analysis, we could explore
 - The distribution of awards and user ratings depending on demographics.
 
 ### Exploratory Data Analysis
-
-> Pre-processing of the data set you chose
-> - Show some basic statistics and get insights about the data
-
 We provide a detailed report in the TODO.md file, showing our initial findings.
 
 ### Related work
 > - What others have already done with the data?
-The lab that created the data focused on answering the following questions :
+The lab that created the first data focused on answering the following questions :
     Who are the bestselling authors of the early twenty-first century?
     What are the bestselling titles?
     Which publishers have the greatest success selling in international markets?
     How do the economics of multinational publishers affect the success of an international bestseller?
     What are the routes by which bestsellers travel from one national market to another?
     And in what ways do the gender and/or nationality of an author correspond with bestseller status?
+The second dataset was created for a class at the Universitat Oberta de Catalunya. As far as we could see this dataset was not used for further analysis.
 
 > - Why is your approach original?
 We are focusing on the book's genre and how that might relate to the author's gender and nationality, as well as reflect on the book's overall rating.
