@@ -33,7 +33,7 @@ To enable a more detailed analysis, we thought it would be appropriate to add th
 > - What am I trying to show with my visualization?
 > - Think of an overview for the project, your motivation, and the target audience.
 
-Our project aims to analyze published books more closely. We want to think about different aspects such as representation, nationality and genders accross different genres. Our target audience would people willing to learn more about books publishing and equality. 
+Our project aims to analyze published books more closely. We want to think about different aspects such as representation, nationality and genders accross different genres. Our target audience would people willing to learn more about books publishing and equality.
 
 We  have thought about a few different questions that we could try to answer such as:
 - What are the most published voices, where do they come from ?
@@ -52,12 +52,20 @@ Using the second dataset to enrich our analysis, we could explore
 We provide a detailed report in the TODO.md file, showing our initial findings.
 
 ### Related work
-
-
 > - What others have already done with the data?
+The lab that created the data focused on answering the following questions :
+    Who are the bestselling authors of the early twenty-first century?
+    What are the bestselling titles?
+    Which publishers have the greatest success selling in international markets?
+    How do the economics of multinational publishers affect the success of an international bestseller?
+    What are the routes by which bestsellers travel from one national market to another?
+    And in what ways do the gender and/or nationality of an author correspond with bestseller status?
+
 > - Why is your approach original?
+We are focusing on the book's genre and how that might relate to the author's gender and nationality, as well as reflect on the book's overall rating.
+
 > - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
+The visualizations on the Flourish website are usually creative and informative, they seem to be a good source of inspiration for our visualizations. Here is an example where they visualize specific [books](https://flourish.studio/blog/visualizing-our-2022-reads/).
 
 ## Milestone 2 (17th April, 5pm)
 
@@ -73,4 +81,3 @@ We provide a detailed report in the TODO.md file, showing our initial findings.
 
 - < 24h: 80% of the grade for the milestone
 - < 48h: 70% of the grade for the milestone
-
