@@ -48,8 +48,7 @@ Using the second dataset to enrich our analysis, we could explore
 
 > Pre-processing of the data set you chose
 > - Show some basic statistics and get insights about the data
-
-We provide a detailed report in the TODO.md file, showing our initial findings.
+Please see the [Exploratory Data Analysis Report](eda_report.md) for detailed statistics, insights, and visualizations of the dataset.
 
 ### Related work
 
