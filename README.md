@@ -25,23 +25,29 @@ Please, fill the following sections about your project.
 
 We found the following dataset [International Bestsellers: The Dataset](https://data.post45.org/posts/international-bestsellers/). It describes more than 7000 books along with author and publishing information. It is made available by the national endowment for the humanities (NEH) of the american government, which we think is sufficient for trustworthiness. Also, the columns are pretty simple and well-formatted, so there is probably little to no pre-processing effort to be made. We believe it will allow us to gain valuable insights for our problematic described below.
 
+To enable a more detailed analysis, we thought it would be appropriate to add the [Best Books Ever Dataset](https://zenodo.org/records/4265096), which contains details about each book, but lacks information about gender and nationality. This dataset is the result of coursework from students of the Universitat Oberta de Catalunya (UOC), and is transparent about how data was collected, which is mainly scraping goodreads, a website containing a lot of information about books and used by millions of users.
+
 ### Problematic
 
 > Frame the general topic of your visualization and the main axis that you want to develop.
 > - What am I trying to show with my visualization?
 > - Think of an overview for the project, your motivation, and the target audience.
 
-Our project aims to analyze published books more closely.Mainly to think about different aspects such as representation, nationality and genders accross different genres. Our target audience would mainly be anyone interested in books. 
+Our project aims to analyze published books more closely. We want to think about different aspects such as representation, nationality and genders accross different genres. Our target audience would people willing to learn more about books publishing and equality. 
+
 We  have thought about a few different questions that we could try to answer such as:
 - What are the most published voices, where do they come from ?
-- Which gender publishes which genre of books ?
-- Are author's who indentify as women rated more harshly than their peers who indentify as male ?
+- Is there a correlation between gender and genres ?
+- Is there a discrepancy in the way books are rated depending on the author's gender ?
+
+Using the second dataset to enrich our analysis, we could explore
+- The distribution of male/female/other characters across gender and nationality of authors as well as genres.
+- The distribution of awards and user ratings depending on demographics.
 
 ### Exploratory Data Analysis
 
 > Pre-processing of the data set you chose
 > - Show some basic statistics and get insights about the data
-
 Please see the [Exploratory Data Analysis Report](eda_report.md) for detailed statistics, insights, and visualizations of the dataset.
 
 ### Related work
