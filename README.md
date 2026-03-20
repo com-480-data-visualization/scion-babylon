@@ -55,6 +55,11 @@ We are focusing on the book's genre and how that might relate to the author's ge
 > - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
 The visualizations on the Flourish website are usually creative and informative, they seem to be a good source of inspiration for our visualizations. Here is an example where they visualize specific [books](https://flourish.studio/blog/visualizing-our-2022-reads/).
 
+We also reviewed papers that may be relevant to the work we plan to pursue. Here are the most notable ones:
+- [How should cultural diversity be measured? An application using the French publishing industry](https://link.springer.com/article/10.1007/s10824-007-9037-8)
+- [The Limits of Diversity: How Publishing Industries Make Race](https://ijoc.org/index.php/ijoc/article/view/18752/3738)
+- [Comparing gender discrimination and inequality in indie and traditional publishing](https://pmc.ncbi.nlm.nih.gov/articles/PMC5891011/)
+
 ## Milestone 2 (17th April, 5pm)
 
 **10% of the final grade**
