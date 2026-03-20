@@ -19,7 +19,7 @@ Please, fill the following sections about your project.
 
 ### Dataset
 
-We found the following dataset [International Bestsellers: The Dataset](https://data.post45.org/posts/international-bestsellers/). It describes more than 7000 books along with author and publishing information. It is made available by the national endowment for the humanities (NEH) of the american government, which we think is sufficient for trustworthiness. Also, the columns are pretty simple and well-formatted, so there is probably little to no pre-processing effort to be made. We believe it will allow us to gain valuable insights for our problematic described below.
+We found the following dataset [International Bestsellers: The Dataset](https://data.post45.org/posts/international-bestsellers/). It describes more than 7000 books along with author and publishing information. It is made available by the national endowment for the humanities (NEH) of the american government, which we believe is sufficient for trustworthiness. Furhtermore, the columns are pretty simple and well-formatted, so there is probably little to no pre-processing effort to be made. We believe it will allow us to gain valuable insights for our problematic described below.
 
 To enable a more detailed analysis, we thought it would be appropriate to add the [Best Books Ever Dataset](https://zenodo.org/records/4265096), which contains details about each book, but lacks information about gender and nationality. This dataset is the result of coursework from students of the Universitat Oberta de Catalunya (UOC), and is transparent about how data was collected, which is mainly scraping GoodReads, a website containing a lot of information about books and used by millions of users.
 
