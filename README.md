@@ -36,7 +36,10 @@ Using the second dataset to enrich our analysis, we could explore
 - The distribution of awards and user ratings depending on demographics.
 
 ### Exploratory Data Analysis
-We provide a detailed report in the TODO.md file, showing our initial findings.
+
+> Pre-processing of the data set you chose
+> - Show some basic statistics and get insights about the data
+Please see the [Exploratory Data Analysis Report](eda_report.md) for detailed statistics, insights, and visualizations of the dataset.
 
 ### Related work
 > - What others have already done with the data?
