@@ -40,7 +40,7 @@ We provide a detailed report in the TODO.md file, showing our initial findings.
 
 ### Related work
 > - What others have already done with the data?
-The lab that created the first data focused on answering the following questions :
+The lab that created the first data(set?) focused on answering the following questions :
     Who are the bestselling authors of the early twenty-first century?
     What are the bestselling titles?
     Which publishers have the greatest success selling in international markets?
