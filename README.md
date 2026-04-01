@@ -50,7 +50,7 @@ Please see the [Exploratory Data Analysis Report for the International Bestselle
 
 > - What others have already done with the data?
 
-The lab that created the first data(set?) focused on answering the following questions :
+The lab that created the first dataset focused on answering the following questions :
 
 - Who are the bestselling authors of the early twenty-first century?
 - What are the bestselling titles?
