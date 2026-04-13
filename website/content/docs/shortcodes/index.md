@@ -183,7 +183,7 @@ Icons are populated using Hugo pipelines which makes them very flexible. Congo i
 
 Custom icons can be added by providing your own icon assets in the `assets/icons/` directory of your project. The icon can then be referenced in the shortcode by using the SVG filename without the `.svg` extension.
 
-Icons can also be used in partials by calling the [icon partial]({{< ref "partials#icon" >}}).
+Icons can also be used in partials by calling the [icon partial]({{< ref "partials#icon" >}}).dkdddldldldld
 
 ## Katex
 
