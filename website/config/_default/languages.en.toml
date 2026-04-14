@@ -10,16 +10,15 @@ copyright = "&copy; 2024 Congo contributors"
   dateFormat = "2 January 2006"
 
   mainSections = ["samples"]
-  description = "A powerful, lightweight theme for Hugo built with Tailwind CSS."
+  #description = "A powerful, lightweight theme for Hugo built with Tailwind CSS."
 
 [params.author]
-  name = "Congo"
-  image = "img/author.jpg"
-  headline = "Not your ordinary theme!"
-  bio = "This is an example author bio, and although there's a stock photo of a dog here, this article was actually created by a human. :dog:"
+  name = "Johanna, Paul and Pol"
+  image = "img/authors.jpeg"
+  headline = "Not your ordinary team!"
+  bio = "We are three EPFL Cybersecurity students, welcome to our website. :dog:"
   links = [
-    { x-twitter = "https://twitter.com/" },
-    { facebook = "https://facebook.com/" },
-    { linkedin = "https://linkedin.com/" },
-    { youtube = "https://youtube.com/" },
+    { linkedin = "https://www.linkedin.com/in/johanna-nuding-7726b4305/" },
+    { linkedin = "https://www.linkedin.com/in/paul-tissot-daguette-167a76303/" },
+    { linkedin = "https://www.linkedin.com/in/pol-fuentes-camacho/" }
   ]

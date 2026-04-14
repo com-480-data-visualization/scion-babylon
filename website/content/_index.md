@@ -9,5 +9,4 @@ A powerful, lightweight theme for Hugo built with Tailwind CSS.
 
 
 ## Featured Visualizations
-
-{{< include-page "samples/d3" >}}
+[D3 pages]({{< ref "samples/d3" >}})
