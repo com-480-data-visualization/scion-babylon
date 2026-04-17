@@ -77,7 +77,7 @@ We also reviewed papers that may be relevant to the work we plan to pursue. Here
 - [Comparing gender discrimination and inequality in indie and traditional publishing](https://pmc.ncbi.nlm.nih.gov/articles/PMC5891011/)
 
 ## Milestone 2 (17th April, 5pm)
-The two page document describing our project can be found [here]("Dataviz milestone 2.pdf").
+The two page document describing our project can be found [here](<Dataviz milestone 2.pdf>).
 
 The live skeleton is accessible on that [link](https://com-480-data-visualization.github.io/scion-babylon/).
 
