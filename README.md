@@ -77,8 +77,9 @@ We also reviewed papers that may be relevant to the work we plan to pursue. Here
 - [Comparing gender discrimination and inequality in indie and traditional publishing](https://pmc.ncbi.nlm.nih.gov/articles/PMC5891011/)
 
 ## Milestone 2 (17th April, 5pm)
+The two page document describing our project can be found [here](TODO METTRE LIEN).
 
-**10% of the final grade**
+The live skeleton is accessible on that [link](https://com-480-data-visualization.github.io/scion-babylon/).
 
 ## Milestone 3 (29th May, 5pm)
 
