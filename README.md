@@ -79,7 +79,7 @@ We also reviewed papers that may be relevant to the work we plan to pursue. Here
 ## Milestone 2 (17th April, 5pm)
 The two page document describing our project can be found [here](<Dataviz milestone 2.pdf>).
 
-The live skeleton is accessible on that [link](https://com-480-data-visualization.github.io/scion-babylon/).
+The live skeleton is accessible on that [link](https://com-480-data-visualization.github.io/scion-babylon/), which is associated with the website branch on this repo.
 
 ## Milestone 3 (29th May, 5pm)
 
