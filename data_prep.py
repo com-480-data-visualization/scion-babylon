@@ -27,14 +27,44 @@ df = rest[["title","author", "rating", "genres", "language"]].copy()
 ## Apply gender detector
 # possible outputs unknown, andy, male, female, mostly_male, or mostly_female
 d = gender.Detector()
-df['gender']= df["author"].apply(lambda x: d.get_gender(x.split()[0]))
+def guess_gender(authors: str):
+    split_authors = authors.split(",")
+
+    if (len(split_authors) == 1): 
+        name = split_authors[0].split()[0]
+        return 'w' if d.get_gender(name) == "female" else 'm'
+
+    # more than one name 
+    final_gender = ""
+    for author in split_authors:
+        name = author.split()[0]
+        if len(final_gender) > 0: 
+            final_gender += ";"
+        gender = d.get_gender(name)
+        match gender:
+            case "female":
+                final_gender += "w"
+            case "male":
+                final_gender += "m"
+            case _:
+                final_gender += gender
+    return final_gender
+        
+        
+
+
+
+
+df['gender']= df["author"].apply(lambda x: guess_gender(x))
+ab = df[['author', 'gender']].copy()
+ab.to_csv("authors_gen.csv", index=False)
+
 # Output unclassified genders
-df_undefined = df[~df['gender'].isin(["male", "female"])]
+df_undefined = df[~df['gender'].isin(["m", "w", "m;m", "w;m", "m;w", "w;w"])]
 df_undefined.to_csv("gender_undefined.csv", index=False)
 print(f"undefined: {len(df_undefined)}")
 
-df_known = df[df['gender'].isin(["male", "female"])]
-df_known['gender'] = df_known['gender'].apply(lambda g: 'w' if g == "female" else 'm')
+df_known = df[df['gender'].isin(["m", "w", "m;m", "w;m", "m;w", "w;w"])]
 df_known = df_known.drop_duplicates(subset=["title"])
 
 merged = pd.merge(best_books, international_bestsellers[['title', 'gender']], on='title', how='inner')
