@@ -23,7 +23,6 @@ rest = rest.drop_duplicates(subset=["title"])
 df = rest[["title","author", "rating", "genres", "language"]].copy()
 
 
-
 ## Apply gender detector
 # possible outputs unknown, andy, male, female, mostly_male, or mostly_female
 d = gender.Detector()

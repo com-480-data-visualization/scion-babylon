@@ -140,3 +140,99 @@ legend.append("rect").attr("width", 14).attr("height", 14).attr("fill", (d, i) =
 legend.append("text").attr("x", 18).attr("y", 11).style("font-size", "13px").text(d => d);
 {{< /d3 >}}
 <!-- prettier-ignore-end -->
+
+## Cartogram
+
+<!-- prettier-ignore-start -->
+<script src="https://unpkg.com/topojson@3/dist/topojson.min.js"></script>
+<script src="/js/cartogram.js"></script>
+
+{{< d3 >}}
+d3.cartogram = cartogramFactory;
+const width = container.clientWidth;
+const height = 500;
+
+const svg = d3.select(container).append("svg")
+  .attr("width", width)
+  .attr("height", height);
+
+const proj = d3.geoNaturalEarth1()
+  .translate([width / 2, height / 2])
+  .scale(width / (2 * Math.PI));
+
+const carto = d3.cartogram()
+  .projection(proj);
+
+
+Promise.all([
+  d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
+  d3.csv("/data/nationalities.csv")
+]).then(([topology, data]) => {
+  const dataById = new Map(
+    data
+      .filter(d => d["ID"] && d["ID"] !== "nan")
+      .map(d => [+d["ID"], +d["counts"]])
+  );
+  // Split geometries
+  const problematicIDs = [10, 643, 242]; // Antarctica, Russia
+  const cartoGeometries = topology.objects.countries.geometries
+    .filter(d => !problematicIDs.includes(+d.id));
+
+  const staticGeometries = topology.objects.countries.geometries
+    .filter(d => problematicIDs.includes(+d.id)); // Russia yes, Antarctica no
+
+
+  const values = cartoGeometries.map(d => dataById.get(+d.id) ?? 0);
+
+  console.log("Sample values:", values.slice(0, 5));
+  console.log("Sample row:", data[0]);
+  console.log("dataById size:", dataById.size);
+  console.log("Sample lookup:", dataById.get("Afghanistan"));
+  const lo = d3.min(values), hi = d3.max(values);
+  console.log("Value range:", lo, hi);
+
+  const scale = d3.scaleLinear().domain([lo, hi]).range([1, 100]);
+   const color = d3.scaleQuantize()
+  .domain([0, hi])
+  .range([
+    congoColors.neutral100,
+    congoColors.primary200,
+    congoColors.primary300,
+    congoColors.primary400,
+    congoColors.primary500,
+  ]);
+    // Draw Russia as static layer FIRST (behind cartogram)
+const staticPath = d3.geoPath().projection(proj);
+svg.selectAll(".static-country")
+  .data(staticGeometries.map(d => topojson.feature(topology, d)))
+  .enter()
+  .append("path")
+  .attr("class", "static-country")
+  .attr("d", staticPath)
+  .attr("fill", d => color(dataById.get(+d.id) ?? 0))
+  .attr("stroke", congoColors.neutral100)
+  .attr("stroke-width", 0.5);
+
+
+  carto
+    .properties(d => ({ id: d.ID }))
+    .value(d => scale(dataById.get(+d.id) ?? 0));
+
+  const features = carto(topology, cartoGeometries).features;
+
+
+
+  svg.selectAll(".carto-country")
+  .data(features)
+  .enter()
+  .append("path")
+  .attr("class", "carto-country")
+  .attr("d", carto.path)
+  .attr("fill", d => color(dataById.get(+d.id) ?? 0))
+  .attr("stroke", congoColors.neutral100)
+  .attr("stroke-width", 0.5);
+}).catch(err => {
+  console.error("Error loading data:", err);
+});
+{{< /d3 >}}
+<!-- prettier-ignore-end -->
