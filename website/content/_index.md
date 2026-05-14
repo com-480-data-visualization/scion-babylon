@@ -166,8 +166,6 @@ const carto = d3.cartogram()
 
 const staticPath = d3.geoPath().projection(proj);
 
-
-
 // --- Tooltip ---
 const tooltip = d3.select(container).append("div")
   .style("position", "absolute")
@@ -190,7 +188,6 @@ const button = d3.select(container).append("button")
   .style("border", "none")
   .style("border-radius", "4px")
   .style("cursor", "pointer");
-
 
 Promise.all([
   d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
@@ -230,7 +227,6 @@ Promise.all([
     return counts === 0 ? congoColors.neutral100 : colorScale(counts);
   };
 
-
   // Tooltip handlers
   const onMouseover = (event, d) => {
     const id = +d.id;
@@ -249,7 +245,6 @@ Promise.all([
   };
 
   const onMouseout = () => tooltip.style("opacity", 0);
-
 
   carto
     .properties(d => ({ id: d.ID }))
@@ -300,5 +295,49 @@ Promise.all([
 }).catch(err => {
   console.error("Error loading data:", err);
 });
+{{< /d3 >}}
+<!-- prettier-ignore-end -->
+
+## Genres and gender
+<!-- prettier-ignore-end -->
+{{< d3 >}}
+const width = container.clientWidth;
+const height = 500;
+
+const svg = d3.select(container).append("svg")
+  .attr("width", width)
+  .attr("height", height);
+// create dummy data -> just one element per circle
+var data = [{ "name": "A" }, { "name": "B" }, { "name": "C" }, { "name": "D" }, { "name": "E" }, { "name": "F" }, { "name": "G" }, { "name": "H" }]
+
+// Initialize the circle: all located at the center of the svg area
+var node = svg.append("g")
+  .selectAll("circle")
+  .data(data)
+  .enter()
+  .append("circle")
+    .attr("r", 25)
+    .attr("cx", width / 2)
+    .attr("cy", height / 2)
+    .style("fill", "#69b3a2")
+    .style("fill-opacity", 0.3)
+    .attr("stroke", "#69a2b2")
+    .style("stroke-width", 4)
+
+// Features of the forces applied to the nodes:
+var simulation = d3.forceSimulation()
+    .force("center", d3.forceCenter().x(width / 2).y(height / 2)) // Attraction to the center of the svg area
+    .force("charge", d3.forceManyBody().strength(0.5)) // Nodes are attracted one each other of value is > 0
+    .force("collide", d3.forceCollide().strength(.01).radius(30).iterations(1)) // Force that avoids circle overlapping
+
+// Apply these forces to the nodes and update their positions.
+// Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
+simulation
+    .nodes(data)
+    .on("tick", function(d){
+      node
+          .attr("cx", function(d){ return d.x; })
+          .attr("cy", function(d){ return d.y; })
+    });
 {{< /d3 >}}
 <!-- prettier-ignore-end -->
