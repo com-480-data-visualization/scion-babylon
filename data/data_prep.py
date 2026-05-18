@@ -21,6 +21,8 @@ best_books['author'] = best_books['author'].str.strip('"').str.replace(r'\(Goodr
 # Strip other roles outside from author
 best_books['author'] = best_books['author'].str.replace(r',\s*[^,]+\([^)]+\)', '', regex=True).str.strip().str.strip(',').str.strip()
 international_bestsellers = pd.read_csv("datasets/international_bestsellers.csv")
+international_bestsellers["gender"] = international_bestsellers["gender"].apply(lambda g: str(g).replace(" ", "").replace(",", ";"))
+
 
 rest = best_books[~best_books['title'].isin(international_bestsellers['title'])]
 rest = rest.drop_duplicates(subset=["title"])
@@ -77,13 +79,4 @@ df_merged_gender = df_merged_gender.drop_duplicates(subset=["title"])
 df_merged_gender.to_csv("datasets/genders.csv", index=False)
 print(f"gender: {len(df_merged_gender)}")
 
-## create gender-genres dataset
-df_merged = df_merged[["gender", "genres"]]
-merged_agg = (merged
-    .groupby("gender", dropna=False)
-    .agg(
-        genres=("genres", "first")  # keep first name for the group
-    )
-    .reset_index()
-)
-print(f"gender with ratings: {len(df_merged)}")
+

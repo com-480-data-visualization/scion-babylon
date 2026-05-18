@@ -307,37 +307,78 @@ const height = 500;
 const svg = d3.select(container).append("svg")
   .attr("width", width)
   .attr("height", height);
-// create dummy data -> just one element per circle
-var data = [{ "name": "A" }, { "name": "B" }, { "name": "C" }, { "name": "D" }, { "name": "E" }, { "name": "F" }, { "name": "G" }, { "name": "H" }]
 
-// Initialize the circle: all located at the center of the svg area
-var node = svg.append("g")
-  .selectAll("circle")
-  .data(data)
+// Gender selector
+const genders = ["m", "w"];
+const selector = d3.select(container).insert("div", "svg")
+  .style("margin-bottom", "10px");
+
+selector.append("label").text("Select gender: ");
+const select = selector.append("select");
+select.selectAll("option")
+  .data(genders)
   .enter()
-  .append("circle")
-    .attr("r", 25)
-    .attr("cx", width / 2)
-    .attr("cy", height / 2)
-    .style("fill", "#69b3a2")
-    .style("fill-opacity", 0.3)
-    .attr("stroke", "#69a2b2")
-    .style("stroke-width", 4)
+  .append("option")
+  .text(d => d)
+  .attr("value", d => d);
 
-// Features of the forces applied to the nodes:
-var simulation = d3.forceSimulation()
-    .force("center", d3.forceCenter().x(width / 2).y(height / 2)) // Attraction to the center of the svg area
-    .force("charge", d3.forceManyBody().strength(0.5)) // Nodes are attracted one each other of value is > 0
-    .force("collide", d3.forceCollide().strength(.01).radius(30).iterations(1)) // Force that avoids circle overlapping
+d3.csv("/data/genders_genres.csv").then(data => {
+  data.forEach(d => d.count = +d.count);
 
-// Apply these forces to the nodes and update their positions.
-// Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
-simulation
-    .nodes(data)
-    .on("tick", function(d){
-      node
-          .attr("cx", function(d){ return d.x; })
-          .attr("cy", function(d){ return d.y; })
-    });
+  const maxCount = d3.max(data, d => d.count);
+  const radiusScale = d3.scaleSqrt()
+    .domain([0, maxCount])
+    .range([10, 60]);
+
+  function update(selectedGender) {
+    const filtered = data.filter(d => d.gender === selectedGender);
+
+    // Bind data
+    const nodes = filtered.map(d => ({ ...d }));
+
+    svg.selectAll("circle").remove();
+    svg.selectAll("text").remove();
+
+    const node = svg.append("g")
+      .selectAll("circle")
+      .data(nodes)
+      .enter()
+      .append("circle")
+        .attr("r", d => radiusScale(d.count))
+        .attr("cx", width / 2)
+        .attr("cy", height / 2)
+        .style("fill", selectedGender === "w" ? "#e07b8a" : "#69b3a2")
+        .style("fill-opacity", 0.6)
+        .attr("stroke", selectedGender === "w" ? "#c45c6a" : "#69a2b2")
+        .style("stroke-width", 2);
+
+    const label = svg.append("g")
+      .selectAll("text")
+      .data(nodes)
+      .enter()
+      .append("text")
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .style("font-size", "11px")
+        .style("pointer-events", "none")
+        .text(d => d.genre);
+
+    const simulation = d3.forceSimulation(nodes)
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("charge", d3.forceManyBody().strength(1))
+      .force("collide", d3.forceCollide().strength(0.8).radius(d => radiusScale(d.count) + 2).iterations(3))
+      .on("tick", () => {
+        node
+          .attr("cx", d => d.x)
+          .attr("cy", d => d.y);
+        label
+          .attr("x", d => d.x)
+          .attr("y", d => d.y);
+      });
+  }
+
+  update("m");
+  select.on("change", function() { update(this.value); });
+});
 {{< /d3 >}}
 <!-- prettier-ignore-end -->
