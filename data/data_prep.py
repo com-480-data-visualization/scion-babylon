@@ -1,5 +1,6 @@
 import pandas as pd
 import gender_guesser.detector as gender
+import os
 
 """
 Code to generate 3 databases of authors: gendered with ratings, only genders and undefined gender
@@ -8,6 +9,10 @@ Method:
 - Use gender guesser to get gender of books in best books database
 - Use international bestseller to add the gender of known books
 """
+
+cwd = os.getcwd().split("/")[-1]
+if cwd != "data":
+    raise ValueError('Please run this script from inside the data directory')
 
 # load datasets
 best_books = pd.read_csv("datasets/books_1.Best_Books_Ever.csv")
