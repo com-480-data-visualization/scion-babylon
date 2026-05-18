@@ -6,7 +6,7 @@
 | Paul Tissot-Daguette       | 341190 |
 | Pol Fuentes Camacho        | 346020 |
 
-[Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
+[Milestone 1](#milestone-1-20th-march-5pm) • [Milestone 2](#milestone-2-17th-april-5pm) • [Milestone 3](#milestone-3-29th-may-5pm)
 
 ## Milestone 1 (20th March, 5pm)
 
@@ -77,8 +77,9 @@ We also reviewed papers that may be relevant to the work we plan to pursue. Here
 - [Comparing gender discrimination and inequality in indie and traditional publishing](https://pmc.ncbi.nlm.nih.gov/articles/PMC5891011/)
 
 ## Milestone 2 (17th April, 5pm)
+The two page document describing our project can be found [here](<Dataviz-milestone-2.pdf>).
 
-**10% of the final grade**
+The live skeleton is accessible on that [link](https://com-480-data-visualization.github.io/scion-babylon/), which is associated with the website branch on this repo.
 
 ## Milestone 3 (29th May, 5pm)
 
