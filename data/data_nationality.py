@@ -1,11 +1,12 @@
 import pandas as pd
 import re
+
 international_bestsellers = pd.read_csv("datasets/international_bestsellers.csv")
 international_bestsellers = international_bestsellers.drop_duplicates(subset=["title"])
 all_countries = pd.read_csv("datasets/all.csv")
 all_countries = all_countries[["name", "country-code"]]
 
-nationalities = international_bestsellers[["author", "nationality"]] #should I drop duplicate authors ?
+nationalities = international_bestsellers[["author", "nationality"]] 
 aliases = {"Vietnam": "Viet Nam", "Turkey": "Türkiye", "South Korea":"Korea, Republic of", "Morroco": "Morocco", "Ivory Coast": "Côte d'Ivoire", "Czech Republic":"Czechia", "Scotland": "United Kingdom of Great Britain and Northern Ireland"}
 
 
@@ -32,12 +33,16 @@ nationalities["matched_name"] = nationalities["nationality"].apply(
 merged = pd.merge(nationalities, all_countries, left_on='matched_name', right_on='name', how='left')
 
 merged = merged.rename(columns={"country-code": "ID"})
-merged = merged[["ID", "nationality", "counts"]]
 
+def exceptions(series):
+    if series.iloc[0] == "Scotland":
+        print("found")
+        return "United Kingdom"
+    return series.iloc[0]
 merged_agg = (merged
     .groupby("ID", dropna=False)
     .agg(
-        nationality=("nationality", "first"),  # keep first name for the group
+        nationality = ("nationality",exceptions),
         counts=("counts", "sum")
     )
     .reset_index()
