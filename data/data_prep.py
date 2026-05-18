@@ -76,14 +76,3 @@ df_merged_gender = pd.concat([df_merged[["title","author", "gender"]], internati
 df_merged_gender = df_merged_gender.drop_duplicates(subset=["title"])
 df_merged_gender.to_csv("datasets/genders.csv", index=False)
 print(f"gender: {len(df_merged_gender)}")
-
-## create gender-genres dataset
-df_merged = df_merged[["gender", "genres"]]
-merged_agg = (merged
-    .groupby("gender", dropna=False)
-    .agg(
-        genres=("genres", "first")  # keep first name for the group
-    )
-    .reset_index()
-)
-print(f"gender with ratings: {len(df_merged)}")
