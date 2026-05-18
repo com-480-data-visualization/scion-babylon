@@ -1,0 +1,12 @@
+<div class="d3">
+  {{ $id := delimit (shuffle (seq 1 9)) "" }}
+  <div id="{{ $id }}"></div>
+  <script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", (event) => {
+      const container = document.getElementById("{{ $id }}");
+      (function(container) {
+        {{ .Inner | safeJS }}
+      })(container);
+    });
+  </script>
+</div>

@@ -1,0 +1,24 @@
+languageCode = "en-AU"
+languageName = "English (Australia)"
+languageDirection = "ltr"
+weight = 1
+
+title = "Book visualization"
+copyright = "&copy; 2024 Congo contributors"
+
+[params]
+  dateFormat = "2 January 2006"
+
+  mainSections = ["samples"]
+  #description = "A powerful, lightweight theme for Hugo built with Tailwind CSS."
+
+[params.author]
+  name = "Johanna, Paul and Pol"
+  image = "img/authors.jpeg"
+  headline = "Not your ordinary team!"
+  bio = "We are three EPFL Cybersecurity students, welcome to our website. :dog:"
+  links = [
+    { linkedin = "https://www.linkedin.com/in/johanna-nuding-7726b4305/" },
+    { linkedin = "https://www.linkedin.com/in/paul-tissot-daguette-167a76303/" },
+    { linkedin = "https://www.linkedin.com/in/pol-fuentes-camacho/" }
+  ]
