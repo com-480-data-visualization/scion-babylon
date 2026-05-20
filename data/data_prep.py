@@ -64,8 +64,9 @@ print(f"undefined: {len(df_undefined)}")
 df_known = df[df['gender'].isin(["m", "w", "m;m", "w;m", "m;w", "w;w"])]
 df_known = df_known.drop_duplicates(subset=["title"])
 
-merged = pd.merge(best_books, international_bestsellers[['title', 'gender']], on='title', how='inner')
-merged = merged[["title","author", "rating", "genres", "language", "gender"]]
+merged = pd.merge(best_books, international_bestsellers[['title', 'gender', 'nationality']], on='title', how='outer')
+merged = merged[["title","author", "nationality", "rating", "genres", "language", "gender"]]
+print(merged.columns)
 df_merged = pd.concat([df_known, merged])
 df_merged = df_merged.drop_duplicates(subset=["title"])
 df_merged.to_csv("datasets/genders_ratings.csv", index=False)
@@ -76,14 +77,3 @@ df_merged_gender = pd.concat([df_merged[["title","author", "gender"]], internati
 df_merged_gender = df_merged_gender.drop_duplicates(subset=["title"])
 df_merged_gender.to_csv("datasets/genders.csv", index=False)
 print(f"gender: {len(df_merged_gender)}")
-
-## create gender-genres dataset
-df_merged = df_merged[["gender", "genres"]]
-merged_agg = (merged
-    .groupby("gender", dropna=False)
-    .agg(
-        genres=("genres", "first")  # keep first name for the group
-    )
-    .reset_index()
-)
-print(f"gender with ratings: {len(df_merged)}")
