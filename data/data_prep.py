@@ -64,7 +64,7 @@ print(f"undefined: {len(df_undefined)}")
 df_known = df[df['gender'].isin(["m", "w", "m;m", "w;m", "m;w", "w;w"])]
 df_known = df_known.drop_duplicates(subset=["title"])
 
-merged = pd.merge(best_books, international_bestsellers[['title', 'gender', 'nationality']], on='title', how='outer')
+merged = pd.merge(best_books, international_bestsellers[['title', 'gender', 'nationality']], on='title', how='inner')
 merged = merged[["title","author", "nationality", "rating", "genres", "language", "gender"]]
 print(merged.columns)
 df_merged = pd.concat([df_known, merged])
