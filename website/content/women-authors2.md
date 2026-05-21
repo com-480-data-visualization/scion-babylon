@@ -62,7 +62,7 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
         background-color: #a78bfa;
         width: 100px;
         height: 160px;
-        border-radius: 5px;
+        border-radius: 2px;
         position: relative;
         padding: 10px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -77,10 +77,20 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
         overflow: hidden;
+        background: #fafafa;
+        padding: 4px;
+        border-radius: 5px;
+    }
+
+    .book hr {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-right: 10px;
+        margin-left: 10px;
+        border: 1px solid #4b4b4b;
     }
     .book .author {
         font-size: 12px;
-        margin-top: 5px;
         text-align: center;
         user-select: none;
     }
@@ -142,6 +152,7 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
         display: flex;
         flex-direction: column;
         gap: 8px;
+        position: relative;
     }
 
     .badges-group-label {
@@ -193,7 +204,7 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
 
     .add-filter-btn {
         width: fit-content;
-        padding: 8px 8px;
+        padding: 6px 6px;
         background-color: #f5f5f5;
         border: 2px solid #ddd;
         border-radius: 5px;
@@ -206,6 +217,60 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
     .add-filter-btn:hover {
         border-color: #a78bfa;
         background-color: #fafafa;
+    }
+
+    .rating-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .rating-btn {
+        padding: 6px 6px;
+        background-color: #f5f5f5;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.2s;
+    }
+
+    .rating-btn:hover {
+        border-color: #a78bfa;
+        background-color: #fafafa;
+    }
+
+    .rating-btn.active {
+        background-color: #a78bfa;
+        color: white;
+        border-color: #a78bfa;
+    }
+
+    .language-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .language-btn {
+        padding: 6px 6px;
+        background-color: #f5f5f5;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.2s;
+    }
+
+    .language-btn:hover {
+        border-color: #a78bfa;
+        background-color: #fafafa;
+    }
+
+    .language-btn.active {
+        background-color: #a78bfa;
+        color: white;
+        border-color: #a78bfa;
     }
 
     .filter-dropdown {
@@ -415,12 +480,22 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
             <h2 class="filter-title">Filters</h2>
             <div id="badges-container" class="badges-container">
                 <div class="badges-group">
-                    <div class="badges-group-label">Gender</div>
-                    <div class="badges-list" id="gender-badges"></div>
-                    <button id="add-gender-btn" class="add-filter-btn">+ Add Gender</button>
+                    <div class="badges-group-label">Rating ⭐</div>
+                    <div class="rating-buttons">
+                        <button class="rating-btn" data-rating="0">All</button>
+                        <button class="rating-btn" data-rating="3">3+</button>
+                        <button class="rating-btn" data-rating="3.5">3.5+</button>
+                        <button class="rating-btn" data-rating="4">4+</button>
+                        <button class="rating-btn" data-rating="4.5">4.5+</button>
+                    </div>
+                </div>
+                <div class="badges-group">
+                    <div class="badges-group-label">Language</div>
+                    <div class="badges-list" id="language-badges"></div>
+                    <button id="add-language-btn" class="add-filter-btn">+ Select language</button>
+                    <div id="language-dropdown" class="filter-dropdown" style="display: none;"></div>
                 </div>
             </div>
-            <div id="gender-dropdown" class="filter-dropdown" style="display: none;"></div>
             <button id="draw-button">Draw new books!</button>
         </div>
     </div>
@@ -439,99 +514,35 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const bookContainers = document.querySelectorAll('.book-container');
-    const addGenderBtn = document.getElementById('add-gender-btn');
-    const genderDropdown = document.getElementById('gender-dropdown');
     const drawButton = document.getElementById('draw-button');
     const modal = document.getElementById('modal-overlay');
     const modalClose = document.querySelector('.modal-close');
     const tooltip = document.getElementById('book-tooltip');
+    const addLanguageBtn = document.getElementById('add-language-btn');
+    const languageDropdown = document.getElementById('language-dropdown');
 
     let booksData = [];
-    let selectedFilters = { gender: [] };
-    let availableFilters = { gender: [] };
+    let selectedFilters = { rating: 0, languages: [] };
+    let availableLanguages = [];
 
     // Load data
     d3.csv('/data/bookshelf2.csv').then(data => {
         booksData = data;
-        console.log(booksData);
-        populateAvailableFilters();
-        setupDropdowns();
+
+        // Extract available languages only for female authors
+        availableLanguages = [...new Set(
+            booksData
+                .filter(d => d.gender === 'w')
+                .map(d => d.language)
+                .filter(l => l)
+        )].sort();
+
+        setupRatingButtons();
+        setupLanguageDropdown();
         drawBooks();
     }).catch(error => {
         console.error('Error loading the CSV file:', error);
     });
-
-    function populateAvailableFilters() {
-        availableFilters.gender = [...new Set(booksData.flatMap(d => d.gender ? d.gender.split(';').map(g => g.trim()) : []).filter(g => g))];
-    }
-
-    function getGenderLabel(gender) {
-        return gender === 'm' ? 'Male' : (gender === 'w' ? 'Female' : 'Other');
-    }
-
-    function setupDropdowns() {
-        // Gender dropdown
-        availableFilters.gender.forEach(gender => {
-            const item = document.createElement('div');
-            item.classList.add('filter-dropdown-item');
-            item.textContent = getGenderLabel(gender);
-            item.dataset.value = gender;
-            item.dataset.type = 'gender';
-            item.addEventListener('click', () => addFilter('gender', gender, getGenderLabel(gender)));
-            genderDropdown.appendChild(item);
-        });
-    }
-
-    function toggleDropdown(dropdown, btn) {
-        if (dropdown.style.display === 'none') {
-            dropdown.style.display = 'block';
-
-            // Position dropdown below button relative to controls-container
-            const btnRect = btn.getBoundingClientRect();
-            const containerRect = document.querySelector('.controls-container').getBoundingClientRect();
-            dropdown.style.top = (btnRect.bottom - containerRect.top + 5) + 'px';
-            dropdown.style.left = (btnRect.left - containerRect.left) + 'px';
-        } else {
-            dropdown.style.display = 'none';
-        }
-    }
-
-    function addFilter(type, value, label) {
-        if (!selectedFilters[type].includes(value)) {
-            selectedFilters[type].push(value);
-            renderBadges();
-            drawBooks();
-        }
-        // Hide dropdown
-        genderDropdown.style.display = 'none';
-    }
-
-    function removeFilter(type, value) {
-        selectedFilters[type] = selectedFilters[type].filter(v => v !== value);
-        renderBadges();
-        drawBooks();
-    }
-
-    function renderBadges() {
-        const genderBadgesContainer = document.getElementById('gender-badges');
-        genderBadgesContainer.innerHTML = '';
-
-        if (selectedFilters.gender.length == 0) {
-            const badge = document.createElement('div');
-            badge.classList.add('badge');
-            badge.innerHTML = `All genders`;
-            genderBadgesContainer.appendChild(badge);
-        }
-
-        selectedFilters.gender.forEach(gender => {
-            const badge = document.createElement('div');
-            badge.classList.add('badge');
-            const label = getGenderLabel(gender);
-            badge.innerHTML = `${label}<span class="badge-delete">×</span>`;
-            badge.querySelector('.badge-delete').addEventListener('click', () => removeFilter('gender', gender));
-            genderBadgesContainer.appendChild(badge);
-        });
-    }
 
     function getRandomBooks(filteredData, count) {
         const shuffled = filteredData.sort(() => 0.5 - Math.random());
@@ -546,11 +557,14 @@ document.addEventListener('DOMContentLoaded', () => {
         title.classList.add('title');
         title.textContent = bookData.title;
 
+        const separator = document.createElement('hr');
+
         const author = document.createElement('div');
         author.classList.add('author');
         author.textContent = bookData.author;
 
         bookElement.appendChild(title);
+        bookElement.appendChild(separator);
         bookElement.appendChild(author);
 
         const colors = ['#dcd6fd', '#a78bfa', '#c4b5fd'];
@@ -678,8 +692,21 @@ document.addEventListener('DOMContentLoaded', () => {
             bookContainers.forEach(container => container.innerHTML = '');
 
             let filteredData = booksData;
-            if (selectedFilters.gender.length > 0) {
-                filteredData = filteredData.filter(d => d.gender && selectedFilters.gender.some(g => d.gender.includes(g)));
+
+            // Hardcoded: filter by female authors
+            filteredData = filteredData.filter(d => d.gender === 'w');
+
+            // Filter by minimum rating
+            if (selectedFilters.rating > 0) {
+                filteredData = filteredData.filter(d => {
+                    const rating = parseFloat(d.rating);
+                    return rating >= selectedFilters.rating;
+                });
+            }
+
+            // Filter by language
+            if (selectedFilters.languages.length > 0) {
+                filteredData = filteredData.filter(d => selectedFilters.languages.includes(d.language));
             }
 
             const randomBooks = getRandomBooks(filteredData, 15);
@@ -703,15 +730,81 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event listeners
-    addGenderBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleDropdown(genderDropdown, addGenderBtn);
-    });
 
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', () => {
-        genderDropdown.style.display = 'none';
-    });
+    // Rating buttons
+    function setupRatingButtons() {
+        document.querySelectorAll('.rating-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const rating = parseFloat(btn.dataset.rating);
+                selectedFilters.rating = rating;
+
+                // Update active button
+                document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                drawBooks();
+            });
+        });
+
+        // Set initial active button (All Ratings)
+        document.querySelector('[data-rating="0"]').classList.add('active');
+    }
+
+    // Language badge rendering and filtering
+    function renderLanguageBadges() {
+        const languageBadgesContainer = document.getElementById('language-badges');
+        languageBadgesContainer.innerHTML = '';
+
+        console.log(2);
+        if (selectedFilters.languages.length === 0) {
+            const badge = document.createElement('div');
+            badge.classList.add('badge');
+            badge.innerHTML = `All languages`;
+            languageBadgesContainer.appendChild(badge);
+        }
+
+        selectedFilters.languages.forEach(language => {
+            const badge = document.createElement('div');
+            badge.classList.add('badge');
+            badge.innerHTML = `${language}<span class="badge-delete">×</span>`;
+            badge.querySelector('.badge-delete').addEventListener('click', () => removeLanguageFilter(language));
+            languageBadgesContainer.appendChild(badge);
+        });
+    }
+
+    function addLanguageFilter(language) {
+        if (!selectedFilters.languages.includes(language)) {
+            selectedFilters.languages.push(language);
+            renderLanguageBadges();
+            drawBooks();
+        }
+        languageDropdown.style.display = 'none';
+    }
+
+    function removeLanguageFilter(language) {
+        selectedFilters.languages = selectedFilters.languages.filter(l => l !== language);
+        renderLanguageBadges();
+        drawBooks();
+    }
+
+    function toggleLanguageDropdown() {
+        if (languageDropdown.style.display === 'none') {
+            languageDropdown.style.display = 'block';
+        } else {
+            languageDropdown.style.display = 'none';
+        }
+    }
+
+    function setupLanguageDropdown() {
+        // Populate dropdown with available languages
+        availableLanguages.forEach(language => {
+            const item = document.createElement('div');
+            item.classList.add('filter-dropdown-item');
+            item.textContent = language;
+            item.addEventListener('click', () => addLanguageFilter(language));
+            languageDropdown.appendChild(item);
+        });
+    }
 
     // Modal close button
     modalClose.addEventListener('click', closeModal);
@@ -723,8 +816,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Language button toggle
+    addLanguageBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleLanguageDropdown();
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+        languageDropdown.style.display = 'none';
+    });
+
     drawButton.addEventListener('click', drawBooks);
-    renderBadges();
+    renderLanguageBadges();
 });
 </script>
 {{< /rawhtml >}}
