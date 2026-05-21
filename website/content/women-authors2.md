@@ -73,6 +73,10 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
         font-weight: bold;
         font-size: 12px;
         user-select: none;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
     }
     .book .author {
         font-size: 12px;
@@ -240,60 +244,153 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
         position: relative;
     }
 
-    .book-info-box {
+    .book-tooltip {
+        position: fixed;
         display: none;
-        margin-top: 15px;
-        padding: 12px;
-        background-color: #f9f9f9;
+        background-color: white;
         border: 1px solid #ddd;
         border-radius: 5px;
-        font-size: 13px;
-        line-height: 1.4;
+        padding: 10px;
+        font-size: 12px;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        width: 200px;
+        pointer-events: none;
     }
 
-    .book-info-box.visible {
+    .book-tooltip.visible {
         display: block;
     }
 
-    .book-info-title {
+    .tooltip-title {
         font-weight: 600;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         color: #333;
     }
 
-    .book-info-item {
-        margin-bottom: 8px;
+    .tooltip-item {
+        margin-bottom: 6px;
+        font-size: 11px;
     }
 
-    .book-info-item:last-child {
-        margin-bottom: 0;
-    }
-
-    .book-info-label {
+    .tooltip-label {
         font-weight: 500;
         color: #666;
-        font-size: 12px;
+        font-size: 10px;
         text-transform: uppercase;
-        letter-spacing: 0.3px;
     }
 
-    .book-info-value {
+    .tooltip-value {
         color: #333;
-        margin-top: 3px;
+        margin-top: 2px;
     }
 
-    .book-info-rating {
+    .tooltip-rating {
         font-weight: 600;
         color: #ff9800;
     }
 
-    .book-genre {
+    .tooltip-genre {
         display: inline-block;
         background-color: #e8e8e8;
-        padding: 3px 8px;
+        padding: 2px 6px;
+        border-radius: 2px;
+        margin-right: 4px;
+        margin-bottom: 3px;
+        font-size: 10px;
+    }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 1000;
+    }
+
+    .modal-overlay.visible {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        padding: 24px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 0px;
+        right: 16px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+    }
+
+    .modal-close:hover {
+        color: #333;
+    }
+
+    .modal-title {
+        font-weight: 700;
+        font-size: 20px;
+        margin-bottom: 12px;
+        color: #333;
+    }
+
+    .modal-field {
+        margin-bottom: 16px;
+    }
+
+    .modal-field:last-child {
+        margin-bottom: 0;
+    }
+
+    .modal-label {
+        font-weight: 600;
+        color: #666;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+    }
+
+    .modal-value {
+        color: #333;
+    }
+
+    .modal-rating {
+        font-weight: 600;
+        color: #ff9800;
+        font-size: 16px;
+    }
+
+    .modal-description {
+        line-height: 1.6;
+        color: #444;
+    }
+
+    .modal-genre {
+        display: inline-block;
+        background-color: #a78bfa;
+        color: white;
+        padding: 4px 10px;
         border-radius: 3px;
-        margin-right: 5px;
-        margin-bottom: 5px;
+        margin-right: 6px;
+        margin-bottom: 6px;
         font-size: 12px;
     }
 </style>
@@ -322,17 +419,19 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
                     <div class="badges-list" id="gender-badges"></div>
                     <button id="add-gender-btn" class="add-filter-btn">+ Add Gender</button>
                 </div>
-                <div class="badges-group">
-                    <div class="badges-group-label">Origin</div>
-                    <div class="badges-list" id="origin-badges"></div>
-                    <button id="add-origin-btn" class="add-filter-btn">+ Add Origin</button>
-                </div>
             </div>
             <div id="gender-dropdown" class="filter-dropdown" style="display: none;"></div>
-            <div id="origin-dropdown" class="filter-dropdown" style="display: none;"></div>
             <button id="draw-button">Draw new books!</button>
-            <div id="book-info-box" class="book-info-box"></div>
         </div>
+    </div>
+</div>
+
+<div id="book-tooltip" class="book-tooltip"></div>
+
+<div id="modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close">×</button>
+        <div id="modal-body"></div>
     </div>
 </div>
 
@@ -341,18 +440,20 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
 document.addEventListener('DOMContentLoaded', () => {
     const bookContainers = document.querySelectorAll('.book-container');
     const addGenderBtn = document.getElementById('add-gender-btn');
-    const addOriginBtn = document.getElementById('add-origin-btn');
     const genderDropdown = document.getElementById('gender-dropdown');
-    const originDropdown = document.getElementById('origin-dropdown');
     const drawButton = document.getElementById('draw-button');
+    const modal = document.getElementById('modal-overlay');
+    const modalClose = document.querySelector('.modal-close');
+    const tooltip = document.getElementById('book-tooltip');
 
     let booksData = [];
-    let selectedFilters = { gender: [], origin: [] };
-    let availableFilters = { gender: [], origin: [] };
+    let selectedFilters = { gender: [] };
+    let availableFilters = { gender: [] };
 
     // Load data
-    d3.csv('/data/bookshelf.csv').then(data => {
+    d3.csv('/data/bookshelf2.csv').then(data => {
         booksData = data;
+        console.log(booksData);
         populateAvailableFilters();
         setupDropdowns();
         drawBooks();
@@ -362,8 +463,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function populateAvailableFilters() {
         availableFilters.gender = [...new Set(booksData.flatMap(d => d.gender ? d.gender.split(';').map(g => g.trim()) : []).filter(g => g))];
-        availableFilters.origin = [...new Set(booksData.flatMap(d => d.nationality ? d.nationality.split(';').map(n => n.trim()) : []).filter(n => n))];
-        availableFilters.origin.sort();
     }
 
     function getGenderLabel(gender) {
@@ -381,25 +480,10 @@ document.addEventListener('DOMContentLoaded', () => {
             item.addEventListener('click', () => addFilter('gender', gender, getGenderLabel(gender)));
             genderDropdown.appendChild(item);
         });
-
-        // Origin dropdown
-        availableFilters.origin.forEach(origin => {
-            const item = document.createElement('div');
-            item.classList.add('filter-dropdown-item');
-            item.textContent = origin;
-            item.dataset.value = origin;
-            item.dataset.type = 'origin';
-            item.addEventListener('click', () => addFilter('origin', origin, origin));
-            originDropdown.appendChild(item);
-        });
     }
 
     function toggleDropdown(dropdown, btn) {
         if (dropdown.style.display === 'none') {
-            // Hide other dropdown
-            const otherDropdown = dropdown === genderDropdown ? originDropdown : genderDropdown;
-            otherDropdown.style.display = 'none';
-
             dropdown.style.display = 'block';
 
             // Position dropdown below button relative to controls-container
@@ -419,8 +503,7 @@ document.addEventListener('DOMContentLoaded', () => {
             drawBooks();
         }
         // Hide dropdown
-        const dropdown = type === 'gender' ? genderDropdown : originDropdown;
-        dropdown.style.display = 'none';
+        genderDropdown.style.display = 'none';
     }
 
     function removeFilter(type, value) {
@@ -431,25 +514,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderBadges() {
         const genderBadgesContainer = document.getElementById('gender-badges');
-        const originBadgesContainer = document.getElementById('origin-badges');
-
         genderBadgesContainer.innerHTML = '';
-        originBadgesContainer.innerHTML = '';
 
         if (selectedFilters.gender.length == 0) {
             const badge = document.createElement('div');
             badge.classList.add('badge');
-            const label = "All genders";
-            badge.innerHTML = `${label}`;
+            badge.innerHTML = `All genders`;
             genderBadgesContainer.appendChild(badge);
-        }
-
-        if (selectedFilters.origin.length == 0) {
-            const badge = document.createElement('div');
-            badge.classList.add('badge');
-            const label = "All origins";
-            badge.innerHTML = `${label}`;
-            originBadgesContainer.appendChild(badge);
         }
 
         selectedFilters.gender.forEach(gender => {
@@ -459,14 +530,6 @@ document.addEventListener('DOMContentLoaded', () => {
             badge.innerHTML = `${label}<span class="badge-delete">×</span>`;
             badge.querySelector('.badge-delete').addEventListener('click', () => removeFilter('gender', gender));
             genderBadgesContainer.appendChild(badge);
-        });
-
-        selectedFilters.origin.forEach(origin => {
-            const badge = document.createElement('div');
-            badge.classList.add('badge');
-            badge.innerHTML = `${origin}<span class="badge-delete">×</span>`;
-            badge.querySelector('.badge-delete').addEventListener('click', () => removeFilter('origin', origin));
-            originBadgesContainer.appendChild(badge);
         });
     }
 
@@ -495,20 +558,22 @@ document.addEventListener('DOMContentLoaded', () => {
         bookElement.style.height = `${140 + (Math.random() * 25)}px`;
         bookElement.style.width = `${100 + (Math.random() * 20)}px`;
 
-        // Add hover listeners
-        bookElement.addEventListener('mouseenter', () => showBookInfo(bookData));
-        bookElement.addEventListener('mouseleave', hideBookInfo);
+        // Add hover listeners for tooltip
+        bookElement.addEventListener('mouseenter', (e) => showBookTooltip(bookData, e));
+        bookElement.addEventListener('mouseleave', hideBookTooltip);
+
+        // Add click listener for modal
+        bookElement.addEventListener('click', () => showBookModal(bookData));
+        bookElement.style.cursor = 'pointer';
 
         return bookElement;
     }
 
-    function showBookInfo(bookData) {
-        const infoBox = document.getElementById('book-info-box');
+    function showBookTooltip(bookData, event) {
         let genresArray = [];
 
         if (bookData.genres) {
             try {
-                // Convert Python list string to valid JSON (single quotes -> double quotes)
                 const jsonString = bookData.genres.replace(/'/g, '"');
                 genresArray = JSON.parse(jsonString);
             } catch (e) {
@@ -516,30 +581,80 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        infoBox.innerHTML = `
-            <div class="book-info-title">${bookData.title}</div>
-            <div class="book-info-item">
-                <div class="book-info-label">Author</div>
-                <div class="book-info-value">${bookData.author}</div>
+        tooltip.innerHTML = `
+            <div class="tooltip-title">${bookData.title}</div>
+            <div class="tooltip-item">
+                <div class="tooltip-label">Author</div>
+                <div class="tooltip-value">${bookData.author}</div>
             </div>
-            <div class="book-info-item">
-                <div class="book-info-label">Rating</div>
-                <div class="book-info-value book-info-rating">⭐ ${bookData.rating}</div>
+            <div class="tooltip-item">
+                <div class="tooltip-label">Rating</div>
+                <div class="tooltip-value tooltip-rating">⭐ ${bookData.rating}</div>
             </div>
-            <div class="book-info-item">
-                <div class="book-info-label">Genres</div>
-                <div class="book-info-value">
-                    ${genresArray.map(g => `<span class="book-genre">${g}</span>`).join('')}
+            <div class="tooltip-item">
+                <div class="tooltip-label">Genres</div>
+                <div class="tooltip-value">
+                    ${genresArray.map(g => `<span class="tooltip-genre">${g}</span>`).join('')}
                 </div>
             </div>
         `;
-        infoBox.classList.add('visible');
+
+        // Position tooltip near the book
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+        tooltip.style.left = (mouseX + 10) + 'px';
+        tooltip.style.top = (mouseY + 10) + 'px';
+        tooltip.classList.add('visible');
     }
 
-    function hideBookInfo() {
-        const infoBox = document.getElementById('book-info-box');
-        infoBox.classList.remove('visible');
-        infoBox.innerHTML = '';
+    function hideBookTooltip() {
+        tooltip.classList.remove('visible');
+    }
+
+    function showBookModal(bookData) {
+        let genresArray = [];
+
+        if (bookData.genres) {
+            try {
+                const jsonString = bookData.genres.replace(/'/g, '"');
+                genresArray = JSON.parse(jsonString);
+            } catch (e) {
+                genresArray = [];
+            }
+        }
+
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = `
+            <div class="modal-title">${bookData.title}</div>
+            <div class="modal-field">
+                <div class="modal-label">Author</div>
+                <div class="modal-value">${bookData.author}</div>
+            </div>
+            <div class="modal-field">
+                <div class="modal-label">Rating</div>
+                <div class="modal-value modal-rating">⭐ ${bookData.rating}</div>
+            </div>
+            <div class="modal-field">
+                <div class="modal-label">Language</div>
+                <div class="modal-value">${bookData.language}</div>
+            </div>
+            <div class="modal-field">
+                <div class="modal-label">Genres</div>
+                <div class="modal-value">
+                    ${genresArray.map(g => `<span class="modal-genre">${g}</span>`).join('')}
+                </div>
+            </div>
+            <div class="modal-field">
+                <div class="modal-label">Description</div>
+                <div class="modal-value modal-description">${bookData.description || 'No description available'}</div>
+            </div>
+        `;
+
+        modal.classList.add('visible');
+    }
+
+    function closeModal() {
+        modal.classList.remove('visible');
     }
 
     function drawBooks() {
@@ -566,10 +681,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (selectedFilters.gender.length > 0) {
                 filteredData = filteredData.filter(d => d.gender && selectedFilters.gender.some(g => d.gender.includes(g)));
             }
-            if (selectedFilters.origin.length > 0) {
-                filteredData = filteredData.filter(d => d.nationality && selectedFilters.origin.some(o => d.nationality.includes(o)));
-            }
-            console.log(booksData);
 
             const randomBooks = getRandomBooks(filteredData, 15);
 
@@ -597,15 +708,19 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleDropdown(genderDropdown, addGenderBtn);
     });
 
-    addOriginBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleDropdown(originDropdown, addOriginBtn);
-    });
-
     // Close dropdowns when clicking outside
     document.addEventListener('click', () => {
         genderDropdown.style.display = 'none';
-        originDropdown.style.display = 'none';
+    });
+
+    // Modal close button
+    modalClose.addEventListener('click', closeModal);
+
+    // Close modal when clicking outside the modal content
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
     });
 
     drawButton.addEventListener('click', drawBooks);
