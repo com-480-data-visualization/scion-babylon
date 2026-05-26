@@ -1097,9 +1097,9 @@ const topValue = topWrap.append("span")
   .style("font-size", "12px");
 const topInput = topWrap.append("input")
   .attr("type", "range")
-  .attr("min", 5)
+  .attr("min", 1)
   .attr("max", 30)
-  .attr("value", 14)
+  .attr("value", 11)
   .attr("step", 1);
 
 const legend = root.append("div")
@@ -1113,7 +1113,6 @@ const legend = root.append("div")
 const colors = {
   men: "#287c8e",
   women: "#c94f7c",
-  mixed: "#d19a2c",
   neutral: "#d6d3cd",
   axis: "#8a8580",
 };
@@ -1121,7 +1120,6 @@ const colors = {
 [
   ["Men-led", colors.men],
   ["Women-led", colors.women],
-  ["Mixed authorship", colors.mixed],
 ].forEach(([label, color]) => {
   const item = legend.append("span")
     .style("display", "inline-flex")
@@ -1170,11 +1168,21 @@ function formatPercent(value) {
 function updateControls(data) {
   const view = viewSelect.property("value");
   const maxTotal = d3.max(data.filter(d => d.attribute_type === view), d => d.total) ?? 100;
-  const maxMin = Math.max(1, Math.min(500, Math.floor(maxTotal / 2)));
+  const maxMin = Math.max(1, maxTotal);
   minInput.attr("max", maxMin);
   if (+minInput.property("value") > maxMin) minInput.property("value", maxMin);
   minValue.text(`${minInput.property("value")}+`);
-  topValue.text(topInput.property("value"));
+
+  const availableRows = data.filter(d =>
+    d.attribute_type === view &&
+    d.total >= +minInput.property("value") &&
+    d.gendered_total > 0
+  ).length;
+  const maximumRows = Math.max(1, availableRows);
+  topInput.attr("max", maximumRows)
+    .property("disabled", availableRows <= 1);
+  if (+topInput.property("value") > maximumRows) topInput.property("value", maximumRows);
+  topValue.text(`${availableRows ? topInput.property("value") : 0} of ${availableRows}`);
 }
 
 function filteredRows(data) {
@@ -1273,7 +1281,6 @@ function render(data) {
         g.append("line").attr("class", "row-guide");
         g.append("rect").attr("class", "men-bar");
         g.append("rect").attr("class", "women-bar");
-        g.append("circle").attr("class", "mixed-dot");
         g.append("text").attr("class", "row-value");
         return g;
       },
@@ -1328,18 +1335,6 @@ function render(data) {
     .attr("x", x(0))
     .attr("width", d => Math.max(1, x(d.pct_women) - x(0)));
 
-  row.select(".mixed-dot")
-    .attr("cy", y.bandwidth() / 2)
-    .attr("fill", colors.mixed)
-    .attr("stroke", congoColors.neutral100)
-    .attr("stroke-width", 1)
-    .on("mousemove", showTooltip)
-    .on("mouseout", hideTooltip)
-    .transition()
-    .duration(360)
-    .attr("cx", d => x(d.disparity))
-    .attr("r", d => d.mixed > 0 ? Math.max(3, Math.min(8, Math.sqrt(d.mixed))) : 0);
-
   row.select(".row-value")
     .attr("x", margin.left + width + 10)
     .attr("y", y.bandwidth() / 2)
@@ -1356,7 +1351,7 @@ function showTooltip(event, d) {
     .style("opacity", 1)
     .style("left", `${x + 14}px`)
     .style("top", `${y - 34}px`)
-    .html(`<strong>${d.attribute}</strong><br/>Women-led: ${d.women}<br/>Men-led: ${d.men}<br/>Mixed authorship: ${d.mixed}<br/>Total books: ${d.total}`);
+    .html(`<strong>${d.attribute}</strong><br/>Women-led: ${d.women}<br/>Men-led: ${d.men}<br/>Other authorship: ${d.mixed + d.unknown}<br/>Total books: ${d.total}`);
 }
 
 function hideTooltip() {
