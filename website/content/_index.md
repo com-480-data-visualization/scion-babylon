@@ -50,6 +50,711 @@ svg.selectAll(".bar")
 {{< /d3 >}}
 <!-- prettier-ignore-end -->
 
+## Gender explorer - filtered comparison
+
+<!-- prettier-ignore-start -->
+{{< d3 >}}
+const comparisonRoot = d3.select(container)
+  .style("position", "relative")
+  .style("font-family", "inherit");
+
+const comparisonDark = document.documentElement.classList.contains("dark");
+const comparisonTheme = comparisonDark ? {
+  foreground: "#f5f4f1",
+  secondary: "#d7d4ce",
+  panel: "#272932",
+  border: "#77747d",
+  grid: "#575963",
+  tooltipBackground: "#faf9f5",
+  tooltipText: "#15171d",
+} : {
+  foreground: "#27282c",
+  secondary: "#59565d",
+  panel: "#fbfaf8",
+  border: "#c6c2ba",
+  grid: "#ddd9d1",
+  tooltipBackground: "#ffffff",
+  tooltipText: "#27282c",
+};
+
+const comparisonColors = {
+  Male: "#36bfd0",
+  Female: "#ff6e9f",
+  Other: "#ffbd4a",
+};
+
+const comparisonLayout = comparisonRoot.append("div")
+  .style("display", "grid")
+  .style("grid-template-columns", "minmax(190px, 230px) minmax(0, 1fr)")
+  .style("gap", "18px")
+  .style("align-items", "start");
+
+const comparisonPanel = comparisonLayout.append("aside")
+  .style("background", comparisonTheme.panel)
+  .style("border", `1px solid ${comparisonTheme.border}`)
+  .style("border-radius", "6px")
+  .style("padding", "14px")
+  .style("color", comparisonTheme.foreground);
+
+comparisonPanel.append("div")
+  .style("font-size", "13px")
+  .style("font-weight", 700)
+  .style("margin-bottom", "7px")
+  .text("Filter by");
+
+const dimensionSelect = comparisonPanel.append("select")
+  .style("width", "100%")
+  .style("border", `1px solid ${comparisonTheme.border}`)
+  .style("border-radius", "6px")
+  .style("padding", "7px 8px")
+  .style("background", comparisonTheme.panel)
+  .style("color", comparisonTheme.foreground)
+  .style("margin-bottom", "14px");
+dimensionSelect.selectAll("option")
+  .data([
+    { value: "genre", label: "Genres" },
+    { value: "origin", label: "Author nationalities" },
+  ])
+  .join("option")
+  .attr("value", d => d.value)
+  .text(d => d.label);
+
+comparisonPanel.append("div")
+  .style("font-size", "13px")
+  .style("font-weight", 700)
+  .style("margin-bottom", "7px")
+  .text("Minimum books");
+
+const comparisonMinText = comparisonPanel.append("div")
+  .style("font-size", "12px")
+  .style("color", comparisonTheme.secondary)
+  .style("margin-bottom", "4px");
+
+const comparisonMin = comparisonPanel.append("input")
+  .attr("type", "range")
+  .attr("min", 1)
+  .attr("max", 100)
+  .attr("value", 10)
+  .attr("step", 1)
+  .style("width", "100%")
+  .style("accent-color", comparisonColors.Male)
+  .style("margin-bottom", "14px");
+
+const categoryHeader = comparisonPanel.append("div")
+  .style("display", "flex")
+  .style("justify-content", "space-between")
+  .style("align-items", "center")
+  .style("gap", "8px")
+  .style("margin-bottom", "8px");
+
+const categoryTitle = categoryHeader.append("span")
+  .style("font-size", "13px")
+  .style("font-weight", 700);
+
+const comparisonAll = categoryHeader.append("button")
+  .attr("type", "button")
+  .style("border", `1px solid ${comparisonTheme.border}`)
+  .style("border-radius", "5px")
+  .style("background", "transparent")
+  .style("color", comparisonTheme.foreground)
+  .style("font-size", "11px")
+  .style("padding", "3px 7px")
+  .style("cursor", "pointer")
+  .text("All");
+
+const categoryList = comparisonPanel.append("div")
+  .style("display", "grid")
+  .style("gap", "6px")
+  .style("max-height", "330px")
+  .style("overflow-y", "auto")
+  .style("padding-right", "3px");
+
+const comparisonChartWrap = comparisonLayout.append("div")
+  .style("min-width", 0);
+
+const comparisonSummary = comparisonChartWrap.append("div")
+  .style("font-size", "14px")
+  .style("font-weight", 650)
+  .style("color", comparisonTheme.foreground)
+  .style("margin", "0 0 10px");
+
+const comparisonSvg = comparisonChartWrap.append("svg")
+  .style("display", "block")
+  .style("width", "100%")
+  .style("background", comparisonTheme.panel)
+  .style("border", `1px solid ${comparisonTheme.border}`)
+  .style("border-radius", "6px");
+
+const comparisonTooltip = comparisonRoot.append("div")
+  .style("position", "absolute")
+  .style("opacity", 0)
+  .style("pointer-events", "none")
+  .style("z-index", 8)
+  .style("padding", "9px 11px")
+  .style("background", comparisonTheme.tooltipBackground)
+  .style("color", comparisonTheme.tooltipText)
+  .style("border", `1px solid ${comparisonTheme.border}`)
+  .style("border-radius", "6px")
+  .style("box-shadow", "0 8px 24px rgba(0,0,0,0.28)")
+  .style("font-size", "13px")
+  .style("line-height", 1.45);
+
+function populateComparisonCategories(data) {
+  const dimension = dimensionSelect.property("value");
+  const minimum = +comparisonMin.property("value");
+  const categories = data
+    .filter(d => d.attribute_type === dimension && d.total >= minimum)
+    .sort((a, b) => d3.descending(a.total, b.total));
+
+  categoryTitle.text(dimension === "genre" ? "Genres" : "Author nationalities");
+  comparisonMinText.text(`${minimum}+ books per option`);
+
+  categoryList.selectAll("label")
+    .data(categories, d => d.attribute)
+    .join(
+      enter => {
+        const label = enter.append("label")
+          .style("display", "grid")
+          .style("grid-template-columns", "auto minmax(0, 1fr) auto")
+          .style("align-items", "center")
+          .style("gap", "7px")
+          .style("font-size", "12px")
+          .style("color", comparisonTheme.secondary);
+        label.append("input")
+          .attr("type", "checkbox")
+          .attr("name", "comparison-category")
+          .property("checked", true);
+        label.append("span").attr("class", "comparison-category-name");
+        label.append("span")
+          .attr("class", "comparison-category-total")
+          .style("font-variant-numeric", "tabular-nums");
+        return label;
+      },
+      update => update,
+      exit => exit.remove()
+    )
+    .each(function(d) {
+      const label = d3.select(this);
+      label.select("input").attr("value", d.attribute).property("checked", true);
+      label.select(".comparison-category-name").text(d.attribute);
+      label.select(".comparison-category-total").text(d3.format(",")(d.total));
+    });
+}
+
+function selectedComparisonData(data) {
+  const dimension = dimensionSelect.property("value");
+  const selected = new Set(
+    categoryList.selectAll("input:checked").nodes().map(node => node.value)
+  );
+  return data.filter(d => d.attribute_type === dimension && selected.has(d.attribute));
+}
+
+function renderComparison(data) {
+  const selected = selectedComparisonData(data);
+  const bars = [
+    { label: "Male", value: d3.sum(selected, d => d.men) },
+    { label: "Female", value: d3.sum(selected, d => d.women) },
+    { label: "Other", value: d3.sum(selected, d => d.mixed + d.unknown) },
+  ];
+  const total = d3.sum(bars, d => d.value);
+  bars.forEach(d => d.share = total ? d.value / total : 0);
+
+  const layoutWidth = Math.max(container.clientWidth, 290);
+  comparisonLayout.style(
+    "grid-template-columns",
+    layoutWidth < 720 ? "minmax(0, 1fr)" : "minmax(190px, 230px) minmax(0, 1fr)"
+  );
+  categoryList.style("max-height", layoutWidth < 720 ? "210px" : "330px");
+
+  const outerWidth = Math.max(comparisonChartWrap.node().clientWidth, 290);
+  const compact = outerWidth < 530;
+  const margin = { top: 25, right: 18, bottom: 55, left: compact ? 51 : 64 };
+  const height = compact ? 360 : 430;
+  const innerWidth = outerWidth - margin.left - margin.right;
+  const innerHeight = height - margin.top - margin.bottom;
+
+  comparisonSvg.attr("viewBox", `0 0 ${outerWidth} ${height}`).attr("height", height);
+  const chart = comparisonSvg.selectAll(".comparison-chart")
+    .data([0])
+    .join("g")
+    .attr("class", "comparison-chart")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const x = d3.scaleBand()
+    .domain(bars.map(d => d.label))
+    .range([0, innerWidth])
+    .padding(0.34);
+  const y = d3.scaleLinear()
+    .domain([0, d3.max(bars, d => d.value) || 1])
+    .nice()
+    .range([innerHeight, 0]);
+
+  chart.selectAll(".comparison-grid")
+    .data([0])
+    .join("g")
+    .attr("class", "comparison-grid")
+    .call(d3.axisLeft(y).ticks(5).tickSize(-innerWidth).tickFormat(""))
+    .call(g => g.select(".domain").remove())
+    .call(g => g.selectAll("line")
+      .attr("stroke", comparisonTheme.grid)
+      .attr("stroke-dasharray", "3 5"));
+
+  chart.selectAll(".comparison-y-axis")
+    .data([0])
+    .join("g")
+    .attr("class", "comparison-y-axis")
+    .call(d3.axisLeft(y).ticks(5).tickFormat(d3.format("~s")))
+    .call(g => g.selectAll(".domain, line").attr("stroke", comparisonTheme.grid))
+    .call(g => g.selectAll("text").attr("fill", comparisonTheme.secondary));
+
+  chart.selectAll(".comparison-x-axis")
+    .data([0])
+    .join("g")
+    .attr("class", "comparison-x-axis")
+    .attr("transform", `translate(0,${innerHeight})`)
+    .call(d3.axisBottom(x).tickSizeOuter(0))
+    .call(g => g.selectAll(".domain, line").attr("stroke", comparisonTheme.grid))
+    .call(g => g.selectAll("text")
+      .attr("fill", comparisonTheme.foreground)
+      .attr("font-size", 13)
+      .attr("font-weight", 650));
+
+  chart.selectAll(".comparison-y-title")
+    .data([0])
+    .join("text")
+    .attr("class", "comparison-y-title")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -innerHeight / 2)
+    .attr("y", -44)
+    .attr("text-anchor", "middle")
+    .attr("fill", comparisonTheme.foreground)
+    .attr("font-size", 12)
+    .attr("font-weight", 650)
+    .text("Number of books");
+
+  const rects = chart.selectAll(".comparison-bar")
+    .data(bars, d => d.label)
+    .join("rect")
+    .attr("class", "comparison-bar")
+    .attr("x", d => x(d.label))
+    .attr("width", x.bandwidth())
+    .attr("fill", d => comparisonColors[d.label])
+    .attr("rx", 4)
+    .on("mousemove", (event, d) => {
+      const [left, top] = d3.pointer(event, container);
+      comparisonTooltip
+        .style("opacity", 1)
+        .style("left", `${left + 14}px`)
+        .style("top", `${top - 34}px`)
+        .html(`<strong style="color:#111318;font-weight:750;">${d.label}</strong><br/>Books: ${d3.format(",")(d.value)}<br/>Share: ${d3.format(".1%")(d.share)}`);
+    })
+    .on("mouseout", () => comparisonTooltip.style("opacity", 0));
+
+  rects.transition()
+    .duration(320)
+    .attr("y", d => y(d.value))
+    .attr("height", d => innerHeight - y(d.value));
+
+  chart.selectAll(".comparison-bar-label")
+    .data(bars, d => d.label)
+    .join("text")
+    .attr("class", "comparison-bar-label")
+    .attr("x", d => x(d.label) + x.bandwidth() / 2)
+    .attr("text-anchor", "middle")
+    .attr("fill", comparisonTheme.foreground)
+    .attr("font-size", compact ? 11 : 12)
+    .attr("font-weight", 650)
+    .transition()
+    .duration(320)
+    .attr("y", d => y(d.value) - 8)
+    .text(d => d3.format(",")(d.value));
+
+  const selectionCount = selected.length;
+  const dimensionLabel = dimensionSelect.property("value") === "genre" ? "genres" : "author nationalities";
+  comparisonSummary.text(`${selectionCount} ${dimensionLabel} selected - ${d3.format(",")(total)} books`);
+}
+
+d3.csv("/data/gender_attribute_summary.csv", d3.autoType).then(data => {
+  populateComparisonCategories(data);
+  renderComparison(data);
+
+  dimensionSelect.on("change", () => {
+    populateComparisonCategories(data);
+    renderComparison(data);
+  });
+  comparisonMin.on("input", () => {
+    populateComparisonCategories(data);
+    renderComparison(data);
+  });
+  categoryList.on("change", () => renderComparison(data));
+  comparisonAll.on("click", () => {
+    categoryList.selectAll("input").property("checked", true);
+    renderComparison(data);
+  });
+  window.addEventListener("resize", () => renderComparison(data));
+}).catch(err => {
+  comparisonSummary.text("Could not load comparison data.");
+  console.error("Error loading filtered gender comparison:", err);
+});
+{{< /d3 >}}
+<!-- prettier-ignore-end -->
+
+## The gender-genre scatter
+
+<!-- prettier-ignore-start -->
+{{< d3 >}}
+const scatterRoot = d3.select(container)
+  .style("position", "relative")
+  .style("max-width", "100%")
+  .style("font-family", "inherit");
+
+const scatterDark = document.documentElement.classList.contains("dark");
+const scatterTheme = scatterDark ? {
+  foreground: "#f5f4f1",
+  secondary: "#d7d4ce",
+  grid: "#56545b",
+  pointStroke: "#171821",
+  chartBackground: "#272932",
+  tooltipBackground: "#f8f7f4",
+  tooltipText: "#1f2026",
+  border: "#77747d",
+} : {
+  foreground: "#27282c",
+  secondary: "#545158",
+  grid: "#c6c2ba",
+  pointStroke: "#ffffff",
+  chartBackground: "#fbfaf8",
+  tooltipBackground: "#ffffff",
+  tooltipText: "#27282c",
+  border: "#c6c2ba",
+};
+const scatterColors = [
+  "#37c6d0", "#ff6e9f", "#ffbf47", "#63dc8a", "#bd93f9",
+  "#ff755e", "#6eafff", "#ff9955", "#b6df58", "#f98dd1", "#c8ccd7",
+];
+const symbolByGender = {
+  "Male authors": d3.symbolCircle,
+  "Non-male authors": d3.symbolDiamond,
+};
+
+const scatterControls = scatterRoot.append("div")
+  .style("display", "flex")
+  .style("flex-wrap", "wrap")
+  .style("gap", "22px")
+  .style("margin", "6px 0 18px")
+  .style("color", scatterTheme.foreground);
+
+const scatterModeWrap = scatterControls.append("label")
+  .style("display", "grid")
+  .style("gap", "7px")
+  .style("font-size", "13px")
+  .style("font-weight", 650);
+scatterModeWrap.append("span").text("Group by");
+const scatterMode = scatterModeWrap.append("select")
+  .style("border", `1px solid ${scatterTheme.border}`)
+  .style("border-radius", "6px")
+  .style("padding", "6px 9px")
+  .style("background", scatterTheme.chartBackground)
+  .style("color", scatterTheme.foreground);
+scatterMode.selectAll("option")
+  .data([
+    { value: "genre", label: "Book genre" },
+    { value: "nationality", label: "Author nationality" },
+  ])
+  .join("option")
+  .attr("value", d => d.value)
+  .text(d => d.label);
+
+const scatterMinWrap = scatterControls.append("label")
+  .style("display", "grid")
+  .style("gap", "7px")
+  .style("font-size", "13px")
+  .style("font-weight", 650);
+const scatterMinLabel = scatterMinWrap.append("span");
+const scatterMin = scatterMinWrap.append("input")
+  .attr("type", "range")
+  .attr("min", 1)
+  .attr("max", 50)
+  .attr("value", 5)
+  .attr("step", 1)
+  .style("accent-color", "#37c6d0");
+
+const genderFilter = scatterControls.append("fieldset")
+  .style("border", "none")
+  .style("padding", 0)
+  .style("margin", 0);
+genderFilter.append("legend")
+  .style("font-size", "13px")
+  .style("font-weight", 650)
+  .style("margin-bottom", "7px")
+  .text("Gender group");
+const genderOptions = genderFilter.append("div")
+  .style("display", "flex")
+  .style("gap", "14px")
+  .style("flex-wrap", "wrap");
+
+["Male authors", "Non-male authors"].forEach(group => {
+  const label = genderOptions.append("label")
+    .style("display", "inline-flex")
+    .style("align-items", "center")
+    .style("gap", "6px")
+    .style("font-size", "13px");
+  label.append("input")
+    .attr("type", "checkbox")
+    .attr("name", "scatter-gender")
+    .attr("value", group)
+    .property("checked", true);
+  label.append("svg")
+    .attr("width", 15)
+    .attr("height", 15)
+    .append("path")
+    .attr("transform", "translate(7.5,7.5)")
+    .attr("d", d3.symbol().type(symbolByGender[group]).size(80)())
+    .attr("fill", scatterTheme.foreground);
+  label.append("span").text(group);
+});
+
+const genreFilter = scatterControls.append("fieldset")
+  .style("border", "none")
+  .style("padding", 0)
+  .style("margin", 0)
+  .style("flex", "1 1 380px");
+const genreHeader = genreFilter.append("div")
+  .style("display", "flex")
+  .style("justify-content", "space-between")
+  .style("align-items", "center")
+  .style("gap", "12px")
+  .style("margin-bottom", "7px");
+const attributeHeading = genreHeader.append("span")
+  .style("font-size", "13px")
+  .style("font-weight", 650);
+const resetGenres = genreHeader.append("button")
+  .attr("type", "button")
+  .style("border", `1px solid ${scatterTheme.border}`)
+  .style("background", "transparent")
+  .style("color", scatterTheme.foreground)
+  .style("border-radius", "6px")
+  .style("font-size", "12px")
+  .style("padding", "4px 9px")
+  .style("cursor", "pointer")
+  .text("Select all");
+const genreOptions = genreFilter.append("div")
+  .style("display", "grid")
+  .style("grid-template-columns", "repeat(auto-fit, minmax(128px, 1fr))")
+  .style("gap", "6px 12px");
+
+const scatterSummary = scatterRoot.append("div")
+  .style("font-size", "14px")
+  .style("font-weight", 650)
+  .style("margin", "0 0 10px")
+  .style("color", scatterTheme.foreground);
+
+const scatterTooltip = scatterRoot.append("div")
+  .style("position", "absolute")
+  .style("z-index", 5)
+  .style("opacity", 0)
+  .style("pointer-events", "none")
+  .style("background", scatterTheme.tooltipBackground)
+  .style("color", scatterTheme.tooltipText)
+  .style("border", `1px solid ${scatterTheme.border}`)
+  .style("box-shadow", "0 8px 24px rgba(0, 0, 0, 0.28)")
+  .style("border-radius", "6px")
+  .style("padding", "9px 11px")
+  .style("font-size", "13px")
+  .style("line-height", 1.45);
+
+const scatterSvg = scatterRoot.append("svg")
+  .style("display", "block")
+  .style("width", "100%")
+  .style("background", scatterTheme.chartBackground)
+  .style("border", `1px solid ${scatterTheme.border}`)
+  .style("border-radius", "6px");
+const scatterChart = scatterSvg.append("g");
+const scatterGrid = scatterChart.append("g");
+const scatterXAxis = scatterChart.append("g");
+const scatterYAxis = scatterChart.append("g");
+const scatterXTitle = scatterChart.append("text");
+const scatterYTitle = scatterChart.append("text");
+
+function scatterFiltered(data) {
+  const attributeType = scatterMode.property("value");
+  const minimum = +scatterMin.property("value");
+  const genders = new Set(
+    genderOptions.selectAll("input:checked").nodes().map(node => node.value)
+  );
+  const attributes = new Set(
+    genreOptions.selectAll("input:checked").nodes().map(node => node.value)
+  );
+  return data.filter(d =>
+    d.attribute_type === attributeType &&
+    d.books >= minimum &&
+    genders.has(d.gender_group) &&
+    attributes.has(d.attribute)
+  );
+}
+
+function drawScatter(data, color) {
+  const visible = scatterFiltered(data);
+  const attributeType = scatterMode.property("value");
+  const minimum = +scatterMin.property("value");
+  const available = data.filter(d => d.attribute_type === attributeType && d.books >= minimum);
+  const width = Math.max(container.clientWidth, 320);
+  const compact = width < 640;
+  const margin = { top: 22, right: compact ? 18 : 30, bottom: 53, left: compact ? 54 : 68 };
+  const height = compact ? 390 : 470;
+  const innerWidth = width - margin.left - margin.right;
+  const innerHeight = height - margin.top - margin.bottom;
+
+  scatterSvg.attr("viewBox", `0 0 ${width} ${height}`).attr("height", height);
+  scatterChart.attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const plotData = available.length ? available : data.filter(d => d.attribute_type === attributeType);
+  const xExtent = d3.extent(plotData, d => d.average_rating);
+  const yExtent = d3.extent(plotData, d => d.average_price);
+  const x = d3.scaleLinear()
+    .domain([xExtent[0] - 0.03, xExtent[1] + 0.03])
+    .nice()
+    .range([0, innerWidth]);
+  const y = d3.scaleLinear()
+    .domain([Math.max(0, yExtent[0] - 1), yExtent[1] + 1])
+    .nice()
+    .range([innerHeight, 0]);
+
+  scatterGrid
+    .call(d3.axisLeft(y).ticks(6).tickSize(-innerWidth).tickFormat(""))
+    .call(group => group.select(".domain").remove())
+    .call(group => group.selectAll(".tick line")
+      .attr("stroke", scatterTheme.grid)
+      .attr("stroke-opacity", 0.7)
+      .attr("stroke-dasharray", "3 5"));
+
+  scatterXAxis
+    .attr("transform", `translate(0,${innerHeight})`)
+    .transition()
+    .duration(300)
+    .call(d3.axisBottom(x).ticks(compact ? 4 : 6).tickFormat(d3.format(".2f")));
+  scatterYAxis
+    .transition()
+    .duration(300)
+    .call(d3.axisLeft(y).ticks(6).tickFormat(value => `$${value}`));
+  scatterXAxis.selectAll(".domain, .tick line").attr("stroke", scatterTheme.grid);
+  scatterYAxis.selectAll(".domain, .tick line").attr("stroke", scatterTheme.grid);
+  scatterChart.selectAll(".tick text").attr("fill", scatterTheme.secondary);
+
+  scatterXTitle
+    .attr("x", innerWidth / 2)
+    .attr("y", innerHeight + 43)
+    .attr("text-anchor", "middle")
+    .attr("font-size", 13)
+    .attr("font-weight", 650)
+    .attr("fill", scatterTheme.foreground)
+    .text("Average rating");
+  scatterYTitle
+    .attr("transform", "rotate(-90)")
+    .attr("x", -innerHeight / 2)
+    .attr("y", -47)
+    .attr("text-anchor", "middle")
+    .attr("font-size", 13)
+    .attr("font-weight", 650)
+    .attr("fill", scatterTheme.foreground)
+    .text("Average price");
+
+  const totalBooks = d3.sum(visible, d => d.books);
+  scatterMinLabel.text(`Minimum books per point: ${minimum}`);
+  scatterSummary.text(`${visible.length} groups shown - ${d3.format(",")(totalBooks)} priced books`);
+
+  const points = scatterChart.selectAll(".scatter-point")
+    .data(visible, d => `${d.attribute_type}-${d.attribute}-${d.gender_group}`)
+    .join(
+      enter => enter.append("path")
+        .attr("class", "scatter-point")
+        .attr("opacity", 0)
+        .attr("transform", d => `translate(${x(d.average_rating)},${y(d.average_price)})`)
+        .attr("d", d => d3.symbol().type(symbolByGender[d.gender_group]).size(0)()),
+      update => update,
+      exit => exit.transition().duration(160).attr("opacity", 0).remove()
+    );
+
+  points
+    .attr("fill", d => color(d.attribute))
+    .attr("stroke", scatterTheme.pointStroke)
+    .attr("stroke-width", 2)
+    .on("mousemove", (event, d) => {
+      const [left, top] = d3.pointer(event, container);
+      scatterTooltip
+        .style("opacity", 1)
+        .style("left", `${left + 14}px`)
+        .style("top", `${top - 36}px`)
+        .html(`<strong style="color: #111318; font-weight: 750;">${d.attribute}</strong><br/>${d.gender_group}<br/>Average price: $${d.average_price.toFixed(2)}<br/>Average rating: ${d.average_rating.toFixed(2)}<br/>Books: ${d3.format(",")(d.books)}`);
+    })
+    .on("mouseout", () => scatterTooltip.style("opacity", 0))
+    .transition()
+    .duration(350)
+    .attr("opacity", 0.9)
+    .attr("transform", d => `translate(${x(d.average_rating)},${y(d.average_price)})`)
+    .attr("d", d => d3.symbol().type(symbolByGender[d.gender_group]).size(compact ? 105 : 135)());
+}
+
+function populateAttributes(data, color) {
+  const attributeType = scatterMode.property("value");
+  const minimum = +scatterMin.property("value");
+  const attributes = Array.from(new Set(
+    data
+      .filter(d => d.attribute_type === attributeType && d.books >= minimum)
+      .map(d => d.attribute)
+  )).sort(d3.ascending);
+
+  attributeHeading.text(attributeType === "genre" ? "Genres" : "Author nationalities");
+  genreOptions.selectAll("*").remove();
+  attributes.forEach(attribute => {
+    const label = genreOptions.append("label")
+      .style("display", "inline-flex")
+      .style("align-items", "center")
+      .style("gap", "6px")
+      .style("font-size", "12px");
+    label.append("input")
+      .attr("type", "checkbox")
+      .attr("name", "scatter-attribute")
+      .attr("value", attribute)
+      .property("checked", true);
+    label.append("span")
+      .style("display", "inline-block")
+      .style("width", "10px")
+      .style("height", "10px")
+      .style("border-radius", "2px")
+      .style("background", color(attribute));
+    label.append("span").text(attribute);
+  });
+}
+
+d3.csv("/data/gender_price_scatter.csv", d3.autoType).then(data => {
+  const attributes = Array.from(new Set(data.map(d => d.attribute)));
+  const color = d3.scaleOrdinal().domain(attributes).range(scatterColors);
+
+  populateAttributes(data, color);
+  drawScatter(data, color);
+  genderOptions.selectAll("input").on("change", () => drawScatter(data, color));
+  genreOptions.on("change", () => drawScatter(data, color));
+  scatterMode.on("change", () => {
+    populateAttributes(data, color);
+    drawScatter(data, color);
+  });
+  scatterMin.on("input", () => {
+    populateAttributes(data, color);
+    drawScatter(data, color);
+  });
+  resetGenres.on("click", () => {
+    genreOptions.selectAll("input").property("checked", true);
+    drawScatter(data, color);
+  });
+  window.addEventListener("resize", () => drawScatter(data, color));
+}).catch(err => {
+  scatterSummary.text("Could not load gender-genre pricing data.");
+  console.error("Error loading gender-genre scatter data:", err);
+});
+{{< /d3 >}}
+<!-- prettier-ignore-end -->
+
 ## Line chart
 
 <!-- prettier-ignore-start -->
