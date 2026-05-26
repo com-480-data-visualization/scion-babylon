@@ -151,7 +151,12 @@ const categoryTitle = categoryHeader.append("span")
   .style("font-size", "13px")
   .style("font-weight", 700);
 
-const comparisonAll = categoryHeader.append("button")
+const categoryActions = categoryHeader.append("div")
+  .style("display", "flex")
+  .style("gap", "5px");
+
+function comparisonActionButton(label) {
+  return categoryActions.append("button")
   .attr("type", "button")
   .style("border", `1px solid ${comparisonTheme.border}`)
   .style("border-radius", "5px")
@@ -160,7 +165,11 @@ const comparisonAll = categoryHeader.append("button")
   .style("font-size", "11px")
   .style("padding", "3px 7px")
   .style("cursor", "pointer")
-  .text("All");
+  .text(label);
+}
+
+const comparisonAll = comparisonActionButton("All");
+const comparisonNone = comparisonActionButton("None");
 
 const categoryList = comparisonPanel.append("div")
   .style("display", "grid")
@@ -389,6 +398,10 @@ d3.csv("/data/gender_attribute_summary.csv", d3.autoType).then(data => {
   categoryList.on("change", () => renderComparison(data));
   comparisonAll.on("click", () => {
     categoryList.selectAll("input").property("checked", true);
+    renderComparison(data);
+  });
+  comparisonNone.on("click", () => {
+    categoryList.selectAll("input").property("checked", false);
     renderComparison(data);
   });
   window.addEventListener("resize", () => renderComparison(data));
