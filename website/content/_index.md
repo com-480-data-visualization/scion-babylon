@@ -157,6 +157,9 @@ const svg = d3.select(container).append("svg")
   .attr("width", width)
   .attr("height", height);
 
+const isDark = document.documentElement.classList.contains("dark");
+const axisColor = isDark ? congoColors.neutral300 : congoColors.neutral700;
+
 const proj = d3.geoNaturalEarth1()
   .translate([width / 2, height / 2])
   .scale(width / (2 * Math.PI));
@@ -204,7 +207,7 @@ Promise.all([
 
 
   // Split geometries
-  const problematicIDs = [10, 643, 242]; // Antarctica, Russia
+  const problematicIDs = [643, 242]; // Antarctica, Russia
   const cartoGeometries = topology.objects.countries.geometries
     .filter(d => !problematicIDs.includes(+d.id));
 
@@ -254,6 +257,7 @@ Promise.all([
   const cartoFeatures = carto(topology, cartoGeometries).features;
   const normalFeatures = cartoGeometries.map(d => topojson.feature(topology, d));
 
+
   // Draw exluded countries because of anti-meridian as static layer first
   svg.selectAll(".static-country")
     .data(staticGeometries.map(d => topojson.feature(topology, d)))
@@ -299,7 +303,7 @@ Promise.all([
 <!-- prettier-ignore-end -->
 
 ## Genres and gender
-<!-- prettier-ignore-end -->
+<!-- prettier-ignore-start-->
 {{< d3 >}}
 const width = container.clientWidth;
 const height = 500;
@@ -308,77 +312,170 @@ const svg = d3.select(container).append("svg")
   .attr("width", width)
   .attr("height", height);
 
-// Gender selector
-const genders = ["m", "w"];
+const genderLabels = {
+  "m":   "Male",
+  "w":   "Female",
+  "w;m": "Female & Male",
+  "m;m": "Male & Male",
+  "w;w": "Female & Female"
+};
+const genders = Object.keys(genderLabels);
+
+const isDark = document.documentElement.classList.contains("dark");
+const labelColor = isDark ? congoColors.neutral100 : "#000000";
+
 const selector = d3.select(container).insert("div", "svg")
   .style("margin-bottom", "10px");
 
-selector.append("label").text("Select gender: ");
-const select = selector.append("select");
+selector.append("label")
+  .text("Select gender: ")
+  .style("color", labelColor);
+
+const select = selector.append("select")
+  .style("margin-bottom", "8px")
+  .style("padding", "6px 12px")
+  .style("background", congoColors.primary400)
+  .style("color", congoColors.neutral100)
+  .style("border", "none")
+  .style("border-radius", "4px")
+  .style("cursor", "pointer");
+
 select.selectAll("option")
   .data(genders)
   .enter()
   .append("option")
-  .text(d => d)
+  .text(d => genderLabels[d])
   .attr("value", d => d);
+
+const genreColorScale = d3.scaleOrdinal()
+  .range([
+    congoColors.primary200,
+    congoColors.primary300,
+    congoColors.primary400,
+    congoColors.primary500,
+    "#a78bfa", "#34d399", "#f97316",
+    "#e879f9", "#facc15", "#38bdf8"
+  ]);
 
 d3.csv("/data/genders_genres.csv").then(data => {
   data.forEach(d => d.count = +d.count);
 
-  const maxCount = d3.max(data, d => d.count);
-  const radiusScale = d3.scaleSqrt()
-    .domain([0, maxCount])
-    .range([10, 60]);
+  const allGenres = [...new Set(data.map(d => d.genres))];
+  genreColorScale.domain(allGenres);
 
   function update(selectedGender) {
     const filtered = data.filter(d => d.gender === selectedGender);
+    const maxCount = d3.max(filtered, d => d.count);
+    const radiusScale = d3.scaleSqrt()
+      .domain([0, maxCount])
+      .range([10, 60]);
 
-    // Bind data
     const nodes = filtered.map(d => ({ ...d }));
 
-    svg.selectAll("circle").remove();
-    svg.selectAll("text").remove();
+    svg.selectAll("*").remove();
 
-    const node = svg.append("g")
-      .selectAll("circle")
+    const nodeGroup = svg.append("g");
+    const labelGroup = svg.append("g");  // declared once, after nodeGroup
+
+    const node = nodeGroup.selectAll("circle")
       .data(nodes)
       .enter()
       .append("circle")
         .attr("r", d => radiusScale(d.count))
         .attr("cx", width / 2)
         .attr("cy", height / 2)
-        .style("fill", selectedGender === "w" ? "#e07b8a" : "#69b3a2")
-        .style("fill-opacity", 0.6)
-        .attr("stroke", selectedGender === "w" ? "#c45c6a" : "#69a2b2")
-        .style("stroke-width", 2);
+        .style("fill", d => genreColorScale(d.genres))
+        .style("fill-opacity", 0.75)
+        .attr("stroke", d => d3.color(genreColorScale(d.genres)).darker(0.6))
+        .style("stroke-width", 1.5);
 
-    const label = svg.append("g")
-      .selectAll("text")
+    // use paint-order trick for outline, and hide label when bubble is too small
+    const label = labelGroup.selectAll("text")
       .data(nodes)
       .enter()
       .append("text")
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "middle")
-        .style("font-size", "11px")
+        .style("font-size", d => `${Math.min(11, radiusScale(d.count) * 0.35)}px`)
         .style("pointer-events", "none")
-        .text(d => d.genre);
+        .style("fill", "#ffffff")
+        .style("paint-order", "stroke")
+        .style("stroke", "rgba(0,0,0,0.6)")
+        .style("stroke-width", "2.5px")
+        .style("stroke-linejoin", "round")
+        .style("opacity", d => radiusScale(d.count) > 18 ? 1 : 0)  // hide on tiny bubbles
+        .text(d => d.genres);
 
     const simulation = d3.forceSimulation(nodes)
       .force("center", d3.forceCenter(width / 2, height / 2))
       .force("charge", d3.forceManyBody().strength(1))
       .force("collide", d3.forceCollide().strength(0.8).radius(d => radiusScale(d.count) + 2).iterations(3))
       .on("tick", () => {
-        node
-          .attr("cx", d => d.x)
-          .attr("cy", d => d.y);
-        label
-          .attr("x", d => d.x)
-          .attr("y", d => d.y);
+        node.attr("cx", d => d.x).attr("cy", d => d.y);
+        label.attr("x", d => d.x).attr("y", d => d.y);
       });
   }
 
   update("m");
   select.on("change", function() { update(this.value); });
+});
+{{< /d3 >}}
+
+<!-- prettier-ignore-end -->
+
+## Bar chart
+<!-- prettier-ignore-start -->
+{{< d3 >}}
+const margin = { top: 20, right: 30, bottom: 50, left: 150 };
+const width = container.clientWidth - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
+
+const svg = d3.select(container).append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", `translate(${margin.left},${margin.top})`);
+
+const isDark = document.documentElement.classList.contains("dark");
+const labelColor = isDark ? congoColors.neutral100 : congoColors.neutral700;
+const barColor = isDark ? congoColors.primary300 : congoColors.primary500;
+
+d3.csv("/data/nationalities.csv").then(data => {
+  data.forEach(d => d.counts = +d.counts);
+
+  const maxVal = d3.max(data, d => d.counts);
+  const x = d3.scaleLinear()
+    .domain([0, maxVal * 1.05])   // 5% padding so longest bar isn't flush
+    .range([0, width]);
+
+  svg.append("g")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x).ticks(6))
+    .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-45)")
+      .style("text-anchor", "end")
+      .style("fill", labelColor);
+
+  // Y axis
+  const y = d3.scaleBand()
+    .range([0, height])
+    .domain(data.map(d => d.nationality))
+    .padding(0.1);
+
+  svg.append("g")
+    .call(d3.axisLeft(y))
+    .selectAll("text")
+      .style("fill", labelColor);
+// Bars
+  svg.selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+      .attr("x", x(0))
+      .attr("y", d => y(d.nationality))
+      .attr("width", d => x(d.counts))
+      .attr("height", y.bandwidth())
+      .attr("fill", barColor);
 });
 {{< /d3 >}}
 <!-- prettier-ignore-end -->
