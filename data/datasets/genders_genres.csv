@@ -1,69 +1,72 @@
 gender,genres,count
-m;m,Childrens,29
-w,Childrens,680
-w;m,Childrens,21
-m;w,Childrens,11
-m,Childrens,850
 w;w,Childrens,53
-w,Classics,527
-m,Classics,2826
-w;m,Classics,4
-m;m,Classics,70
-w;w,Classics,6
-m;w,Classics,7
-w;m,Fantasy,29
+m;m,Childrens,29
+w,Childrens,679
+m,Childrens,847
+w;m,Childrens,32
+m;m,Classics,65
+w;w,Classics,5
+m,Classics,2654
+w,Classics,484
+w;m,Classics,11
+w,Drama,141
+m;m,Drama,5
+w;w,Drama,2
+m,Drama,333
+w;m,Drama,2
+w;m,Fantasy,78
 m;m,Fantasy,137
-w,Fantasy,2730
-m,Fantasy,4244
-m;w,Fantasy,49
-w;w,Fantasy,78
+w;w,Fantasy,77
+w,Fantasy,2719
+m,Fantasy,4221
+m,Feminism,35
+w;w,Feminism,1
+w,Feminism,100
 m;m,Horror,34
-m;w,Horror,11
-w;m,Horror,1
-w,Horror,153
-m,Horror,935
+w,Horror,151
+m,Horror,930
+w;m,Horror,12
 w;w,Horror,2
-m;m,Nonfiction,332
-w,Nonfiction,1380
+m;m,Literary Fiction,6
+w;m,Literary Fiction,2
+w;w,Literary Fiction,1
+m;m;m,Literary Fiction,1
+m,Literary Fiction,863
+w,Literary Fiction,367
+m,Nonfiction,4703
+w,Nonfiction,1335
+w;m,Nonfiction,171
 w;w,Nonfiction,80
-m,Nonfiction,4713
-m;w,Nonfiction,100
-w;m,Nonfiction,71
-m,Philosophy,855
-w,Philosophy,48
-m;w,Philosophy,1
-w;m,Philosophy,2
+m;m,Nonfiction,332
+w,Philosophy,45
+w;m,Philosophy,3
+m,Philosophy,841
 m;m,Philosophy,39
-m;w,Poetry,2
-m;m,Poetry,9
-w;m,Poetry,1
 w;w,Poetry,2
-w,Poetry,167
-m,Poetry,736
-m;m;m,Romance,1
-m;w,Romance,13
-w;w,Romance,91
-n,Romance,1
-m,Romance,2644
+w;m,Poetry,3
+w,Poetry,163
+m;m,Poetry,9
+m,Poetry,730
+m,Romance,2586
+w;m,Romance,22
+w;w,Romance,89
+w,Romance,4729
 m;m,Romance,11
-w;m,Romance,9
-w,Romance,4777
-m;m,Science Fiction,75
-m,Science Fiction,1588
-w,Science Fiction,242
-w;m,Science Fiction,13
+n,Romance,1
+m;m;m,Romance,1
+w;m,Science Fiction,37
 w;w,Science Fiction,13
-m;w,Science Fiction,24
-w;m,Thriller,2
-w,Thriller,530
-w;w,Thriller,9
+m;m,Science Fiction,75
+w,Science Fiction,238
+m,Science Fiction,1579
+w;m,Thriller,18
+w,Thriller,513
 m;m,Thriller,72
-m,Thriller,1715
-m;w,Thriller,16
-w,Young Adult,2534
-w;w,Young Adult,59
-m;m,Young Adult,30
-w;m,Young Adult,21
-m,Young Adult,1878
-m;w,Young Adult,25
+m,Thriller,1683
+w;w,Thriller,9
+m,Young Adult,1856
 m;m;m,Young Adult,1
+w;w,Young Adult,59
+w;m,Young Adult,46
+m;m,Young Adult,30
+w,Young Adult,2516

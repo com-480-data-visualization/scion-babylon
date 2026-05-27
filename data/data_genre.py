@@ -12,11 +12,13 @@ best_books['author'] = best_books['author'].str.strip('"').str.replace(r'\(Goodr
 
 # Strip other roles outside from author
 best_books['author'] = best_books['author'].str.replace(r',\s*[^,]+\([^)]+\)', '', regex=True).str.strip().str.strip(',').str.strip()
+best_books = best_books.drop_duplicates(subset=["title"])
 international_bestsellers = pd.read_csv("datasets/international_bestsellers.csv")
 international_bestsellers = international_bestsellers.drop_duplicates(subset=["title"])
 
 rest = best_books[~best_books['title'].isin(international_bestsellers['title'])]
-rest = rest.drop_duplicates(subset=["title"])
+rest.drop_duplicates(subset=['title'], inplace = True)
+rest = rest.loc[rest['genres'] != "[]"]
 df = rest[["title","author", "rating", "genres", "language"]].copy()
 
 
@@ -56,10 +58,10 @@ merged = pd.merge(best_books, international_bestsellers[['title', 'gender']], on
 merged["gender"] = merged["gender"].apply(lambda g: str(g).replace(" ", "").replace(",", ";"))
 
 merged = merged[["title","author", "rating", "genres", "language", "gender"]]
+
 df_merged = pd.concat([df_known, merged ])
 df_merged = df_merged.drop_duplicates(subset=["title"])
-defined_genres = {"Nonfiction", "Science Fiction", "Fantasy", "Thriller", "Classics", "Romance", "Philosophy", "Horror", "Childrens", "Young Adult", "Poetry"}
-
+defined_genres = {"Nonfiction", "Science Fiction", "Fantasy", "Thriller", "Classics", "Romance", "Philosophy", "Horror", "Childrens", "Young Adult", "Poetry", "Feminism", "Drama", "Literary Fiction", "Historical Fiction"}
 
 ## create gender-genres dataset
 def find_genre(series):
@@ -73,11 +75,17 @@ def find_genre(series):
 df_merged["genres"] = df_merged["genres"].apply(find_genre)
 
 df_unknown = df_merged[~df_merged["genres"].isin(defined_genres)]
-df_unknown.to_csv("datasets/unkown_genres.csv")
+df_genres = best_books[["genres", "title"]].copy()
+df_genres = df_genres.rename(columns={"genres":"genres_list"})
+df_unknown = pd.merge(df_unknown, df_genres, on='title', how='left')
+df_unknown.to_csv("datasets/unknown_genres.csv")
 print(f"df_unknown: {len(df_unknown)}")
 df_merged = df_merged[df_merged["genres"].isin(defined_genres)]
+print(f"df_known: {len(df_merged)}")
 
 df_merged = df_merged[["gender", "genres"]]
+df_merged["gender"] = df_merged["gender"].apply(lambda s: "w;m" if s == "m;w" else s)
+df_merged.to_csv("datasets/genders_genres_merged.csv", index=False)
 df_merged["count"] = df_merged.groupby(["gender", "genres"])["gender"].transform("count")
 
 df_merged = df_merged.drop_duplicates(subset=["gender", "genres"]).sort_values(by=["genres"])

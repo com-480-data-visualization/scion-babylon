@@ -1,70 +1,101 @@
 ---
-title: "Welcome to Dataviz! :tada:"
+title: "Cartogram"
 date: 2026-04-13
-description: "This is a website to host our book visualizations."
+description: "Map that scales countries by amount of books published by author's from these countries"
 tags: ["d3", "sample", "graph", "shortcodes"]
+layout: "simple"
 ---
-
-{{< lead >}}
-A powerful, lightweight visualization for COM-480 built with Hugo, Tailwind CSS.
-{{< /lead >}}
-
-# Visualizations
-
-## Project visualizations
-
-- [Gender explorer - filtered comparison](visualizations/gender-explorer/): filter genres or author nationalities and compare male, female, and other authorship totals.
-- [The gender-genre scatter](visualizations/gender-genre-scatter/): compare average price and rating by gender group.
-- [Gender explorator](visualizations/gender-explorator/): inspect women-led and men-led representation by genre or author nationality.
-- [Languages](visualizations/languages/): see the distribution of books by language as a waffle chart.
-- [Publishers](visualizations/publishers/): compare gender representation across major publishers.
-- [Library](visualizations/library/): browse and filter books on an interactive shelf.
-
-### Scale countries by amount of books published by author's from these countries
-
-
-## Cartogram
-
+Toggle the button to discover the scaled map ! 
 <!-- prettier-ignore-start -->
 <script src="https://unpkg.com/topojson@3/dist/topojson.min.js"></script>
-<script src="{{< asset-url "js/cartogram.js" >}}"></script>
+<script src="/js/cartogram.js"></script>
 
 {{< d3 >}}
+d3.cartogram = cartogramFactory;
 const width = container.clientWidth;
 const height = 500;
+d3.select(container).style("position", "relative");
+
 const svg = d3.select(container).append("svg")
   .attr("width", width)
   .attr("height", height);
 
-const genderLabels = {
-  "m":   "Male",
-  "w":   "Female",
-  "w;m": "Female & Male",
-  "m;m": "Male & Male",
-  "m;m;m": "Male & Male & Male",
-  "w;w": "Female & Female"
-};
-const genders = Object.keys(genderLabels);
 const isDark = document.documentElement.classList.contains("dark");
-const labelColor = isDark ? congoColors.neutral100 : "#000000";
+const axisColor = isDark ? congoColors.neutral300 : congoColors.neutral700;
 
-const selector = d3.select(container).insert("div", "svg")
-  .style("margin-bottom", "10px");
-selector.append("label")
-  .text("Select gender: ")
-  .style("color", labelColor);
-const select = selector.append("select")
-  .style("margin-bottom", "8px")
-  .style("padding", "6px 12px")
-  .style("background", congoColors.primary400)
-  .style("color", congoColors.neutral100)
-  .style("border", "none")
+const proj = d3.geoNaturalEarth1()
+  .translate([width / 2, height / 2])
+  .scale(width / (2 * Math.PI));
+
+const carto = d3.cartogram()
+  .projection(proj);
+
+const staticPath = d3.geoPath().projection(proj);
+
+// --- Tooltip ---
+const tooltip = d3.select(container).append("div")
+  .style("position", "absolute")
+  .style("background", congoColors.neutral100)
+  .style("color", congoColors.neutral700)
+  .style("padding", "6px 10px")
   .style("border-radius", "4px")
+  .style("font-size", "13px")
+  .style("pointer-events", "none")
+  .style("opacity", 0);
+
+// --- Toggle button ---
+let distorted = false;
+
+const toggleWrapper = d3.select(container).insert("div", "svg")
+  .style("margin-bottom", "10px")
+  .style("display", "flex")
+  .style("align-items", "center")
+  .style("gap", "10px");
+
+toggleWrapper.append("span")
+  .text("Normal map")
+  .style("font-size", "15px")
+  .style("color", axisColor);
+
+const toggleLabel = toggleWrapper.append("label")
+  .style("position", "relative")
+  .style("display", "inline-block")
+  .style("width", "48px")
+  .style("height", "26px")
   .style("cursor", "pointer");
+
+const checkbox = toggleLabel.append("input")
+  .attr("type", "checkbox")
+  .style("opacity", "0")
+  .style("width", "0")
+  .style("height", "0");
+
+const knob = toggleLabel.append("span")
+  .style("position", "absolute")
+  .style("inset", "0")
+  .style("background-color", congoColors.primary300)
+  .style("border-radius", "26px")
+  .style("transition", "background-color .3s");
+
+knob.append("span")
+  .attr("class", "knob-inner")
+  .style("position", "absolute")
+  .style("height", "20px")
+  .style("width", "20px")
+  .style("left", "3px")
+  .style("bottom", "3px")
+  .style("background-color", "white")
+  .style("border-radius", "50%")
+  .style("transition", "transform .3s");
+
+toggleWrapper.append("span")
+  .text("Cartogram")
+  .style("font-size", "15px")
+  .style("color", axisColor);
 
 Promise.all([
   d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
-  d3.csv("{{< asset-url "data/nationalities.csv" >}}")
+  d3.csv("/data/nationalities.csv")
 ]).then(([topology, data]) => {
   const dataById = new Map(
     data
@@ -77,7 +108,7 @@ Promise.all([
 
 
   // Split geometries
-  const problematicIDs = [10, 643, 242]; // Antarctica, Russia
+  const problematicIDs = [643, 242]; // Antarctica, Russia
   const cartoGeometries = topology.objects.countries.geometries
     .filter(d => !problematicIDs.includes(+d.id));
 
@@ -127,6 +158,7 @@ Promise.all([
   const cartoFeatures = carto(topology, cartoGeometries).features;
   const normalFeatures = cartoGeometries.map(d => topojson.feature(topology, d));
 
+
   // Draw exluded countries because of anti-meridian as static layer first
   svg.selectAll(".static-country")
     .data(staticGeometries.map(d => topojson.feature(topology, d)))
@@ -153,17 +185,19 @@ Promise.all([
     .on("mousemove", onMousemove)
     .on("mouseout", onMouseout);
 
-  // Toggle between distorted and normal
-  button.on("click", () => {
-    distorted = !distorted;
-    button.text(distorted ? "Show Normal Map" : "Show Cartogram");
+  checkbox.on("change", function() {
+  distorted = this.checked;
 
-    paths.transition().duration(750)
-      .attr("d", (d, i) => distorted
-        ? carto.path(d)
-        : staticPath(normalFeatures[i])
-      );
-  });
+  knob.style("background-color", distorted ? congoColors.primary500 : congoColors.primary300);
+  knob.select(".knob-inner")
+    .style("transform", distorted ? "translateX(22px)" : "translateX(0)");
+
+  paths.transition().duration(750)
+    .attr("d", (d, i) => distorted
+      ? carto.path(d)
+      : staticPath(normalFeatures[i])
+    );
+});
 
 }).catch(err => {
   console.error("Error loading data:", err);
