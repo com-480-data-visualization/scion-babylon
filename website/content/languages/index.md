@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .concat(d3.schemeSet3)
     .concat(['#7b8b8e', '#d97d54', '#82a7e0', '#b49ad9', '#74a57f', '#d4a373']);
 
-  d3.csv('/data/language_counts.csv', d => ({
+  d3.csv('{{< asset-url "data/language_counts.csv" >}}', d => ({
     language: d.language || 'Unknown',
     num_books: +d.num_books || 0,
   })).then(raw => {

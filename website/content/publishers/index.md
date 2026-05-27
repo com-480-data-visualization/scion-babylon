@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const colorFemale = '#d8b3f0', colorMale = '#a3d5ff', colorNeutral = '#b4b2a9';
   let currentSort = 'pct'; // 'pct' or 'total'
 
-  d3.csv("/data/publisher_gender_counts.csv").then(raw => {
+  d3.csv('{{< asset-url "data/publisher_gender_counts.csv" >}}').then(raw => {
     let data = raw.map(d => ({
       publisher: d.publisher,
       num_male: +d.num_male,

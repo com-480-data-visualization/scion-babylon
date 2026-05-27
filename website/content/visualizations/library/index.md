@@ -535,7 +535,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let availableGenres = [];
 
     // Load data
-    d3.csv('/data/bookshelf2.csv').then(data => {
+    d3.csv('{{< asset-url "data/bookshelf2.csv" >}}').then(data => {
         booksData = data;
 
         // Extract available languages only for female authors
