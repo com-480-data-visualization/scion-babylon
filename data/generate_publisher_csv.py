@@ -38,7 +38,7 @@ df = df[["title", "author", "rating", "gender", "genres", "publisher", "publishD
 df = df.drop_duplicates(subset=["title"])
 
 # Normalize publisher values and gender field
-df["publisher"] = df["publisher"].fillna("Unknown").astype(str)
+df = df.dropna(subset=["publisher"])
 df["gender"] = df["gender"].fillna("").astype(str)
 
 # Parse genres column

@@ -6,16 +6,16 @@ date: 2026-05-23
 {{< rawhtml >}}
 <div>
   <div style="margin-bottom: 16px;">
-    <label style="font-size: 13px; color: #666;">Sort by:</label>
+    <label style="font-size: 12px; color: #666;">Sort by:</label>
     <button id="sort-pct" style="margin-left: 8px; padding: 6px 12px; background: #d8b3f0; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Women %</button>
-    <button id="sort-total" style="margin-left: 4px; padding: 6px 12px; background: #eee; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Total books</button>
+    <button id="sort-total" style="margin-left: 4px; padding: 6px 12px; background: #eee; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">Number of books</button>
   </div>
   <div id="publisher-chart"></div>
 </div>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const margin = { top: 48, right: 180, bottom: 52, left: 240 };
+  const margin = { top: 48, right: 180, bottom: 52, left: 290 };
   const colorFemale = '#d8b3f0', colorMale = '#a3d5ff', colorNeutral = '#b4b2a9';
   let currentSort = 'pct'; // 'pct' or 'total'
 
@@ -30,10 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .filter(d => d.total > 150)
       .map(d => ({ ...d, femalePct: d.num_female / d.total }));
 
-    const rowHeight = 30;
+    const rowHeight = 25;
     const innerHeight = data.length * rowHeight;
-    const totalW = Math.min(900, window.innerWidth - 40);
-    const width = totalW - margin.left - margin.right;
+    const totalW = Math.min(1400, window.innerWidth - 40);
+    const width = totalW - margin.left - margin.right - 270;
     const height = innerHeight + margin.top + margin.bottom;
 
     const rScale = d3.scaleSqrt()
@@ -101,49 +101,68 @@ document.addEventListener('DOMContentLoaded', () => {
         .text(d => Math.round(d.femalePct * 100) + '%')
         .style('font-size', '11px').style('fill', '#888');
 
-      // Genre badges on the right
-      rows.append('g')
-        .selectAll('rect')
-        .data(d => {
-          const genres = d.top_genres ? d.top_genres.split(', ') : [];
-          return genres.map((g, i) => ({ genre: g, index: i, parent: d }));
-        })
-        .enter()
-        .append('rect')
-        .attr('x', d => 500 + d.index * 56)
-        .attr('y', -7)
-        .attr('width', 50)
-        .attr('height', 14)
-        .attr('rx', 3)
-        .style('fill', '#f0f0f0')
-        .style('stroke', '#ddd')
-        .style('stroke-width', 0.5);
+      // Right-hand column positions (count + genres)
+      const countX = width - 65; // number of books
+      const genreStartX = countX + 60; // start x for genre badges
 
-      rows.append('g')
-        .selectAll('text')
+      // Column header for counts
+      svg.append('text')
+        .attr('x', countX - 90)
+        .attr('y', -10)
+        .attr('text-anchor', 'start')
+        .text('Number of books')
+        .style('font-size', '12px').style('fill', '#444').style('font-weight', '600');
+
+      // Number of books column
+      rows.append('text')
+        .attr('x', countX - 50)
+        .attr('y', 0).attr('dy', '0.35em')
+        .attr('text-anchor', 'start')
+        .text(d => d.total)
+        .style('font-size', '12px').style('fill', '#666');
+
+      // Genre badges as HTML so sizing follows the text automatically.
+      const genreColumnWidth = Math.max(0, totalW - genreStartX - 12);
+      rows.append('foreignObject')
+        .attr('x', genreStartX - 50)
+        .attr('y', -10)
+        .attr('width', genreColumnWidth)
+        .attr('height', rowHeight)
+        .append('xhtml:div')
+        .style('display', 'flex')
+        .style('flex-wrap', 'wrap')
+        .style('gap', '4px')
+        .style('align-items', 'center')
+        .style('max-width', `${genreColumnWidth}px`)
+        .selectAll('span')
         .data(d => {
           const genres = d.top_genres ? d.top_genres.split(', ') : [];
-          return genres.map((g, i) => ({ genre: g, index: i, parent: d }));
+          return genres.map(genre => ({ genre }));
         })
         .enter()
-        .append('text')
-        .attr('x', d => d.index * 56 + 525)
-        .attr('y', 3)
-        .attr('text-anchor', 'middle')
-        .text(d => d.genre)
-        .style('font-size', '9px')
-        .style('fill', '#666');
+        .append('xhtml:span')
+        .style('display', 'inline-flex')
+        .style('align-items', 'center')
+        .style('justify-content', 'center')
+        .style('padding', '1px 8px')
+        .style('border-radius', '3px')
+        .style('background', '#f0f0f0')
+        .style('border', '1px solid #ddd')
+        .style('font-size', '12px')
+        .style('line-height', '1.2')
+        .style('color', '#666')
+        .text(d => d.genre);
 
 
       // Publisher labels
       svg.append('g')
-        .call(d3.axisLeft(y).tickSize(0).tickFormat(p => `${p} (${publisherTotals.get(p)})`))
+        .call(d3.axisLeft(y).tickSize(0).tickFormat(p => p))
         .call(ax => ax.select('.domain').remove())
         .selectAll('text')
         .style('font-size', '13px').attr('x', -8).attr('text-anchor', 'end');
 
       // Top axis labels
-      [[0.25, '25% female'], [0.5, '50%'], [0.75, '75% female']].forEach(([v, label]) => {
+      [[0.5, '50%']].forEach(([v, label]) => {
         svg.append('text')
           .attr('x', x(v)).attr('y', -10).attr('text-anchor', 'middle')
           .text(label).style('font-size', '11px').style('fill', '#888');
