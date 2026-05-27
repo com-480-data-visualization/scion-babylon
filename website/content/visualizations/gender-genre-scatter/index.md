@@ -2,6 +2,7 @@
 title: "The gender-genre scatter"
 description: "Compare average price and average rating by genre or author nationality and gender group."
 tags: ["d3", "visualization"]
+layout: "simple"
 ---
 
 <!-- prettier-ignore-start -->

@@ -2,6 +2,7 @@
 title: "Gender explorer - filtered comparison"
 description: "Filter genres or author nationalities and compare male, female, and other authorship totals."
 tags: ["d3", "visualization"]
+layout: "simple"
 ---
 
 <!-- prettier-ignore-start -->

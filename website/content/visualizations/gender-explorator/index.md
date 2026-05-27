@@ -2,6 +2,7 @@
 title: "Gender explorator"
 description: "Explore gender disparity across genres and author nationalities."
 tags: ["d3", "visualization"]
+layout: "simple"
 ---
 
 <!-- prettier-ignore-start -->
