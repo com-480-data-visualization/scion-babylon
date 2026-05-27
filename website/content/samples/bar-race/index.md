@@ -4,6 +4,8 @@ date: 2026-04-13
 description: "Bar race representing books published by each country each year scaled by number of inhabitants"
 tags: ["d3", "sample", "graph", "shortcodes"]
 layout: "simple"
+aliases:
+  - /samples/bar_race/
 ---
 Toggle the button to see the race with data scaled by inhabitants. Please wait for the race to end to scale the data :)
 <!-- prettier-ignore-start -->
@@ -81,7 +83,7 @@ function toFlag(alpha2) {
   );
 }
 
-d3.csv("/data/nat_date.csv").then(data => {
+d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
   data.forEach(d => {
     d.counts_raw = +d.counts_raw;
     d.counts = +d.counts;

@@ -1,6 +1,6 @@
 ---
-title: "Content Samples"
-description: "See what's possible with Congo."
+title: "Visualization Samples"
+description: "Standalone sample pages for project visualizations."
 
 cascade:
   showEdit: false
@@ -8,9 +8,5 @@ cascade:
 ---
 
 {{< lead >}}
-Congo brings your content to life. :heart_eyes:
+Standalone versions of the project visualizations used while developing the final pages.
 {{< /lead >}}
-
-_**Sidenote:** This page is just a standard Congo article listing and Hugo has been configured to generate a `samples` content type and display article summaries._
-
----

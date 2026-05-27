@@ -8,7 +8,7 @@ layout: "simple"
 Toggle the button to discover the scaled map ! 
 <!-- prettier-ignore-start -->
 <script src="https://unpkg.com/topojson@3/dist/topojson.min.js"></script>
-<script src="/js/cartogram.js"></script>
+<script src="{{< asset-url "js/cartogram.js" >}}"></script>
 
 {{< d3 >}}
 d3.cartogram = cartogramFactory;
@@ -95,7 +95,7 @@ toggleWrapper.append("span")
 
 Promise.all([
   d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
-  d3.csv("/data/nationalities.csv")
+  d3.csv("{{< asset-url "data/nationalities.csv" >}}")
 ]).then(([topology, data]) => {
   const dataById = new Map(
     data
