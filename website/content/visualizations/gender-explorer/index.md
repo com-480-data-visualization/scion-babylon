@@ -37,14 +37,15 @@ const comparisonColors = {
 
 const comparisonLayout = comparisonRoot.append("div")
   .style("display", "grid")
-  .style("grid-template-columns", "minmax(190px, 230px) minmax(0, 1fr)")
-  .style("gap", "18px")
-  .style("align-items", "start");
-
-const comparisonPanel = comparisonLayout.append("aside")
+  .style("grid-template-columns", "minmax(150px, 184px) minmax(0, 1fr)")
+  .style("align-items", "stretch")
   .style("background", comparisonTheme.panel)
   .style("border", `1px solid ${comparisonTheme.border}`)
   .style("border-radius", "6px")
+  .style("overflow", "hidden");
+
+const comparisonPanel = comparisonLayout.append("aside")
+  .style("border-right", `1px solid ${comparisonTheme.border}`)
   .style("padding", "14px")
   .style("color", comparisonTheme.foreground);
 
@@ -94,6 +95,7 @@ const comparisonMin = comparisonPanel.append("input")
 
 const categoryHeader = comparisonPanel.append("div")
   .style("display", "flex")
+  .style("flex-wrap", "wrap")
   .style("justify-content", "space-between")
   .style("align-items", "center")
   .style("gap", "8px")
@@ -131,7 +133,8 @@ const categoryList = comparisonPanel.append("div")
   .style("padding-right", "3px");
 
 const comparisonChartWrap = comparisonLayout.append("div")
-  .style("min-width", 0);
+  .style("min-width", 0)
+  .style("padding", "12px 12px 8px");
 
 const comparisonSummary = comparisonChartWrap.append("div")
   .style("font-size", "14px")
@@ -141,10 +144,7 @@ const comparisonSummary = comparisonChartWrap.append("div")
 
 const comparisonSvg = comparisonChartWrap.append("svg")
   .style("display", "block")
-  .style("width", "100%")
-  .style("background", comparisonTheme.panel)
-  .style("border", `1px solid ${comparisonTheme.border}`)
-  .style("border-radius", "6px");
+  .style("width", "100%");
 
 const comparisonTooltip = comparisonRoot.append("div")
   .style("position", "absolute")
@@ -221,11 +221,14 @@ function renderComparison(data) {
   bars.forEach(d => d.share = total ? d.value / total : 0);
 
   const layoutWidth = Math.max(container.clientWidth, 290);
+  const stacked = layoutWidth < 430;
   comparisonLayout.style(
     "grid-template-columns",
-    layoutWidth < 720 ? "minmax(0, 1fr)" : "minmax(190px, 230px) minmax(0, 1fr)"
+    stacked ? "minmax(0, 1fr)" : "minmax(150px, 184px) minmax(0, 1fr)"
   );
-  categoryList.style("max-height", layoutWidth < 720 ? "210px" : "330px");
+  comparisonPanel.style("border-right", stacked ? "none" : `1px solid ${comparisonTheme.border}`)
+    .style("border-bottom", stacked ? `1px solid ${comparisonTheme.border}` : "none");
+  categoryList.style("max-height", stacked ? "180px" : "330px");
 
   const outerWidth = Math.max(comparisonChartWrap.node().clientWidth, 290);
   const compact = outerWidth < 530;

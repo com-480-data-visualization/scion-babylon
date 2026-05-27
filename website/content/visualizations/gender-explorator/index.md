@@ -66,27 +66,20 @@ sortSelect.selectAll("option")
   .text(d => d.label);
 styleInput(sortSelect);
 
-const minWrap = control("Minimum books");
-const minValue = minWrap.append("span")
-  .style("font-weight", 500)
-  .style("font-size", "12px");
-const minInput = minWrap.append("input")
-  .attr("type", "range")
-  .attr("min", 1)
-  .attr("max", 100)
-  .attr("value", 10)
-  .attr("step", 1);
+const minimumBooks = 6;
 
 const topWrap = control("Rows shown");
 const topValue = topWrap.append("span")
   .style("font-weight", 500)
-  .style("font-size", "12px");
+  .style("font-size", "12px")
+  .style("color", "#111318");
 const topInput = topWrap.append("input")
   .attr("type", "range")
   .attr("min", 1)
   .attr("max", 30)
   .attr("value", 11)
-  .attr("step", 1);
+  .attr("step", 1)
+  .style("accent-color", "#bd93f9");
 
 const legend = root.append("div")
   .style("display", "flex")
@@ -153,15 +146,9 @@ function formatPercent(value) {
 
 function updateControls(data) {
   const view = viewSelect.property("value");
-  const maxTotal = d3.max(data.filter(d => d.attribute_type === view), d => d.total) ?? 100;
-  const maxMin = Math.max(1, maxTotal);
-  minInput.attr("max", maxMin);
-  if (+minInput.property("value") > maxMin) minInput.property("value", maxMin);
-  minValue.text(`${minInput.property("value")}+`);
-
   const availableRows = data.filter(d =>
     d.attribute_type === view &&
-    d.total >= +minInput.property("value") &&
+    d.total >= minimumBooks &&
     d.gendered_total > 0
   ).length;
   const maximumRows = Math.max(1, availableRows);
@@ -174,11 +161,10 @@ function updateControls(data) {
 function filteredRows(data) {
   const view = viewSelect.property("value");
   const sort = sortSelect.property("value");
-  const minimum = +minInput.property("value");
   const limit = +topInput.property("value");
 
   const rows = data
-    .filter(d => d.attribute_type === view && d.total >= minimum && d.gendered_total > 0);
+    .filter(d => d.attribute_type === view && d.total >= minimumBooks && d.gendered_total > 0);
 
   rows.sort((a, b) => {
     if (sort === "women") return d3.descending(a.pct_women, b.pct_women) || d3.descending(a.total, b.total);
@@ -215,7 +201,7 @@ function render(data) {
     .paddingInner(0.32)
     .paddingOuter(0.1);
 
-  summary.text(`${rows.length} ${viewSelect.property("value") === "genre" ? "genres" : "author nationalities"} shown after filtering`);
+  summary.text(`${rows.length} ${viewSelect.property("value") === "genre" ? "genres" : "author nationalities"} shown - categories with ${minimumBooks}+ books`);
 
   const axis = svg.selectAll(".gender-axis")
     .data([0])
@@ -348,7 +334,6 @@ d3.csv("/data/gender_attribute_summary.csv", d3.autoType).then(data => {
   render(data);
   viewSelect.on("change", () => render(data));
   sortSelect.on("change", () => render(data));
-  minInput.on("input", () => render(data));
   topInput.on("input", () => render(data));
   window.addEventListener("resize", () => render(data));
 }).catch(err => {

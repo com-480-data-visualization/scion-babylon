@@ -31,20 +31,29 @@ const scatterTheme = scatterDark ? {
   tooltipText: "#27282c",
   border: "#c6c2ba",
 };
-const scatterColors = [
-  "#37c6d0", "#ff6e9f", "#ffbf47", "#63dc8a", "#bd93f9",
-  "#ff755e", "#6eafff", "#ff9955", "#b6df58", "#f98dd1", "#c8ccd7",
-];
+const genderColors = {
+  "Male authors": "#a5d8ff",
+  "Non-male authors": "#bd93f9",
+};
 const symbolByGender = {
   "Male authors": d3.symbolCircle,
   "Non-male authors": d3.symbolDiamond,
 };
 
-const scatterControls = scatterRoot.append("div")
-  .style("display", "flex")
-  .style("flex-wrap", "wrap")
-  .style("gap", "22px")
-  .style("margin", "6px 0 18px")
+const scatterLayout = scatterRoot.append("div")
+  .style("display", "grid")
+  .style("grid-template-columns", "minmax(150px, 184px) minmax(0, 1fr)")
+  .style("align-items", "stretch")
+  .style("background", scatterTheme.chartBackground)
+  .style("border", `1px solid ${scatterTheme.border}`)
+  .style("border-radius", "6px")
+  .style("overflow", "hidden");
+
+const scatterControls = scatterLayout.append("aside")
+  .style("display", "grid")
+  .style("gap", "16px")
+  .style("border-right", `1px solid ${scatterTheme.border}`)
+  .style("padding", "14px")
   .style("color", scatterTheme.foreground);
 
 const scatterModeWrap = scatterControls.append("label")
@@ -54,6 +63,7 @@ const scatterModeWrap = scatterControls.append("label")
   .style("font-weight", 650);
 scatterModeWrap.append("span").text("Group by");
 const scatterMode = scatterModeWrap.append("select")
+  .style("width", "100%")
   .style("border", `1px solid ${scatterTheme.border}`)
   .style("border-radius", "6px")
   .style("padding", "6px 9px")
@@ -76,22 +86,20 @@ const scatterMinWrap = scatterControls.append("label")
 const scatterMinLabel = scatterMinWrap.append("span");
 const scatterMin = scatterMinWrap.append("input")
   .attr("type", "range")
-  .attr("min", 1)
+  .attr("min", 2)
   .attr("max", 50)
   .attr("value", 5)
   .attr("step", 1)
-  .style("accent-color", "#37c6d0");
+  .style("width", "100%")
+  .style("accent-color", "#bd93f9");
 
-const genderFilter = scatterControls.append("fieldset")
-  .style("border", "none")
-  .style("padding", 0)
-  .style("margin", 0);
-genderFilter.append("legend")
+const genderLegend = scatterControls.append("div");
+genderLegend.append("div")
   .style("font-size", "13px")
   .style("font-weight", 650)
   .style("margin-bottom", "7px")
   .text("Gender group");
-const genderOptions = genderFilter.append("div")
+const genderOptions = genderLegend.append("div")
   .style("display", "flex")
   .style("gap", "14px")
   .style("flex-wrap", "wrap");
@@ -102,28 +110,25 @@ const genderOptions = genderFilter.append("div")
     .style("align-items", "center")
     .style("gap", "6px")
     .style("font-size", "13px");
-  label.append("input")
-    .attr("type", "checkbox")
-    .attr("name", "scatter-gender")
-    .attr("value", group)
-    .property("checked", true);
   label.append("svg")
     .attr("width", 15)
     .attr("height", 15)
     .append("path")
     .attr("transform", "translate(7.5,7.5)")
     .attr("d", d3.symbol().type(symbolByGender[group]).size(80)())
-    .attr("fill", scatterTheme.foreground);
+    .attr("fill", genderColors[group])
+    .attr("stroke", scatterTheme.pointStroke)
+    .attr("stroke-width", 1);
   label.append("span").text(group);
 });
 
 const genreFilter = scatterControls.append("fieldset")
   .style("border", "none")
   .style("padding", 0)
-  .style("margin", 0)
-  .style("flex", "1 1 380px");
+  .style("margin", 0);
 const genreHeader = genreFilter.append("div")
   .style("display", "flex")
+  .style("flex-wrap", "wrap")
   .style("justify-content", "space-between")
   .style("align-items", "center")
   .style("gap", "12px")
@@ -131,22 +136,35 @@ const genreHeader = genreFilter.append("div")
 const attributeHeading = genreHeader.append("span")
   .style("font-size", "13px")
   .style("font-weight", 650);
-const resetGenres = genreHeader.append("button")
-  .attr("type", "button")
-  .style("border", `1px solid ${scatterTheme.border}`)
-  .style("background", "transparent")
-  .style("color", scatterTheme.foreground)
-  .style("border-radius", "6px")
-  .style("font-size", "12px")
-  .style("padding", "4px 9px")
-  .style("cursor", "pointer")
-  .text("Select all");
+const attributeActions = genreHeader.append("div")
+  .style("display", "flex")
+  .style("gap", "6px");
+function attributeButton(label) {
+  return attributeActions.append("button")
+    .attr("type", "button")
+    .style("border", `1px solid ${scatterTheme.border}`)
+    .style("background", "transparent")
+    .style("color", scatterTheme.foreground)
+    .style("border-radius", "6px")
+    .style("font-size", "12px")
+    .style("padding", "4px 9px")
+    .style("cursor", "pointer")
+    .text(label);
+}
+const resetGenres = attributeButton("Select all");
+const clearGenres = attributeButton("None");
 const genreOptions = genreFilter.append("div")
   .style("display", "grid")
-  .style("grid-template-columns", "repeat(auto-fit, minmax(128px, 1fr))")
-  .style("gap", "6px 12px");
+  .style("gap", "6px")
+  .style("max-height", "380px")
+  .style("overflow-y", "auto")
+  .style("padding-right", "3px");
 
-const scatterSummary = scatterRoot.append("div")
+const scatterChartWrap = scatterLayout.append("div")
+  .style("min-width", 0)
+  .style("padding", "12px 12px 8px");
+
+const scatterSummary = scatterChartWrap.append("div")
   .style("font-size", "14px")
   .style("font-weight", 650)
   .style("margin", "0 0 10px")
@@ -166,12 +184,9 @@ const scatterTooltip = scatterRoot.append("div")
   .style("font-size", "13px")
   .style("line-height", 1.45);
 
-const scatterSvg = scatterRoot.append("svg")
+const scatterSvg = scatterChartWrap.append("svg")
   .style("display", "block")
-  .style("width", "100%")
-  .style("background", scatterTheme.chartBackground)
-  .style("border", `1px solid ${scatterTheme.border}`)
-  .style("border-radius", "6px");
+  .style("width", "100%");
 const scatterChart = scatterSvg.append("g");
 const scatterGrid = scatterChart.append("g");
 const scatterXAxis = scatterChart.append("g");
@@ -179,32 +194,63 @@ const scatterYAxis = scatterChart.append("g");
 const scatterXTitle = scatterChart.append("text");
 const scatterYTitle = scatterChart.append("text");
 
-function scatterFiltered(data) {
+function eligibleAttributes(data) {
   const attributeType = scatterMode.property("value");
   const minimum = +scatterMin.property("value");
-  const genders = new Set(
-    genderOptions.selectAll("input:checked").nodes().map(node => node.value)
+  const grouped = d3.group(
+    data.filter(d => d.attribute_type === attributeType),
+    d => d.attribute
   );
+  return new Set(Array.from(grouped, ([attribute, rows]) => {
+    const counts = new Map(rows.map(d => [d.gender_group, d.books]));
+    return counts.get("Male authors") >= minimum && counts.get("Non-male authors") >= minimum
+      ? attribute
+      : null;
+  }).filter(Boolean));
+}
+
+function compoundedPoints(data) {
+  const attributeType = scatterMode.property("value");
+  const eligible = eligibleAttributes(data);
   const attributes = new Set(
     genreOptions.selectAll("input:checked").nodes().map(node => node.value)
   );
-  return data.filter(d =>
-    d.attribute_type === attributeType &&
-    d.books >= minimum &&
-    genders.has(d.gender_group) &&
-    attributes.has(d.attribute)
+  const selected = data.filter(d =>
+    d.attribute_type === attributeType && eligible.has(d.attribute) && attributes.has(d.attribute)
   );
+
+  return ["Male authors", "Non-male authors"].map(group => {
+    const rows = selected.filter(d => d.gender_group === group);
+    const books = d3.sum(rows, d => d.books);
+    return {
+      gender_group: group,
+      average_price: books ? d3.sum(rows, d => d.average_price * d.books) / books : null,
+      average_rating: books ? d3.sum(rows, d => d.average_rating * d.books) / books : null,
+      books,
+      attributes: new Set(rows.map(d => d.attribute)).size,
+    };
+  }).filter(d => d.books > 0);
 }
 
-function drawScatter(data, color) {
-  const visible = scatterFiltered(data);
+function drawScatter(data) {
+  const visible = compoundedPoints(data);
   const attributeType = scatterMode.property("value");
-  const minimum = +scatterMin.property("value");
-  const available = data.filter(d => d.attribute_type === attributeType && d.books >= minimum);
-  const width = Math.max(container.clientWidth, 320);
-  const compact = width < 640;
+  const eligible = eligibleAttributes(data);
+  const available = data.filter(d => d.attribute_type === attributeType && eligible.has(d.attribute));
+  const layoutWidth = Math.max(container.clientWidth, 290);
+  const stacked = layoutWidth < 430;
+  scatterLayout.style(
+    "grid-template-columns",
+    stacked ? "minmax(0, 1fr)" : "minmax(150px, 184px) minmax(0, 1fr)"
+  );
+  scatterControls.style("border-right", stacked ? "none" : `1px solid ${scatterTheme.border}`)
+    .style("border-bottom", stacked ? `1px solid ${scatterTheme.border}` : "none");
+  genreOptions.style("max-height", stacked ? "180px" : "380px");
+
+  const width = Math.max(scatterChartWrap.node().clientWidth, 290);
+  const compact = width < 560;
   const margin = { top: 22, right: compact ? 18 : 30, bottom: 53, left: compact ? 54 : 68 };
-  const height = compact ? 390 : 470;
+  const height = compact ? 430 : 530;
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -263,11 +309,12 @@ function drawScatter(data, color) {
     .text("Average price");
 
   const totalBooks = d3.sum(visible, d => d.books);
-  scatterMinLabel.text(`Minimum books per point: ${minimum}`);
-  scatterSummary.text(`${visible.length} groups shown - ${d3.format(",")(totalBooks)} priced books`);
+  const selectedCount = visible.length ? d3.max(visible, d => d.attributes) : 0;
+  scatterMinLabel.text(`Minimum books in each gender group: ${scatterMin.property("value")}`);
+  scatterSummary.text(`${selectedCount} ${attributeType === "genre" ? "genres" : "author nationalities"} combined - ${d3.format(",")(totalBooks)} priced records`);
 
   const points = scatterChart.selectAll(".scatter-point")
-    .data(visible, d => `${d.attribute_type}-${d.attribute}-${d.gender_group}`)
+    .data(visible, d => d.gender_group)
     .join(
       enter => enter.append("path")
         .attr("class", "scatter-point")
@@ -279,7 +326,7 @@ function drawScatter(data, color) {
     );
 
   points
-    .attr("fill", d => color(d.attribute))
+    .attr("fill", d => genderColors[d.gender_group])
     .attr("stroke", scatterTheme.pointStroke)
     .attr("stroke-width", 2)
     .on("mousemove", (event, d) => {
@@ -288,7 +335,7 @@ function drawScatter(data, color) {
         .style("opacity", 1)
         .style("left", `${left + 14}px`)
         .style("top", `${top - 36}px`)
-        .html(`<strong style="color: #111318; font-weight: 750;">${d.attribute}</strong><br/>${d.gender_group}<br/>Average price: $${d.average_price.toFixed(2)}<br/>Average rating: ${d.average_rating.toFixed(2)}<br/>Books: ${d3.format(",")(d.books)}`);
+        .html(`<strong style="color: #111318; font-weight: 750;">${d.gender_group}</strong><br/>Selected categories: ${d.attributes}<br/>Average price: $${d.average_price.toFixed(2)}<br/>Average rating: ${d.average_rating.toFixed(2)}<br/>Books: ${d3.format(",")(d.books)}`);
     })
     .on("mouseout", () => scatterTooltip.style("opacity", 0))
     .transition()
@@ -298,14 +345,9 @@ function drawScatter(data, color) {
     .attr("d", d => d3.symbol().type(symbolByGender[d.gender_group]).size(compact ? 105 : 135)());
 }
 
-function populateAttributes(data, color) {
+function populateAttributes(data) {
   const attributeType = scatterMode.property("value");
-  const minimum = +scatterMin.property("value");
-  const attributes = Array.from(new Set(
-    data
-      .filter(d => d.attribute_type === attributeType && d.books >= minimum)
-      .map(d => d.attribute)
-  )).sort(d3.ascending);
+  const attributes = Array.from(eligibleAttributes(data)).sort(d3.ascending);
 
   attributeHeading.text(attributeType === "genre" ? "Genres" : "Author nationalities");
   genreOptions.selectAll("*").remove();
@@ -320,37 +362,31 @@ function populateAttributes(data, color) {
       .attr("name", "scatter-attribute")
       .attr("value", attribute)
       .property("checked", true);
-    label.append("span")
-      .style("display", "inline-block")
-      .style("width", "10px")
-      .style("height", "10px")
-      .style("border-radius", "2px")
-      .style("background", color(attribute));
     label.append("span").text(attribute);
   });
 }
 
 d3.csv("/data/gender_price_scatter.csv", d3.autoType).then(data => {
-  const attributes = Array.from(new Set(data.map(d => d.attribute)));
-  const color = d3.scaleOrdinal().domain(attributes).range(scatterColors);
-
-  populateAttributes(data, color);
-  drawScatter(data, color);
-  genderOptions.selectAll("input").on("change", () => drawScatter(data, color));
-  genreOptions.on("change", () => drawScatter(data, color));
+  populateAttributes(data);
+  drawScatter(data);
+  genreOptions.on("change", () => drawScatter(data));
   scatterMode.on("change", () => {
-    populateAttributes(data, color);
-    drawScatter(data, color);
+    populateAttributes(data);
+    drawScatter(data);
   });
   scatterMin.on("input", () => {
-    populateAttributes(data, color);
-    drawScatter(data, color);
+    populateAttributes(data);
+    drawScatter(data);
   });
   resetGenres.on("click", () => {
     genreOptions.selectAll("input").property("checked", true);
-    drawScatter(data, color);
+    drawScatter(data);
   });
-  window.addEventListener("resize", () => drawScatter(data, color));
+  clearGenres.on("click", () => {
+    genreOptions.selectAll("input").property("checked", false);
+    drawScatter(data);
+  });
+  window.addEventListener("resize", () => drawScatter(data));
 }).catch(err => {
   scatterSummary.text("Could not load gender-genre pricing data.");
   console.error("Error loading gender-genre scatter data:", err);
