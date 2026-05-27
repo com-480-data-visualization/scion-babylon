@@ -495,6 +495,12 @@ description: "Explore 16,000+ bestselling books by female authors with interacti
                     <button id="add-language-btn" class="add-filter-btn">+ Select language</button>
                     <div id="language-dropdown" class="filter-dropdown" style="display: none;"></div>
                 </div>
+                <div class="badges-group">
+                    <div class="badges-group-label">Genres</div>
+                    <div class="badges-list" id="genre-badges"></div>
+                    <button id="add-genre-btn" class="add-filter-btn">+ Select genres</button>
+                    <div id="genre-dropdown" class="filter-dropdown" style="display: none;"></div>
+                </div>
             </div>
             <button id="draw-button">Draw new books!</button>
         </div>
@@ -520,10 +526,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const tooltip = document.getElementById('book-tooltip');
     const addLanguageBtn = document.getElementById('add-language-btn');
     const languageDropdown = document.getElementById('language-dropdown');
+    const addGenreBtn = document.getElementById('add-genre-btn');
+    const genreDropdown = document.getElementById('genre-dropdown');
 
     let booksData = [];
-    let selectedFilters = { rating: 0, languages: [] };
+    let selectedFilters = { rating: 0, languages: [], genres: [] };
     let availableLanguages = [];
+    let availableGenres = [];
 
     // Load data
     d3.csv('/data/bookshelf2.csv').then(data => {
@@ -537,8 +546,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 .filter(l => l)
         )].sort();
 
+        // Extract available genres only for female authors
+        const genreSet = new Set();
+        booksData
+            .filter(d => d.gender === 'w')
+            .forEach(d => {
+                if (d.genres) {
+                    try {
+                        const jsonString = d.genres.replace(/'/g, '"');
+                        const genresArray = JSON.parse(jsonString);
+                        genresArray.forEach(g => genreSet.add(g));
+                    } catch (e) {
+                        // Skip if parsing fails
+                    }
+                }
+            });
+        availableGenres = Array.from(genreSet).sort();
+
         setupRatingButtons();
         setupLanguageDropdown();
+        setupGenreDropdown();
         drawBooks();
     }).catch(error => {
         console.error('Error loading the CSV file:', error);
@@ -709,6 +736,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 filteredData = filteredData.filter(d => selectedFilters.languages.includes(d.language));
             }
 
+            // Filter by genres (books must have ALL selected genres)
+            if (selectedFilters.genres.length > 0) {
+                filteredData = filteredData.filter(d => {
+                    if (!d.genres) return false;
+                    try {
+                        const jsonString = d.genres.replace(/'/g, '"');
+                        const bookGenres = JSON.parse(jsonString);
+                        return selectedFilters.genres.every(selectedGenre => bookGenres.includes(selectedGenre));
+                    } catch (e) {
+                        return false;
+                    }
+                });
+            }
+
             const randomBooks = getRandomBooks(filteredData, 15);
 
             randomBooks.forEach((book, index) => {
@@ -806,6 +847,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Genre badge rendering and filtering
+    function renderGenreBadges() {
+        const genreBadgesContainer = document.getElementById('genre-badges');
+        genreBadgesContainer.innerHTML = '';
+
+        if (selectedFilters.genres.length === 0) {
+            const badge = document.createElement('div');
+            badge.classList.add('badge');
+            badge.innerHTML = `All genres`;
+            genreBadgesContainer.appendChild(badge);
+        }
+
+        selectedFilters.genres.forEach(genre => {
+            const badge = document.createElement('div');
+            badge.classList.add('badge');
+            badge.innerHTML = `${genre}<span class="badge-delete">×</span>`;
+            badge.querySelector('.badge-delete').addEventListener('click', () => removeGenreFilter(genre));
+            genreBadgesContainer.appendChild(badge);
+        });
+    }
+
+    function addGenreFilter(genre) {
+        if (!selectedFilters.genres.includes(genre)) {
+            selectedFilters.genres.push(genre);
+            renderGenreBadges();
+            drawBooks();
+        }
+        genreDropdown.style.display = 'none';
+    }
+
+    function removeGenreFilter(genre) {
+        selectedFilters.genres = selectedFilters.genres.filter(g => g !== genre);
+        renderGenreBadges();
+        drawBooks();
+    }
+
+    function toggleGenreDropdown() {
+        if (genreDropdown.style.display === 'none') {
+            genreDropdown.style.display = 'block';
+        } else {
+            genreDropdown.style.display = 'none';
+        }
+    }
+
+    function setupGenreDropdown() {
+        // Populate dropdown with available genres
+        availableGenres.forEach(genre => {
+            const item = document.createElement('div');
+            item.classList.add('filter-dropdown-item');
+            item.textContent = genre;
+            item.addEventListener('click', () => addGenreFilter(genre));
+            genreDropdown.appendChild(item);
+        });
+    }
+
     // Modal close button
     modalClose.addEventListener('click', closeModal);
 
@@ -825,10 +921,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close dropdown when clicking outside
     document.addEventListener('click', () => {
         languageDropdown.style.display = 'none';
+        genreDropdown.style.display = 'none';
+    });
+
+    // Genre button toggle
+    addGenreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleGenreDropdown();
     });
 
     drawButton.addEventListener('click', drawBooks);
     renderLanguageBadges();
+    renderGenreBadges();
 });
 </script>
 {{< /rawhtml >}}
