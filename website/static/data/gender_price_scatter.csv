@@ -1,0 +1,101 @@
+attribute_type,attribute,gender_group,average_price,average_rating,books
+genre,Childrens,Male authors,7.47,4.109,776
+genre,Childrens,Non-male authors,7.57,4.041,679
+genre,Classics,Male authors,10.18,3.958,2374
+genre,Classics,Non-male authors,7.31,3.924,453
+genre,Fantasy,Male authors,10.44,4.047,3504
+genre,Fantasy,Non-male authors,8.61,3.995,2125
+genre,Horror,Male authors,12.12,3.906,760
+genre,Horror,Non-male authors,10.28,3.836,128
+genre,Nonfiction,Male authors,10.22,4.075,4270
+genre,Nonfiction,Non-male authors,9.16,4.013,1480
+genre,Philosophy,Male authors,13.21,4.046,722
+genre,Philosophy,Non-male authors,17.06,4.028,45
+genre,Poetry,Male authors,12.59,4.176,510
+genre,Poetry,Non-male authors,17.36,4.133,144
+genre,Romance,Male authors,8.46,3.982,1342
+genre,Romance,Non-male authors,7.64,3.974,3053
+genre,Science Fiction,Male authors,10.12,3.938,1341
+genre,Science Fiction,Non-male authors,9.04,3.953,225
+genre,Thriller,Male authors,5.87,3.922,1519
+genre,Thriller,Non-male authors,5.93,3.869,449
+genre,Young Adult,Male authors,6.02,3.917,1564
+genre,Young Adult,Non-male authors,5.7,3.888,2218
+nationality,Afghanistan,Male authors,2.78,4.215,2
+nationality,Argentina,Male authors,7.06,4.23,1
+nationality,Argentina,Non-male authors,9.5,3.6,1
+nationality,Australia,Male authors,8.04,4.014,12
+nationality,Australia,Non-male authors,5.42,3.836,10
+nationality,Austria,Male authors,4.74,3.923,3
+nationality,Belgium,Male authors,1.92,3.99,1
+nationality,Belgium,Non-male authors,15.7,3.975,2
+nationality,Brazil,Male authors,6.88,3.522,4
+nationality,Bulgaria,Male authors,29.23,3.57,1
+nationality,Bulgaria,Non-male authors,3.12,3.39,1
+nationality,Canada,Male authors,3.47,3.852,4
+nationality,Canada,Non-male authors,5.45,3.83,8
+nationality,Chile,Non-male authors,4.0,3.87,2
+nationality,China,Male authors,6.97,3.983,6
+nationality,Colombia,Male authors,6.58,3.967,3
+nationality,Cuba,Male authors,6.42,4.18,1
+nationality,Cyprus,Male authors,15.63,4.09,1
+nationality,Czech Republic,Male authors,3.11,4.14,1
+nationality,Czechia,Male authors,7.49,3.715,2
+nationality,Denmark,Male authors,3.12,4.01,1
+nationality,Denmark,Non-male authors,4.95,3.75,1
+nationality,Egypt,Male authors,6.89,3.92,3
+nationality,Finland,Non-male authors,6.87,3.91,2
+nationality,France,Male authors,10.02,3.869,21
+nationality,Germany,Male authors,5.09,4.256,7
+nationality,Germany,Non-male authors,4.16,3.751,7
+nationality,Hungary,Non-male authors,3.17,4.01,1
+nationality,Iceland,Male authors,8.28,4.05,1
+nationality,Iceland,Non-male authors,5.18,4.15,1
+nationality,India,Male authors,6.3,3.976,5
+nationality,India,Non-male authors,5.51,3.46,3
+nationality,Ireland,Male authors,12.73,4.02,2
+nationality,Ireland,Non-male authors,4.18,3.74,5
+nationality,Israel,Male authors,3.72,3.76,1
+nationality,Israel,Non-male authors,5.78,4.43,1
+nationality,Italy,Male authors,4.81,3.783,17
+nationality,Italy,Non-male authors,4.1,4.078,6
+nationality,Jamaica,Non-male authors,5.25,4.05,1
+nationality,Japan,Male authors,7.0,4.045,11
+nationality,Malaysia,Male authors,3.46,4.12,1
+nationality,Mexico,Male authors,7.13,3.715,2
+nationality,Mexico,Non-male authors,7.0,3.32,1
+nationality,Netherlands,Male authors,46.09,4.11,1
+nationality,New Zealand,Non-male authors,21.34,4.25,1
+nationality,Nigeria,Male authors,4.99,3.73,1
+nationality,Nigeria,Non-male authors,5.64,4.17,2
+nationality,Norway,Male authors,6.98,3.941,9
+nationality,Norway,Non-male authors,3.11,3.87,1
+nationality,Pakistan,Male authors,3.48,3.79,1
+nationality,Peru,Male authors,9.19,3.54,1
+nationality,Poland,Male authors,9.6,4.205,4
+nationality,Poland,Non-male authors,7.29,3.853,3
+nationality,Portugal,Male authors,6.83,3.93,1
+nationality,Romania,Male authors,16.04,3.73,1
+nationality,Russia,Male authors,13.56,4.29,1
+nationality,Russia,Non-male authors,10.64,3.715,2
+nationality,Singapore,Male authors,5.36,3.867,3
+nationality,South Africa,Male authors,4.06,3.89,2
+nationality,South Africa,Non-male authors,5.22,3.71,1
+nationality,South Korea,Male authors,5.68,3.64,1
+nationality,South Korea,Non-male authors,9.53,4.17,1
+nationality,Spain,Male authors,7.09,4.002,15
+nationality,Spain,Non-male authors,6.61,3.828,5
+nationality,Sweden,Male authors,8.27,4.041,8
+nationality,Sweden,Non-male authors,4.26,3.705,4
+nationality,Switzerland,Male authors,7.78,3.86,1
+nationality,Tanzania,Male authors,5.68,4.31,1
+nationality,Trinidad and Tobago,Male authors,6.37,3.79,1
+nationality,Turkey,Male authors,6.03,3.71,1
+nationality,Turkey,Non-male authors,4.94,3.97,1
+nationality,Uganda,Male authors,3.13,3.69,1
+nationality,Ukraine,Male authors,7.8,3.92,1
+nationality,United Kingdom,Male authors,4.62,3.936,44
+nationality,United Kingdom,Non-male authors,5.96,3.948,57
+nationality,United States,Male authors,6.36,3.982,168
+nationality,United States,Non-male authors,6.45,3.968,154
+nationality,Vietnam,Male authors,9.4,4.01,2

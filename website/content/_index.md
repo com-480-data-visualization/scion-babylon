@@ -11,10 +11,24 @@ A powerful, lightweight visualization for COM-480 built with Hugo, Tailwind CSS.
 
 # Visualizations
 
+## Project visualizations
+
+- [Gender explorer - filtered comparison](visualizations/gender-explorer/): filter genres or author nationalities and compare male, female, and other authorship totals.
+- [The gender-genre scatter](visualizations/gender-genre-scatter/): compare average price and rating by gender group.
+- [Gender explorator](visualizations/gender-explorator/): inspect women-led and men-led representation by genre or author nationality.
+- [Languages](visualizations/languages/): see the distribution of books by language as a waffle chart.
+- [Publishers](visualizations/publishers/): compare gender representation across major publishers.
+- [Library](visualizations/library/): browse and filter books on an interactive shelf.
+
+### Scale countries by amount of books published by author's from these countries
 
 
-## Genres and gender
-<!-- prettier-ignore-start-->
+## Cartogram
+
+<!-- prettier-ignore-start -->
+<script src="https://unpkg.com/topojson@3/dist/topojson.min.js"></script>
+<script src="{{< asset-url "js/cartogram.js" >}}"></script>
+
 {{< d3 >}}
 const width = container.clientWidth;
 const height = 500;
@@ -47,180 +61,112 @@ const select = selector.append("select")
   .style("border", "none")
   .style("border-radius", "4px")
   .style("cursor", "pointer");
-select.selectAll("option")
-  .data(genders)
-  .enter()
-  .append("option")
-  .text(d => genderLabels[d])
-  .attr("value", d => d);
 
-const genreColorScale = d3.scaleOrdinal()
-  .range([
-    congoColors.primary200,
-    congoColors.primary300,
-    congoColors.primary400,
-    congoColors.primary500,
-    "#a78bfa", "#34d399", "#f97316",
-    "#e879f9", "#facc15", "#38bdf8"
-  ]);
+Promise.all([
+  d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
+  d3.csv("{{< asset-url "data/nationalities.csv" >}}")
+]).then(([topology, data]) => {
+  const dataById = new Map(
+    data
+      .filter(d => d["ID"] && d["ID"] !== "nan")
+      .map(d => [+d["ID"], { counts: +d["counts"], name: d["nationality"] }])
+  );
+  const nameById = new Map(
+    topology.objects.countries.geometries.map(d => [+d.id, d.properties?.name ?? "Unknown"])
+  );
 
-d3.csv("/data/genders_genres.csv").then(data => {
-  data.forEach(d => d.count = +d.count);
-  const allGenres = [...new Set(data.map(d => d.genres))];
-  genreColorScale.domain(allGenres);
 
-  // Shelf layout constants
-  const shelfHeight = 18;
-  const shelfPadding = 6;
-  const shelfColor = isDark ? "#5a3e2b" : "#8B5E3C";
-  const shelfShadow = isDark ? "#3a2518" : "#6b4423";
-  const bookGap = 3;
-  const marginLeft = 30;
-  const marginTop = 30;
-  const availableWidth = width - marginLeft - 20;
+  // Split geometries
+  const problematicIDs = [10, 643, 242]; // Antarctica, Russia
+  const cartoGeometries = topology.objects.countries.geometries
+    .filter(d => !problematicIDs.includes(+d.id));
 
-  // Min/max book dimensions
-  const minBookWidth = 18;
-  const maxBookWidth = 60;
-  const minBookHeight = 80;
-  const maxBookHeight = 160;
+  const staticGeometries = topology.objects.countries.geometries
+    .filter(d => problematicIDs.includes(+d.id)); // Russia yes, Antarctica no
 
-  function update(selectedGender) {
-    const filtered = data.filter(d => d.gender === selectedGender)
-      .sort((a, b) => b.count - a.count);
 
-    const maxCount = d3.max(filtered, d => d.count);
-    const minCount = d3.min(filtered, d => d.count);
+  const values = cartoGeometries.map(d =>  dataById.get(+d.id)?.counts ?? 0);
 
-    const widthScale = d3.scaleLinear()
-      .domain([minCount, maxCount])
-      .range([minBookWidth, maxBookWidth]);
-    const heightScale = d3.scaleLinear()
-      .domain([minCount, maxCount])
-      .range([minBookHeight, maxBookHeight]);
+  const lo = d3.min(values), hi = d3.max(values);
 
-    svg.selectAll("*").remove();
+  const scale = d3.scaleLinear().domain([lo, hi]).range([1, 20]);
+  const colorScale = d3.scaleSequentialLog(d3.interpolate(
+  congoColors.neutral100,
+  congoColors.primary500
+  )).domain([1, hi]);
 
-    // Pack books into rows (shelves)
-    const rows = [];
-    let currentRow = [];
-    let currentRowWidth = 0;
-    filtered.forEach(d => {
-      const bw = Math.round(widthScale(d.count));
-      if (currentRowWidth + bw + bookGap > availableWidth && currentRow.length > 0) {
-        rows.push(currentRow);
-        currentRow = [];
-        currentRowWidth = 0;
-      }
-      currentRow.push({ ...d, bookWidth: bw, bookHeight: Math.round(heightScale(d.count)) });
-      currentRowWidth += bw + bookGap;
-    });
-    if (currentRow.length > 0) rows.push(currentRow);
+  const color = d => {
+    const counts = dataById.get(+d.id)?.counts ?? 0;
+    return counts === 0 ? congoColors.neutral100 : colorScale(counts);
+  };
 
-    const rowSpacing = maxBookHeight + shelfHeight + shelfPadding + 10;
-    const totalHeight = marginTop + rows.length * rowSpacing + 20;
-    svg.attr("height", totalHeight);
+  // Tooltip handlers
+  const onMouseover = (event, d) => {
+    const id = +d.id;
+    const entry = dataById.get(id);
+    const name = entry?.name ?? nameById.get(id) ?? "Unknown";
+    const counts = entry?.counts ?? 0;
+    tooltip.style("opacity", 1)
+      .html(`<strong>${name}</strong><br/>${counts} book${counts !== 1 ? "s" : ""}`);
+  };
 
-    rows.forEach((row, rowIndex) => {
-      const baseY = marginTop + rowIndex * rowSpacing;
-      const shelfY = baseY + maxBookHeight;
+  const onMousemove = (event) => {
+    const [x, y] = d3.pointer(event, container);
+    tooltip
+      .style("left", `${x + 12}px`)
+      .style("top", `${y - 28}px`);
+  };
 
-      // Draw shelf plank
-      const rowWidth = d3.sum(row, d => d.bookWidth + bookGap) - bookGap;
-      const g = svg.append("g");
+  const onMouseout = () => tooltip.style("opacity", 0);
 
-      // Shelf top surface
-      g.append("rect")
-        .attr("x", marginLeft - 4)
-        .attr("y", shelfY)
-        .attr("width", rowWidth + 8)
-        .attr("height", shelfHeight)
-        .attr("rx", 2)
-        .attr("fill", shelfColor);
+  carto
+    .properties(d => ({ id: d.ID }))
+    .value(d => scale(dataById.get(+d.id)?.counts ?? 0));
 
-      // Shelf shadow/depth
-      g.append("rect")
-        .attr("x", marginLeft - 4)
-        .attr("y", shelfY + shelfHeight)
-        .attr("width", rowWidth + 8)
-        .attr("height", 4)
-        .attr("rx", 1)
-        .attr("fill", shelfShadow);
+  const features = carto(topology, cartoGeometries).features;
+  const cartoFeatures = carto(topology, cartoGeometries).features;
+  const normalFeatures = cartoGeometries.map(d => topojson.feature(topology, d));
 
-      // Draw books
-      let xCursor = marginLeft;
-      row.forEach(d => {
-        const bookTop = shelfY - d.bookHeight;
-        const bookG = g.append("g").style("cursor", "default");
+  // Draw exluded countries because of anti-meridian as static layer first
+  svg.selectAll(".static-country")
+    .data(staticGeometries.map(d => topojson.feature(topology, d)))
+    .enter().append("path")
+    .attr("class", "static-country")
+    .attr("d", staticPath)
+    .attr("fill", color)
+    .attr("stroke", congoColors.neutral100)
+    .attr("stroke-width", 0.5)
+    .on("mouseover", onMouseover)
+    .on("mousemove", onMousemove)
+    .on("mouseout", onMouseout);
 
-        // Book body
-        bookG.append("rect")
-          .attr("x", xCursor)
-          .attr("y", bookTop)
-          .attr("width", d.bookWidth)
-          .attr("height", d.bookHeight)
-          .attr("rx", 1)
-          .attr("fill", genreColorScale(d.genres))
-          .attr("fill-opacity", 0.9)
-          .attr("stroke", d3.color(genreColorScale(d.genres)).darker(0.8))
-          .attr("stroke-width", 0.8);
+  // Draw cartogram countries
+  const paths = svg.selectAll(".carto-country")
+    .data(cartoFeatures)
+    .enter().append("path")
+    .attr("class", "carto-country")
+    .attr("d", carto.path)
+    .attr("fill", color)
+    .attr("stroke", congoColors.neutral100)
+    .attr("stroke-width", 0.5)
+    .on("mouseover", onMouseover)
+    .on("mousemove", onMousemove)
+    .on("mouseout", onMouseout);
 
-        // Spine highlight (left edge gleam)
-        bookG.append("rect")
-          .attr("x", xCursor)
-          .attr("y", bookTop)
-          .attr("width", Math.max(2, d.bookWidth * 0.12))
-          .attr("height", d.bookHeight)
-          .attr("rx", 1)
-          .attr("fill", "rgba(255,255,255,0.18)");
+  // Toggle between distorted and normal
+  button.on("click", () => {
+    distorted = !distorted;
+    button.text(distorted ? "Show Normal Map" : "Show Cartogram");
 
-        // Top of book (page edges)
-        bookG.append("rect")
-          .attr("x", xCursor + 1)
-          .attr("y", bookTop)
-          .attr("width", d.bookWidth - 2)
-          .attr("height", 3)
-          .attr("fill", isDark ? "#ccc" : "#f0ece4")
-          .attr("opacity", 0.7);
+    paths.transition().duration(750)
+      .attr("d", (d, i) => distorted
+        ? carto.path(d)
+        : staticPath(normalFeatures[i])
+      );
+  });
 
-        // Spine text (rotated) — only if book is wide enough
-        if (d.bookWidth >= 22) {
-          const fontSize = Math.min(10, Math.max(7, d.bookWidth * 0.3));
-          const cx = xCursor + d.bookWidth / 2;
-          const cy = bookTop + d.bookHeight / 2;
-          bookG.append("text")
-            .attr("transform", `translate(${cx}, ${cy}) rotate(-90)`)
-            .attr("text-anchor", "middle")
-            .attr("dominant-baseline", "middle")
-            .style("font-size", `${fontSize}px`)
-            .style("font-family", "serif")
-            .style("fill", "#fff")
-            .style("paint-order", "stroke")
-            .style("stroke", "rgba(0,0,0,0.5)")
-            .style("stroke-width", "2px")
-            .style("stroke-linejoin", "round")
-            .style("pointer-events", "none")
-            .text(d.genres);
-        }
-
-        // Count label below shelf
-        g.append("text")
-          .attr("x", xCursor + d.bookWidth / 2)
-          .attr("y", shelfY + shelfHeight + 14)
-          .attr("text-anchor", "middle")
-          .style("font-size", "9px")
-          .style("fill", labelColor)
-          .style("opacity", 0.6)
-          .text(d.count);
-
-        xCursor += d.bookWidth + bookGap;
-      });
-    });
-  }
-
-  update("m");
-  select.on("change", function() { update(this.value); });
+}).catch(err => {
+  console.error("Error loading data:", err);
 });
 {{< /d3 >}}
-
 <!-- prettier-ignore-end -->

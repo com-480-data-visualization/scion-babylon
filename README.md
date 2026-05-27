@@ -46,6 +46,8 @@ Using the second dataset to enrich our analysis, we could explore
 
 Please see the [Exploratory Data Analysis Report for the International Bestsellers](eda_report.md) and the notebook for the [Best book ever dataset](EDA_Best_Books_Ever.ipynb) for our results.
 
+Please see the [Exploratory Data Analysis Report](eda_report.md) for detailed statistics, insights, and visualizations of the dataset.
+
 ### Related work
 
 > - What others have already done with the data?
