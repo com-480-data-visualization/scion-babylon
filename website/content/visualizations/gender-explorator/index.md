@@ -330,7 +330,7 @@ function hideTooltip() {
   tooltip.style("opacity", 0);
 }
 
-d3.csv("/data/gender_attribute_summary.csv", d3.autoType).then(data => {
+d3.csv("{{< asset-url "data/gender_attribute_summary.csv" >}}", d3.autoType).then(data => {
   render(data);
   viewSelect.on("change", () => render(data));
   sortSelect.on("change", () => render(data));

@@ -336,7 +336,7 @@ function renderComparison(data) {
   comparisonSummary.text(`${selectionCount} ${dimensionLabel} selected - ${d3.format(",")(total)} books`);
 }
 
-d3.csv("/data/gender_attribute_summary.csv", d3.autoType).then(data => {
+d3.csv("{{< asset-url "data/gender_attribute_summary.csv" >}}", d3.autoType).then(data => {
   populateComparisonCategories(data);
   renderComparison(data);
 

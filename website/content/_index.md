@@ -151,7 +151,7 @@ legend.append("text").attr("x", 18).attr("y", 11).style("font-size", "13px").tex
 
 <!-- prettier-ignore-start -->
 <script src="https://unpkg.com/topojson@3/dist/topojson.min.js"></script>
-<script src="/js/cartogram.js"></script>
+<script src="{{< asset-url "js/cartogram.js" >}}"></script>
 
 {{< d3 >}}
 d3.cartogram = cartogramFactory;
@@ -197,7 +197,7 @@ const button = d3.select(container).append("button")
 
 Promise.all([
   d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json"),
-  d3.csv("/data/nationalities.csv")
+  d3.csv("{{< asset-url "data/nationalities.csv" >}}")
 ]).then(([topology, data]) => {
   const dataById = new Map(
     data

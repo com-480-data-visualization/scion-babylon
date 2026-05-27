@@ -364,7 +364,7 @@ function populateAttributes(data) {
   });
 }
 
-d3.csv("/data/gender_price_scatter.csv", d3.autoType).then(data => {
+d3.csv("{{< asset-url "data/gender_price_scatter.csv" >}}", d3.autoType).then(data => {
   populateAttributes(data);
   drawScatter(data);
   genreOptions.on("change", () => drawScatter(data));
