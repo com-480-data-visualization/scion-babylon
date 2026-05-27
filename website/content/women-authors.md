@@ -60,7 +60,7 @@ function parseCSV(csv) {
 }
 
 // Load CSV data
-fetch('/genders_ratings.csv')
+fetch('{{< asset-url "data/bookshelf2.csv" >}}')
   .then(response => response.text())
   .then(csv => {
     const rows = parseCSV(csv);
