@@ -12,6 +12,7 @@ best_books['author'] = best_books['author'].str.strip('"').str.replace(r'\(Goodr
 
 # Strip other roles outside from author
 best_books['author'] = best_books['author'].str.replace(r',\s*[^,]+\([^)]+\)', '', regex=True).str.strip().str.strip(',').str.strip()
+best_books = best_books.drop_duplicates(subset=["title"])
 international_bestsellers = pd.read_csv("datasets/international_bestsellers.csv")
 international_bestsellers = international_bestsellers.drop_duplicates(subset=["title"])
 
@@ -60,8 +61,7 @@ merged = merged[["title","author", "rating", "genres", "language", "gender"]]
 
 df_merged = pd.concat([df_known, merged ])
 df_merged = df_merged.drop_duplicates(subset=["title"])
-defined_genres = {"Nonfiction", "Science Fiction", "Fantasy", "Thriller", "Classics", "Romance", "Philosophy", "Horror", "Childrens", "Young Adult", "Poetry", "Feminism", "Drama","Young Adult", "Literary Fiction"}
-
+defined_genres = {"Nonfiction", "Science Fiction", "Fantasy", "Thriller", "Classics", "Romance", "Philosophy", "Horror", "Childrens", "Young Adult", "Poetry", "Feminism", "Drama", "Literary Fiction", "Historical Fiction"}
 
 ## create gender-genres dataset
 def find_genre(series):
