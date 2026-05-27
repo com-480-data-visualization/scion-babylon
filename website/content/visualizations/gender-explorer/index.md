@@ -39,14 +39,11 @@ const comparisonLayout = comparisonRoot.append("div")
   .style("display", "grid")
   .style("grid-template-columns", "minmax(150px, 184px) minmax(0, 1fr)")
   .style("align-items", "stretch")
-  .style("background", comparisonTheme.panel)
-  .style("border", `1px solid ${comparisonTheme.border}`)
-  .style("border-radius", "6px")
-  .style("overflow", "hidden");
+  .style("column-gap", "18px");
 
 const comparisonPanel = comparisonLayout.append("aside")
   .style("border-right", `1px solid ${comparisonTheme.border}`)
-  .style("padding", "14px")
+  .style("padding", "4px 16px 4px 0")
   .style("color", comparisonTheme.foreground);
 
 comparisonPanel.append("div")
@@ -134,7 +131,7 @@ const categoryList = comparisonPanel.append("div")
 
 const comparisonChartWrap = comparisonLayout.append("div")
   .style("min-width", 0)
-  .style("padding", "12px 12px 8px");
+  .style("padding", "0");
 
 const comparisonSummary = comparisonChartWrap.append("div")
   .style("font-size", "14px")
@@ -225,9 +222,10 @@ function renderComparison(data) {
   comparisonLayout.style(
     "grid-template-columns",
     stacked ? "minmax(0, 1fr)" : "minmax(150px, 184px) minmax(0, 1fr)"
-  );
+  ).style("row-gap", stacked ? "16px" : "0");
   comparisonPanel.style("border-right", stacked ? "none" : `1px solid ${comparisonTheme.border}`)
-    .style("border-bottom", stacked ? `1px solid ${comparisonTheme.border}` : "none");
+    .style("border-bottom", stacked ? `1px solid ${comparisonTheme.border}` : "none")
+    .style("padding", stacked ? "0 0 14px" : "4px 16px 4px 0");
   categoryList.style("max-height", stacked ? "180px" : "330px");
 
   const outerWidth = Math.max(comparisonChartWrap.node().clientWidth, 290);

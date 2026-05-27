@@ -44,16 +44,13 @@ const scatterLayout = scatterRoot.append("div")
   .style("display", "grid")
   .style("grid-template-columns", "minmax(150px, 184px) minmax(0, 1fr)")
   .style("align-items", "stretch")
-  .style("background", scatterTheme.chartBackground)
-  .style("border", `1px solid ${scatterTheme.border}`)
-  .style("border-radius", "6px")
-  .style("overflow", "hidden");
+  .style("column-gap", "18px");
 
 const scatterControls = scatterLayout.append("aside")
   .style("display", "grid")
   .style("gap", "16px")
   .style("border-right", `1px solid ${scatterTheme.border}`)
-  .style("padding", "14px")
+  .style("padding", "4px 16px 4px 0")
   .style("color", scatterTheme.foreground);
 
 const scatterModeWrap = scatterControls.append("label")
@@ -162,7 +159,7 @@ const genreOptions = genreFilter.append("div")
 
 const scatterChartWrap = scatterLayout.append("div")
   .style("min-width", 0)
-  .style("padding", "12px 12px 8px");
+  .style("padding", "0");
 
 const scatterSummary = scatterChartWrap.append("div")
   .style("font-size", "14px")
@@ -242,9 +239,10 @@ function drawScatter(data) {
   scatterLayout.style(
     "grid-template-columns",
     stacked ? "minmax(0, 1fr)" : "minmax(150px, 184px) minmax(0, 1fr)"
-  );
+  ).style("row-gap", stacked ? "16px" : "0");
   scatterControls.style("border-right", stacked ? "none" : `1px solid ${scatterTheme.border}`)
-    .style("border-bottom", stacked ? `1px solid ${scatterTheme.border}` : "none");
+    .style("border-bottom", stacked ? `1px solid ${scatterTheme.border}` : "none")
+    .style("padding", stacked ? "0 0 14px" : "4px 16px 4px 0");
   genreOptions.style("max-height", stacked ? "180px" : "380px");
 
   const width = Math.max(scatterChartWrap.node().clientWidth, 290);
