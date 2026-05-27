@@ -16,6 +16,9 @@ A powerful, lightweight visualization for COM-480 built with Hugo, Tailwind CSS.
 - [Gender explorer - filtered comparison](visualizations/gender-explorer/): filter genres or author nationalities and compare male, female, and other authorship totals.
 - [The gender-genre scatter](visualizations/gender-genre-scatter/): compare average price and rating by gender group.
 - [Gender explorator](visualizations/gender-explorator/): inspect women-led and men-led representation by genre or author nationality.
+- [Languages](visualizations/languages/): see the distribution of books by language as a waffle chart.
+- [Publishers](visualizations/publishers/): compare gender representation across major publishers.
+- [Library](visualizations/library/): browse and filter books on an interactive shelf.
 
 ### Scale countries by amount of books published by author's from these countries
 
