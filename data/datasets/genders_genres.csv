@@ -1,0 +1,69 @@
+gender,genres,count
+m;m,Childrens,29
+w,Childrens,680
+w;m,Childrens,21
+m;w,Childrens,11
+m,Childrens,850
+w;w,Childrens,53
+w,Classics,527
+m,Classics,2826
+w;m,Classics,4
+m;m,Classics,70
+w;w,Classics,6
+m;w,Classics,7
+w;m,Fantasy,29
+m;m,Fantasy,137
+w,Fantasy,2730
+m,Fantasy,4244
+m;w,Fantasy,49
+w;w,Fantasy,78
+m;m,Horror,34
+m;w,Horror,11
+w;m,Horror,1
+w,Horror,153
+m,Horror,935
+w;w,Horror,2
+m;m,Nonfiction,332
+w,Nonfiction,1380
+w;w,Nonfiction,80
+m,Nonfiction,4713
+m;w,Nonfiction,100
+w;m,Nonfiction,71
+m,Philosophy,855
+w,Philosophy,48
+m;w,Philosophy,1
+w;m,Philosophy,2
+m;m,Philosophy,39
+m;w,Poetry,2
+m;m,Poetry,9
+w;m,Poetry,1
+w;w,Poetry,2
+w,Poetry,167
+m,Poetry,736
+m;m;m,Romance,1
+m;w,Romance,13
+w;w,Romance,91
+n,Romance,1
+m,Romance,2644
+m;m,Romance,11
+w;m,Romance,9
+w,Romance,4777
+m;m,Science Fiction,75
+m,Science Fiction,1588
+w,Science Fiction,242
+w;m,Science Fiction,13
+w;w,Science Fiction,13
+m;w,Science Fiction,24
+w;m,Thriller,2
+w,Thriller,530
+w;w,Thriller,9
+m;m,Thriller,72
+m,Thriller,1715
+m;w,Thriller,16
+w,Young Adult,2534
+w;w,Young Adult,59
+m;m,Young Adult,30
+w;m,Young Adult,21
+m,Young Adult,1878
+m;w,Young Adult,25
+m;m;m,Young Adult,1
