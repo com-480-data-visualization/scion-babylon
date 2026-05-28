@@ -67,16 +67,3 @@ fingerprintAlgorithm = "sha256"
 
 [taxonomy]
   showTermCount = true
-
-[fathomAnalytics]
-  # site = "ABC12345"
-
-#[umamiAnalytics]
-#  site = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-#  region = "eu"  # Can be either "eu" or "us"
-
-[verification]
-  # google = ""
-  # bing = ""
-  # pinterest = ""
-  # yandex = ""
