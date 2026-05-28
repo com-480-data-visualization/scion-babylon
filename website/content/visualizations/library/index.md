@@ -1,9 +1,17 @@
 ---
-title: "Library"
+title: "Women's bookshop"
 date: 2026-04-13
-description: "Guide to D3.js usage in Congo"
+description: "browse and filter books on an interactive shelf"
 layout: "simple"
 ---
+## Welcome to our bookshop ! 
+
+Press the button to discover books written exclusively by women from all over the world :)
+
+One cover raises your interest ? Click on it to read the synopsis !
+
+Or, if nothing looks interesting, just draw again or change the filters 🎲
+
 {{< rawhtml >}}
 <style>
     .max-w-prose:has(> .bookshelf-body) {
@@ -480,16 +488,6 @@ layout: "simple"
             <h2 class="filter-title">Filters</h2>
             <div id="badges-container" class="badges-container">
                 <div class="badges-group">
-                    <div class="badges-group-label">Rating ⭐</div>
-                    <div class="rating-buttons">
-                        <button class="rating-btn" data-rating="0">All</button>
-                        <button class="rating-btn" data-rating="3">3+</button>
-                        <button class="rating-btn" data-rating="3.5">3.5+</button>
-                        <button class="rating-btn" data-rating="4">4+</button>
-                        <button class="rating-btn" data-rating="4.5">4.5+</button>
-                    </div>
-                </div>
-                <div class="badges-group">
                     <div class="badges-group-label">Language</div>
                     <div class="badges-list" id="language-badges"></div>
                     <button id="add-language-btn" class="add-filter-btn">+ Select language</button>
@@ -500,6 +498,16 @@ layout: "simple"
                     <div class="badges-list" id="genre-badges"></div>
                     <button id="add-genre-btn" class="add-filter-btn">+ Select genres</button>
                     <div id="genre-dropdown" class="filter-dropdown" style="display: none;"></div>
+                </div>
+                <div class="badges-group">
+                    <div class="badges-group-label">Rating ⭐</div>
+                    <div class="rating-buttons">
+                        <button class="rating-btn" data-rating="0">All</button>
+                        <button class="rating-btn" data-rating="3">3+</button>
+                        <button class="rating-btn" data-rating="3.5">3.5+</button>
+                        <button class="rating-btn" data-rating="4">4+</button>
+                        <button class="rating-btn" data-rating="4.5">4.5+</button>
+                    </div>
                 </div>
             </div>
             <button id="draw-button">Draw new books!</button>

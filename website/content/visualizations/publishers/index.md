@@ -1,10 +1,27 @@
 ---
 title: "Publishers"
 date: 2026-04-13
-description: "Guide to D3.js usage in Congo"
+description: "compare gender representation across major publishers"
 layout: "simple"
 ---
+
+This charts explores the relationship betwen publishers and authors' gender.
+
+As we can see, few publishers are close to gender equality.
+
+One factor that seem to impact the ratio quite strongly is the most published book genres, as all publishers with a majority of books published by women have either Romance, Young Adult or both in their top 3. 
+
+On the other hand, publishers focusing on Classics/Literature, Science Fiction and Fantasy seem to be publishing men's books overwhelmingly.
 {{< rawhtml >}}
+<style>
+  #publisher-chart {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 100%;
+  }
+</style>
 <div>
   <div style="margin-bottom: 16px;">
     <label style="font-size: 12px; color: #666;">Sort by:</label>
@@ -33,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const rowHeight = 25;
     const innerHeight = data.length * rowHeight;
-    const totalW = Math.min(1400, window.innerWidth - 40);
+    const totalW = Math.min(1250, window.innerWidth - 40);
     const width = totalW - margin.left - margin.right - 270;
     const height = innerHeight + margin.top + margin.bottom;
 

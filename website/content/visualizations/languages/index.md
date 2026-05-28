@@ -4,6 +4,10 @@ date: 2026-04-13
 description: "Guide to D3.js usage in Congo"
 layout: "simple"
 ---
+This chart shows the distribution of the languages of the published books in the goodreads dataset.
+
+Initially, one could think that goodreads contains a large panel of the books published over the world, but the large predominance of English suggests that there is very likely a bias. It might be because books with an english translation are marked as english, or because goodreads userbase mostly resides in North America and Europe.
+
 {{< rawhtml >}}
 <div class="waffle-page">
   <style>
