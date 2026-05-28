@@ -6,8 +6,17 @@ international_bestsellers = international_bestsellers.drop_duplicates(subset=["t
 all_countries = pd.read_csv("datasets/all.csv")
 all_countries = all_countries[["name", "country-code"]]
 
-nationalities = international_bestsellers[["author", "nationality"]] 
-aliases = {"Vietnam": "Viet Nam", "Turkey": "Türkiye", "South Korea":"Korea, Republic of", "Morroco": "Morocco", "Ivory Coast": "Côte d'Ivoire", "Czech Republic":"Czechia", "Scotland": "United Kingdom of Great Britain and Northern Ireland"}
+nationalities = international_bestsellers[["author", "nationality"]]
+aliases = {
+    "Vietnam": "Viet Nam",
+    "Turkey": "Türkiye",
+    "South Korea": "Korea, Republic of",
+    "Morroco": "Morocco",
+    "Ivory Coast": "Côte d'Ivoire",
+    "Czech Republic": "Czechia",
+    "Scotland": "United Kingdom of Great Britain and Northern Ireland",
+    "Algiers": "Algeria"
+}
 
 
 def find_match(nationality, country_names):
@@ -36,9 +45,9 @@ merged = merged.rename(columns={"country-code": "ID"})
 
 def exceptions(series):
     if series.iloc[0] == "Scotland":
-        print("found")
         return "United Kingdom"
     return series.iloc[0]
+
 merged_agg = (merged
     .groupby("ID", dropna=False)
     .agg(
