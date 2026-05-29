@@ -1,0 +1,171 @@
+{{ $visualizations := slice
+  (dict "title" "Gender explorer" "url" "/visualizations/gender-explorer/" "description" "Filter genres or author nationalities and compare male, female, and other authorship totals." "type" "bars")
+  (dict "title" "Gender-genre scatter" "url" "/visualizations/gender-genre-scatter/" "description" "Compare average price and rating by gender group across genres or nationalities." "type" "scatter")
+  (dict "title" "Gender explorator" "url" "/visualizations/gender-explorator/" "description" "Inspect women-led and men-led representation by genre or author nationality." "type" "diverging")
+  (dict "title" "Cartogram" "url" "/visualizations/cartogram/" "description" "Scale countries by the number of books from authors with those nationalities." "type" "map")
+  (dict "title" "Bar race" "url" "/visualizations/bar-race/" "description" "Watch the leading author nationalities change over time, with optional population scaling." "type" "race")
+  (dict "title" "Languages" "url" "/visualizations/languages/" "description" "See the distribution of books by language as a waffle chart." "type" "waffle")
+  (dict "title" "Publishers" "url" "/visualizations/publishers/" "description" "Compare gender representation across major publishers." "type" "publishers")
+  (dict "title" "Library" "url" "/visualizations/library/" "description" "Browse and filter books on an interactive shelf." "type" "shelf")
+}}
+
+<section class="viz-card-grid" aria-label="Project visualizations">
+  <style>
+    .viz-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    .viz-card {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(39, 40, 44, 0.14);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.76);
+      color: inherit;
+      text-decoration: none;
+      box-shadow: 0 14px 32px rgba(30, 34, 42, 0.08);
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .viz-card:hover {
+      transform: translateY(-3px);
+      border-color: #bd93f9;
+      box-shadow: 0 18px 42px rgba(30, 34, 42, 0.14);
+    }
+
+    .viz-card-visual {
+      height: 135px;
+      background: #fbfaf8;
+      border-bottom: 1px solid rgba(39, 40, 44, 0.1);
+    }
+
+    .viz-card-visual svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .viz-card-body {
+      padding: 16px 17px 18px;
+    }
+
+    .viz-card-body h3 {
+      margin: 0 0 7px;
+      font-size: 1.08rem;
+      line-height: 1.25;
+    }
+
+    .viz-card-body p {
+      margin: 0;
+      color: #59565d;
+      font-size: 0.93rem;
+      line-height: 1.45;
+    }
+
+    .dark .viz-card {
+      border-color: rgba(245, 244, 241, 0.16);
+      background: rgba(39, 41, 50, 0.78);
+    }
+
+    .dark .viz-card-visual {
+      background: #272932;
+      border-bottom-color: rgba(245, 244, 241, 0.12);
+    }
+
+    .dark .viz-card-body p {
+      color: #d7d4ce;
+    }
+  </style>
+
+  {{ range $visualizations }}
+    <a class="viz-card" href="{{ .url | relURL }}">
+      <div class="viz-card-visual" aria-hidden="true">
+        {{ if eq .type "bars" }}
+          <svg viewBox="0 0 320 150" role="img">
+            <rect width="320" height="150" fill="currentColor" opacity="0.02" />
+            <line x1="38" y1="118" x2="292" y2="118" stroke="#c6c2ba" />
+            <rect x="55" y="42" width="46" height="76" rx="4" fill="#a5d8ff" />
+            <rect x="124" y="24" width="46" height="94" rx="4" fill="#bd93f9" />
+            <rect x="193" y="78" width="46" height="40" rx="4" fill="#ffbd4a" />
+          </svg>
+        {{ else if eq .type "scatter" }}
+          <svg viewBox="0 0 320 150" role="img">
+            <g stroke="#ddd9d1" stroke-width="1">
+              <line x1="42" y1="118" x2="282" y2="118" />
+              <line x1="42" y1="30" x2="42" y2="118" />
+              <line x1="42" y1="88" x2="282" y2="88" opacity="0.7" />
+              <line x1="42" y1="58" x2="282" y2="58" opacity="0.7" />
+            </g>
+            <circle cx="92" cy="76" r="8" fill="#a5d8ff" stroke="#fff" />
+            <circle cx="142" cy="52" r="7" fill="#a5d8ff" stroke="#fff" />
+            <circle cx="205" cy="87" r="9" fill="#a5d8ff" stroke="#fff" />
+            <path d="M108 105l8-8 8 8-8 8z" fill="#bd93f9" stroke="#fff" />
+            <path d="M173 70l8-8 8 8-8 8z" fill="#bd93f9" stroke="#fff" />
+            <path d="M240 45l8-8 8 8-8 8z" fill="#bd93f9" stroke="#fff" />
+          </svg>
+        {{ else if eq .type "diverging" }}
+          <svg viewBox="0 0 320 150" role="img">
+            <line x1="160" y1="24" x2="160" y2="126" stroke="#8a8580" stroke-dasharray="4 5" />
+            <rect x="86" y="32" width="74" height="14" rx="3" fill="#a5d8ff" />
+            <rect x="160" y="57" width="96" height="14" rx="3" fill="#bd93f9" />
+            <rect x="114" y="82" width="46" height="14" rx="3" fill="#a5d8ff" />
+            <rect x="160" y="107" width="52" height="14" rx="3" fill="#bd93f9" />
+          </svg>
+        {{ else if eq .type "map" }}
+          <svg viewBox="0 0 320 150" role="img">
+            <path d="M70 78c18-34 55-42 82-20 21-18 61-9 82 15 20 23-3 49-34 37-23 22-63 15-75-8-23 8-68 7-55-24z" fill="#d7c3ff" />
+            <circle cx="112" cy="70" r="17" fill="#bd93f9" opacity="0.86" />
+            <circle cx="184" cy="82" r="26" fill="#8fd3ff" opacity="0.82" />
+            <circle cx="226" cy="63" r="12" fill="#ffbd4a" opacity="0.88" />
+          </svg>
+        {{ else if eq .type "race" }}
+          <svg viewBox="0 0 320 150" role="img">
+            <text x="42" y="34" fill="#59565d" font-size="13" font-weight="700">1998</text>
+            <rect x="42" y="50" width="190" height="16" rx="4" fill="#bd93f9" />
+            <rect x="42" y="77" width="145" height="16" rx="4" fill="#a5d8ff" />
+            <rect x="42" y="104" width="104" height="16" rx="4" fill="#ffbd4a" />
+            <path d="M249 45l24 20-24 20" fill="none" stroke="#59565d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" />
+          </svg>
+        {{ else if eq .type "waffle" }}
+          <svg viewBox="0 0 320 150" role="img">
+            {{ range seq 0 9 }}
+              {{ $row := . }}
+              {{ range seq 0 13 }}
+                {{ $col := . }}
+                {{ $index := add (mul $row 14) $col }}
+                <rect x="{{ add 46 (mul $col 16) }}" y="{{ add 24 (mul $row 11) }}" width="10" height="7" rx="2" fill="{{ if lt $index 88 }}#a5d8ff{{ else if lt $index 118 }}#bd93f9{{ else }}#ffbd4a{{ end }}" />
+              {{ end }}
+            {{ end }}
+          </svg>
+        {{ else if eq .type "publishers" }}
+          <svg viewBox="0 0 320 150" role="img">
+            <line x1="160" y1="28" x2="160" y2="124" stroke="#c6c2ba" />
+            <circle cx="126" cy="42" r="8" fill="#a5d8ff" />
+            <circle cx="196" cy="65" r="8" fill="#bd93f9" />
+            <circle cx="152" cy="88" r="8" fill="#d6d3cd" />
+            <circle cx="224" cy="111" r="8" fill="#bd93f9" />
+            <g stroke="#ddd9d1"><line x1="70" y1="42" x2="250" y2="42"/><line x1="70" y1="65" x2="250" y2="65"/><line x1="70" y1="88" x2="250" y2="88"/><line x1="70" y1="111" x2="250" y2="111"/></g>
+          </svg>
+        {{ else }}
+          <svg viewBox="0 0 320 150" role="img">
+            <rect x="54" y="36" width="34" height="70" rx="3" fill="#bd93f9" />
+            <rect x="96" y="24" width="34" height="82" rx="3" fill="#a5d8ff" />
+            <rect x="138" y="46" width="34" height="60" rx="3" fill="#ffbd4a" />
+            <rect x="180" y="31" width="34" height="75" rx="3" fill="#d7c3ff" />
+            <rect x="222" y="55" width="34" height="51" rx="3" fill="#8fd3ff" />
+            <rect x="44" y="108" width="222" height="12" rx="4" fill="#846358" />
+          </svg>
+        {{ end }}
+      </div>
+      <div class="viz-card-body">
+        <h3>{{ .title }}</h3>
+        <p>{{ .description }}</p>
+      </div>
+    </a>
+  {{ end }}
+</section>
