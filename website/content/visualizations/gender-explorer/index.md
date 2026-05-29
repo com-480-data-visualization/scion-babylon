@@ -5,6 +5,12 @@ tags: ["d3", "visualization"]
 layout: "simple"
 ---
 
+This filtered comparison lets you select either book genres or author nationalities, then compare the total number of books attributed to male, female, and other authorship groups.
+
+Use the filters to focus on specific categories and see how the gender distribution changes across different slices of the Goodreads dataset.
+
+Try switching between genres and nationalities, then raise the minimum-books slider to let the small categories step aside and reveal the bigger patterns.
+
 <!-- prettier-ignore-start -->
 {{< d3 >}}
 const comparisonRoot = d3.select(container)

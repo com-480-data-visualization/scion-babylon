@@ -5,6 +5,12 @@ tags: ["d3", "visualization"]
 layout: "simple"
 ---
 
+This view explores gender disparity across book genres and author nationalities by showing whether each category leans more toward men-led or women-led authorship.
+
+Change the sorting and number of rows to highlight the largest categories, the strongest disparities, or the categories closest to parity.
+
+Move the row slider and change the sorting mode to make different stories surface: big categories first, sharpest gaps next, and quieter near-parity cases when you want a closer look.
+
 <!-- prettier-ignore-start -->
 {{< d3 >}}
 const root = d3.select(container)
