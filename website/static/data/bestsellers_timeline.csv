@@ -1,0 +1,541 @@
+origin,year,gender_class,appearances,titles,number_one_appearances,markets,average_rating,featured_title,featured_author,featured_origin,featured_rating,featured_appearances,featured_best_rank
+Afghanistan,2003,men,6,1,2,2,4.3,The Kite Runner,Khaled Hosseini,"United States, Afghanistan",4.3,6,1
+Afghanistan,2007,men,2,1,1,2,4.38,A Thousand Splendid Suns,Khaled Hosseini,"United States, Afghanistan",4.38,2,1
+Afghanistan,2012,men,18,1,1,11,4.05,And the Mountains Echoed,Khaled Hosseini,"United States, Afghanistan",4.05,18,1
+Afghanistan,2018,men,2,1,0,2,4.05,Sea Prayer,Khaled Hosseini,"United States, Afghanistan",4.05,2,4
+Algiers,2016,women,3,1,0,1,4.29,Captive,Sarah Rivens,Algiers,4.29,3,5
+All origins,1927,men,9,2,0,4,3.39,Men Without Women,Haruki Murakami,Japan,3.65,5,2
+All origins,1928,men,1,1,0,1,3.69,Quicksand,Henning Mankell,Sweden,3.69,1,5
+All origins,1932,men,5,1,0,2,3.99,Brave New World,Aldous Huxley,United Kingdom,3.99,5,9
+All origins,1935,men,1,1,0,1,4.22,Swami and Friends,R. K. Narayan,India,4.22,1,9
+All origins,1936,men,1,1,0,1,4.49,Three Comrades,Erich Maria Remarque,Germany,4.49,1,8
+All origins,1937,men,2,2,1,2,3.99,Theatre,Naoki Matayoshi,Japan,4.15,1,1
+All origins,1940,women,1,1,0,1,3.82,The Betrothed,Kiera Cass,United States,3.82,1,6
+All origins,1941,men,2,1,0,1,3.66,Antigone,Jean Anouilh,France,3.66,2,10
+All origins,1942,men,6,1,0,3,3.98,The Stranger,Harlan Coben,United States,3.98,4,3
+All origins,1943,men,12,2,3,6,4.3,The Little Prince,Antoine de Saint-Exupéry,France,4.31,11,1
+All origins,1944,men,1,1,0,1,3.75,Guignol's Band,Louis-Ferdinand Céline,France,3.75,1,6
+All origins,1945,men,6,1,0,3,3.95,Animal Farm,George Orwell,United Kingdom,3.95,6,2
+All origins,1946,men,2,2,0,2,3.93,"Listen, Little Man!",Wilhelm Reich,Austria,4.02,1,6
+All origins,1947,men,5,2,1,3,3.9,The Plague,Andrea Camilleri,Italy,4.01,2,1
+All origins,1948,men,2,2,0,2,4.02,No Longer Human,Nakahara Chuuya,Japan,4.12,1,8
+All origins,1950,men,1,1,0,1,4.28,Mahabharata,C. Rajagopalachari,India,4.28,1,5
+All origins,1951,men,1,1,0,1,3.81,The Catcher in the Rye,J. D. Salinger,United States,3.81,1,8
+All origins,1952,men,1,1,0,1,3.78,The Old Man and the Sea,Ernest Hemingway,United States,3.78,1,7
+All origins,1953,men,6,2,1,4,4.03,The Long Goodbye,Raymond Chandler,United States,4.21,1,2
+All origins,1954,men,4,1,0,2,3.54,Hard Times,Mario Vargas Llosa,Peru,3.54,4,2
+All origins,1955,men,2,1,0,1,4.06,Pedro Páramo,Juan Rulfo,Mexico,4.06,2,7
+All origins,1956,men,3,1,0,1,4.34,Night,Bernard Minier,France,4.34,3,4
+All origins,1957,women,2,1,0,1,3.69,Atlas Shrugged,Ayn Rand,"United States, Russia",3.69,2,2
+All origins,1958,men,3,1,0,2,4.01,The Leopard,Jo Nesbø,Norway,4.01,3,6
+All origins,1959,women,1,1,0,1,3.92,The Landlady,Noa Yedlin,Israel,3.92,1,10
+All origins,1960,men,1,1,1,1,4.13,Butcher's Crossing,John Williams,United States,4.13,1,1
+All origins,1960,women,10,1,0,7,4.28,To Kill a Mockingbird,Harper Lee,United States,4.28,10,2
+All origins,1962,men,3,3,0,3,4.03,One Flew Over the Cuckoo's Nest,Ken Kesey,United States,4.19,1,8
+All origins,1963,men,2,1,0,2,4.23,Hopscotch,Julio Cortázar,Argentina,4.23,2,8
+All origins,1963,women,1,1,1,1,3.98,The Collector,Nora Roberts,United States,3.98,1,1
+All origins,1964,men,1,1,0,1,4.14,Charlie and the Chocolate Factory,Roald Dahl,United Kingdom,4.14,1,2
+All origins,1965,men,8,3,1,8,4.19,Stoner,John Williams,United States,4.29,4,1
+All origins,1967,men,12,3,0,7,4.07,The Master and Margarita,Mikhail Bulgakov,Russia,4.29,1,9
+All origins,1968,women,2,1,0,2,4.09,Little Women,Louisa May Alcott,United States,4.09,2,6
+All origins,1969,men,4,2,1,4,4.02,The Promise,Damon Galgut,South Africa,4.16,2,1
+All origins,1970,men,10,1,0,4,3.68,The Guardians,John Grisham,United States,3.68,10,2
+All origins,1971,women,1,1,0,1,3.86,Nemesis,Catherine Coulter,United States,3.86,1,10
+All origins,1972,men,4,1,1,1,3.83,Charlotte,David Foenkinos,France,3.83,4,1
+All origins,1972,women,5,2,1,2,4.02,The Summer Book,Tove Jansson,Finland,4.08,1,3
+All origins,1974,men,6,2,0,5,3.87,Zero,Marc Elsberg,Austria,3.91,1,8
+All origins,1976,men,1,1,0,1,3.91,The Adventures of Tom Sawyer,Mark Twain,United States,3.91,1,4
+All origins,1977,men,1,1,0,1,4.23,The Shining,Stephen King,United States,4.23,1,3
+All origins,1977,women,1,1,0,1,4.23,The Thorn Birds,Colleen McCullough,Australia,4.23,1,2
+All origins,1978,men,11,2,3,3,3.97,The Snow Leopard,Sylvain Tesson,France,4.12,5,1
+All origins,1979,women,1,1,0,1,4.35,A Man,Oriana Fallaci,Italy,4.35,1,8
+All origins,1980,men,1,1,0,1,4.12,The Name of the Rose,Umberto Eco,Italy,4.12,1,5
+All origins,1981,men,1,1,0,1,3.97,Chronicle of a Death Foretold,Gabriel García Márquez,Colombia,3.97,1,8
+All origins,1982,men,1,1,0,1,3.93,Baltasar and Blimunda,José Saramago,Portugal,3.93,1,3
+All origins,1983,men,2,2,0,2,3.87,The Red Horse,Eugenio Corti,Italy,4.23,1,7
+All origins,1984,men,5,3,1,3,3.98,The Unbearable Lightness of Being,Milan Kundera,Czechia,4.1,1,9
+All origins,1985,women,10,1,0,2,4.11,The Handmaid's Tale,Margaret Atwood,Canada,4.11,10,3
+All origins,1986,men,4,1,0,4,4.24,It,Stephen King,United States,4.24,4,3
+All origins,1987,men,5,3,0,5,3.98,The Door,Manel Loureiro,Spain,4.07,1,6
+All origins,1988,men,13,3,0,9,3.87,Foucault's Pendulum,Umberto Eco,Italy,3.9,1,8
+All origins,1989,men,2,2,0,2,3.78,The Negotiator,Francis Walder,Belgium,3.99,1,3
+All origins,1990,men,30,4,9,3,4.22,Homeland,Fernando Aramburu,Spain,4.24,26,1
+All origins,1991,men,6,6,0,5,4.01,Paradise,Abdulrazak Gurnah,Tanzania,4.31,1,8
+All origins,1991,women,3,3,0,3,3.91,Outlander,Diana Gabaldon,United States,4.23,1,10
+All origins,1992,men,3,2,1,2,4.32,When Nietzsche Wept,Irvin Yalom,United States,4.33,1,5
+All origins,1992,women,1,1,0,1,4.22,Queen,Bebi Fernández,Spain,4.22,1,8
+All origins,1993,men,5,4,1,5,4.08,Stories,Patrick Modiano,France,4.21,1,4
+All origins,1993,women,1,1,0,1,4.25,Confusion,Elizabeth Jane Howard,United Kingdom,4.25,1,8
+All origins,1994,men,4,3,0,4,4.1,The Crossing,Michael Connelly,United States,4.13,2,6
+All origins,1994,women,1,1,0,1,4.01,Hidden Riches,Nora Roberts,United States,4.01,1,9
+All origins,1995,men,5,3,0,4,3.92,Blindness,José Saramago,Portugal,4.13,2,3
+All origins,1995,women,5,4,0,4,3.7,Casting Off,Elizabeth Jane Howard,United Kingdom,4.28,1,6
+All origins,1996,men,8,4,0,8,4.2,A Game of Thrones,George R. R. Martin,United States,4.45,5,2
+All origins,1996,women,1,1,0,1,3.48,That Summer,Jennifer Weiner,United States,3.48,1,8
+All origins,1997,men,4,3,0,3,3.89,Naked,Jean-Philippe Toussaint,Belgium,4.09,1,4
+All origins,1997,women,6,2,0,3,4.09,The Spider's Web,Dumebi Ezar Ehigiator,Nigeria,4.1,1,5
+All origins,1998,men,8,3,2,4,4.25,A Clash of Kings,George R. R. Martin,United States,4.41,3,1
+All origins,1998,women,8,4,2,6,4.13,Harry Potter and the Chamber of Secrets,J. K. Rowling,United Kingdom,4.43,3,1
+All origins,1999,men,7,3,0,4,4.21,Journey Under the Midnight Sun,Keigo Higashino,Japan,4.32,4,2
+All origins,1999,women,5,3,0,5,4.07,Harry Potter and the Prisoner of Azkaban,J. K. Rowling,United Kingdom,4.57,2,6
+All origins,2000,men,10,6,0,7,3.98,A Storm of Swords,George R. R. Martin,United States,4.53,2,7
+All origins,2000,women,7,4,1,5,4.16,Harry Potter and the Goblet of Fire,J. K. Rowling,United Kingdom,4.56,1,8
+All origins,2001,men,5,4,1,3,3.76,The Shadow of the Wind,Carlos Ruiz Zafón,Spain,4.27,1,1
+All origins,2001,women,5,2,1,2,3.88,Fantastic Beasts and Where to Find Them,J. K. Rowling,United Kingdom,3.98,2,1
+All origins,2002,men,3,3,0,2,3.68,Liberation Day,George Saunders,United States,3.85,1,10
+All origins,2002,women,3,2,0,2,3.61,Romancing Mister Bridgerton,Julia Quinn,United States,4.18,1,5
+All origins,2003,men,19,6,3,9,4.17,The Kite Runner,Khaled Hosseini,"United States, Afghanistan",4.3,6,1
+All origins,2003,women,6,6,0,4,3.9,Harry Potter and the Order of the Phoenix,J. K. Rowling,United Kingdom,4.5,1,10
+All origins,2004,men,13,9,2,6,3.92,The Morning After,Mario Calabresi,Italy,4.09,2,6
+All origins,2004,women,3,3,0,3,3.89,When He Was Wicked,Julia Quinn,United States,4.03,1,9
+All origins,2005,men,14,7,0,8,4.03,The Book Thief,Markus Zusak,Australia,4.37,4,2
+All origins,2005,women,9,5,0,4,3.69,Every Breath You Take,Mary Higgins Clark; Alafair Burke,United States; United States,3.89,1,10
+All origins,2006,men,17,6,1,7,3.72,Missing You,Harlan Coben,United States,4.17,3,1
+All origins,2006,women,8,8,1,6,4.1,Marta,Helena Hugo,South Africa,4.42,1,9
+All origins,2007,men,46,12,7,16,4.05,A Thousand Splendid Suns,Khaled Hosseini,"United States, Afghanistan",4.38,2,1
+All origins,2007,women,14,8,1,10,3.81,City of Bones,Cassandra Clare,United States,4.1,3,4
+All origins,2008,men,34,15,2,9,3.84,Identical,Scott Turow,United States,4.31,1,4
+All origins,2008,women,10,6,0,6,3.92,The Thing Around Your Neck,Chimamanda Ngozi Adichie,Nigeria,4.24,1,6
+All origins,2009,men,35,18,2,13,3.79,The Defector,Siegfried Lenz,Germany,4.3,3,1
+All origins,2009,women,17,14,1,9,3.98,Undone,Karin Slaughter,United States,4.22,2,5
+All origins,2010,men,59,18,8,15,3.96,A Dog's Purpose,W. Bruce Cameron,United States,4.34,2,1
+All origins,2010,mixed,1,1,0,1,3.76,Freedom,Irina Zimmer Paluten; Klaas Kern,Germany; Germany,3.76,1,7
+All origins,2010,women,21,14,2,12,3.91,Winter Garden,Kristin Hannah,United States,4.18,1,7
+All origins,2011,men,40,22,2,13,3.99,The Suspect,Georges Simenon,Belgium,4.43,1,7
+All origins,2011,women,124,20,9,26,3.94,The Song of Achilles,Madeline Miller,United States,4.35,17,1
+All origins,2012,men,112,24,20,27,3.96,A Dog's Journey,W. Bruce Cameron,United States,4.41,1,9
+All origins,2012,mixed,2,1,0,2,4.27,Trapped,Camilla Läckberg; Henrik Fexeus,Sweden; Sweden,4.27,2,6
+All origins,2012,women,104,27,9,25,4.08,The Story of a New Name,Elena Ferrante,Italy,4.39,19,2
+All origins,2013,men,138,36,25,34,4.08,The Fallen,David Baldacci,United States,4.43,4,1
+All origins,2013,mixed,1,1,0,1,3.78,First Love,James Patterson; Emily Raymond,United States; United States,3.78,1,3
+All origins,2013,women,107,37,7,27,3.94,The Mistress,Danielle Steel,United States,4.49,1,5
+All origins,2014,men,125,42,13,20,4.11,Words of Radiance,Brandon Sanderson,United States,4.75,1,8
+All origins,2014,mixed,1,1,0,1,4.13,The Heist,Janet Evanovich; Lee Goldberg,United States; United States,4.13,1,5
+All origins,2014,women,85,38,12,21,4.05,Night Broken,Patricia Briggs,United States,4.42,1,10
+All origins,2015,men,77,25,7,15,3.88,The Cartel,Don Winslow,United States,4.31,2,4
+All origins,2015,mixed,3,2,1,2,3.96,Never Never,James Patterson; Candice Fox,United States; Australia,4.07,2,1
+All origins,2015,women,157,27,27,28,3.91,The Nightingale,Kristin Hannah,United States,4.57,11,4
+All origins,2016,men,76,26,8,18,4.03,Gravity Falls: Journal 3,Alex Hirsch,United States,4.69,1,3
+All origins,2016,women,70,26,4,24,4.03,It Ends with Us,Colleen Hoover,United States,4.4,22,1
+All origins,2017,men,86,26,11,20,4.02,Oathbringer,Brandon Sanderson,United States,4.59,1,1
+All origins,2017,women,64,24,4,21,4.04,Dear Life,Alice Munro,Canada,4.42,3,3
+All origins,2018,men,51,14,4,18,3.99,Boy Swallows Universe,Trent Dalton,Australia,4.4,5,3
+All origins,2018,mixed,3,2,0,3,3.9,What If It's Us,Becky Albertalli; Adam Silvera,United States,3.91,1,8
+All origins,2018,women,101,27,6,29,4.08,Turning Point,Carmen Korn,Germany,4.54,4,4
+All origins,2019,men,49,11,4,18,4.09,Ambush,James Patterson; James O. Born,United States; United States,4.49,1,5
+All origins,2019,mixed,1,1,0,1,3.9,The 19th Christmas,James Patterson; Maxine Paetro,United States,3.9,1,6
+All origins,2019,unknown,2,1,0,2,4.23,"Red, White & Royal Blue",Casey McQuiston,United States,4.23,2,4
+All origins,2019,women,43,12,2,16,4.15,Legacy,Nora Roberts,United States,4.53,1,7
+All origins,2020,men,6,4,1,4,4.39,Mirage,Douglas Kennedy,United States,4.67,2,2
+All origins,2020,women,67,17,7,13,4.12,"Good Girl, Bad Blood",Holly Jackson,United Kingdom,4.52,1,4
+All origins,2021,women,5,1,1,2,4.33,The Four Winds,Kristin Hannah,United States,4.33,5,1
+Argentina,1963,men,2,1,0,2,4.23,Hopscotch,Julio Cortázar,Argentina,4.23,2,8
+Argentina,2014,women,1,1,0,1,3.6,Jasy,Florencia Bonelli,Argentina,3.6,1,3
+Argentina,2015,women,1,1,0,1,4.19,Dark Soul,Florencia Bonelli,Argentina,4.19,1,2
+Armenia,2009,women,1,1,0,1,4.18,The Gray House,Mariam Petrosyan,Armenia,4.18,1,7
+Australia,1977,women,1,1,0,1,4.23,The Thorn Birds,Colleen McCullough,Australia,4.23,1,2
+Australia,1991,men,1,1,0,1,4.0,Cloudstreet,Tim Winton,Australia,4.0,1,8
+Australia,2003,men,7,1,0,4,4.25,Shantaram,Gregory David Roberts,Australia,4.25,7,2
+Australia,2003,women,1,1,0,1,3.8,The Lake House,Kate Morton,Australia,3.8,1,6
+Australia,2005,men,4,1,0,3,4.37,The Book Thief,Markus Zusak,Australia,4.37,4,2
+Australia,2009,men,1,1,0,1,4.08,What Alice Forgot,Liane Moriarty,Australia,4.08,1,8
+Australia,2012,women,4,2,1,3,4.08,The Secret Keeper,Kate Morton,Australia,4.13,2,4
+Australia,2013,men,18,4,5,11,4.07,I Am Pilgrim,Terry Hayes,"United Kingdom, Australia",4.25,4,1
+Australia,2013,women,7,1,1,5,3.94,The Husband's Secret,Liane Moriarty,Australia,3.94,7,1
+Australia,2014,men,4,1,0,4,3.61,The Rosie Effect,Graeme Simsion,Australia,3.61,4,4
+Australia,2014,women,3,2,0,3,4.1,Big Little Lies,Liane Moriarty,Australia,4.27,1,3
+Australia,2015,men,2,2,0,1,3.4,Black Rock White City,A. S. Patrić,Australia,3.53,1,4
+Australia,2015,mixed,2,1,1,1,4.07,Never Never,James Patterson; Candice Fox,United States; Australia,4.07,2,1
+Australia,2016,men,1,1,0,1,4.3,The Four Legendary Kingdoms,Matthew Reilly,Australia,4.3,1,3
+Australia,2016,women,3,2,0,3,3.72,The Dry,Jane Harper,Australia,4.02,1,9
+Australia,2017,men,1,1,1,1,4.33,Colombiano,Rusty Young,Australia,4.33,1,1
+Australia,2017,women,1,1,1,1,3.38,Sad Girls,Lang Leav,Australia,3.38,1,1
+Australia,2018,men,5,1,0,2,4.4,Boy Swallows Universe,Trent Dalton,Australia,4.4,5,3
+Australia,2018,women,8,2,1,5,3.64,The Clockmaker's Daughter,Kate Morton,Australia,3.72,5,2
+Austria,1946,men,1,1,0,1,4.02,"Listen, Little Man!",Wilhelm Reich,Austria,4.02,1,6
+Austria,1974,men,1,1,0,1,3.91,Zero,Marc Elsberg,Austria,3.91,1,8
+Austria,2010,men,6,1,1,3,3.84,Blackout,Marc Elsberg,Austria,3.84,6,1
+Belgium,1972,women,4,1,1,1,4.0,First Blood,Amélie Nothomb,Belgium,4.0,4,1
+Belgium,1989,men,1,1,0,1,3.99,The Negotiator,Francis Walder,Belgium,3.99,1,3
+Belgium,1997,men,1,1,0,1,4.09,Naked,Jean-Philippe Toussaint,Belgium,4.09,1,4
+Belgium,2010,women,5,1,1,1,3.76,Thirst,Amélie Nothomb,Belgium,3.76,5,1
+Belgium,2011,men,1,1,0,1,4.43,The Suspect,Georges Simenon,Belgium,4.43,1,7
+Belgium,2020,women,3,1,0,2,3.95,Real Life,Adeline Dieudonne,Belgium,3.95,3,6
+Brazil,1988,men,11,1,0,7,3.88,The Alchemist,Paulo Coelho,Brazil,3.88,11,2
+Brazil,2012,men,12,2,3,10,3.12,Manuscript Found in Accra,Paulo Coelho,Brazil,3.8,1,10
+Brazil,2016,men,4,1,0,3,3.35,The Spy,Paulo Coelho,Brazil,3.35,4,2
+Bulgaria,1989,men,1,1,0,1,3.57,Closer,Konstantin Trendafilov,Bulgaria,3.57,1,10
+Bulgaria,2005,men,1,1,0,1,3.39,Clay,Victoria Beshliiska,Bulgaria,3.39,1,3
+Bulgaria,2005,women,1,1,0,1,3.39,Clay,Victoria Beshliiska,Bulgaria,3.39,1,2
+Canada,1985,women,10,1,0,2,4.11,The Handmaid's Tale,Margaret Atwood,Canada,4.11,10,3
+Canada,2001,men,1,1,0,1,3.91,Life of Pi,Yann Martel,Canada,3.91,1,7
+Canada,2007,men,1,1,0,1,3.78,The Shack,Wm. Paul Young,Canada,3.78,1,10
+Canada,2010,women,1,1,0,1,3.91,Runaway,Alice Munro,Canada,3.91,1,8
+Canada,2011,women,2,2,0,2,3.72,Now You See Her,Joy Fielding,Canada,4.01,1,8
+Canada,2012,men,1,1,0,1,3.96,Cross Roads,William P. Young,Canada,3.96,1,10
+Canada,2014,men,1,1,0,1,3.75,No Safe House,Linwood Barclay,Canada,3.75,1,7
+Canada,2014,women,1,1,0,1,4.07,Milk and Honey,Rupi Kaur,Canada,4.07,1,8
+Canada,2015,men,1,1,0,1,3.79,Fifteen Dogs,Andre Alexis,"Trinidad and Tobago, Canada",3.79,1,2
+Canada,2015,women,1,1,0,1,3.37,The Heart Goes Last,Margaret Atwood,Canada,3.37,1,7
+Canada,2016,women,4,3,0,3,3.87,Paper Princess,Erin Watt,South Korea; Canada,4.0,1,10
+Canada,2017,women,5,2,1,5,4.32,Dear Life,Alice Munro,Canada,4.42,3,3
+Canada,2019,women,10,1,1,6,4.2,The Testaments,Margaret Atwood,Canada,4.2,10,1
+Chile,2012,women,5,1,2,2,3.92,Ripper,Isabel Allende,Chile,3.92,5,1
+Chile,2015,women,6,1,2,3,3.82,The Japanese Lover,Isabel Allende,Chile,3.82,6,1
+China,1937,men,1,1,0,1,3.83,Rickshaw Boy,Lao She,China,3.83,1,10
+China,1988,men,1,1,0,1,3.72,The Garlic Ballads,Mo Yan,China,3.72,1,8
+China,1992,men,2,1,1,1,4.32,To Live,Yu Hua,China,4.32,2,1
+China,1998,women,1,1,0,1,4.34,The Road Home,Mo Bao Fei Bao,China,4.34,1,6
+China,2004,men,1,1,0,1,4.03,Wolf Totem,Jiang Rong,China,4.03,1,8
+China,2006,men,2,1,0,1,4.06,The Three-Body Problem,Liu Cixin,China,4.06,2,7
+China,2010,men,1,1,0,1,3.94,Siege,Qian Zhongshu,China,3.94,1,10
+Colombia,1967,men,10,1,0,6,4.08,One Hundred Years of Solitude,Gabriel García Márquez,Colombia,4.08,10,3
+Colombia,1981,men,1,1,0,1,3.97,Chronicle of a Death Foretold,Gabriel García Márquez,Colombia,3.97,1,8
+Colombia,1996,men,1,1,0,1,3.86,News of a Kidnapping,Gabriel García Márquez,Colombia,3.86,1,8
+Colombia,2004,men,3,1,0,1,4.07,Oblivion,Héctor Abad Faciolince,Colombia,4.07,3,8
+Cuba,2005,men,1,1,0,1,4.18,Heretics,Leonardo Padura Fuentes,Cuba,4.18,1,10
+Cyprus,2019,men,17,1,0,9,4.09,The Silent Patient,Alex Michaelides,Cyprus,4.09,17,2
+Czech Republic,1990,men,2,1,0,1,4.14,Immortality,Milan Kundera,Czech Republic,4.14,2,2
+Czechia,1984,men,1,1,0,1,4.1,The Unbearable Lightness of Being,Milan Kundera,Czechia,4.1,1,9
+Czechia,2011,women,1,1,0,1,3.63,Hana,Alena Mornštajnová,Czechia,3.63,1,3
+Czechia,2013,men,1,1,0,1,3.33,The Festival of Insignificance,Milan Kundera,Czechia,3.33,1,2
+Denmark,2000,women,1,1,0,1,3.75,Nothing,Janne Teller,Denmark,3.75,1,10
+Denmark,2003,men,1,1,0,1,4.01,Avenger,Dan Buthler; Dag Ohrlund,Denmark; Sweden,4.01,1,8
+Denmark,2010,men,2,1,0,2,3.96,Promise,Jussi Adler-Olsen,Denmark,3.96,2,8
+Egypt,2003,men,1,1,0,1,4.21,With,Sonallah lbrahim,Egypt,4.21,1,2
+Egypt,2007,men,10,1,1,5,4.23,Call Me By Your Name,André Aciman,"Egypt, United States",4.23,10,1
+Egypt,2019,men,2,1,0,2,3.32,Find Me,André Aciman,"Egypt, United States",3.32,2,3
+Finland,1972,women,1,1,0,1,4.08,The Summer Book,Tove Jansson,Finland,4.08,1,3
+Finland,2014,women,1,1,0,1,3.74,Rain,Ulla-Lena Lundberg,Finland,3.74,1,10
+France,1941,men,2,1,0,1,3.66,Antigone,Jean Anouilh,France,3.66,2,10
+France,1942,men,2,1,0,2,3.98,The Stranger,Albert Camus,France,3.98,2,8
+France,1943,men,11,1,3,5,4.31,The Little Prince,Antoine de Saint-Exupéry,France,4.31,11,1
+France,1944,men,1,1,0,1,3.75,Guignol's Band,Louis-Ferdinand Céline,France,3.75,1,6
+France,1946,men,1,1,0,1,3.85,Cousin Bette,Honoré de Balzac,France,3.85,1,6
+France,1947,men,2,1,0,2,4.01,The Plague,Albert Camus,France,4.01,2,7
+France,1956,men,3,1,0,1,4.34,Night,Bernard Minier,France,4.34,3,4
+France,1967,men,1,1,0,1,3.75,Andromaque,Jean Racine,France,3.75,1,9
+France,1972,men,4,1,1,1,3.83,Charlotte,David Foenkinos,France,3.83,4,1
+France,1978,men,5,1,1,1,4.12,The Snow Leopard,Sylvain Tesson,France,4.12,5,1
+France,1993,men,1,1,0,1,4.21,Stories,Patrick Modiano,France,4.21,1,4
+France,2006,men,7,2,0,2,3.25,Next,Guillaume Musso,France,3.52,3,3
+France,2007,men,4,1,0,1,3.79,The Red Necklace,Jean-Christophe Rufin,France,3.79,4,2
+France,2007,women,2,1,0,1,3.32,A Life,Simone Veil,France,3.32,2,2
+France,2008,men,1,1,0,1,3.63,Aurelia,Gérard de Nerval,France,3.63,1,3
+France,2009,men,1,1,0,1,4.13,The Last Child,Philippe Besson,France,4.13,1,7
+France,2010,men,6,4,0,2,3.98,War,Louis-Ferdinand Céline,France,4.23,2,2
+France,2012,men,6,2,1,1,3.86,Angelic,Guillaume Musso,France,3.93,4,1
+France,2013,men,2,2,0,2,4.05,Puzzle,Franck Thilliez,France,4.06,1,8
+France,2014,men,4,2,0,1,4.25,Sisters,Bernard Minier,France,4.34,3,5
+France,2014,women,10,1,2,2,4.07,Three,Valerie Perrin,France,4.07,10,1
+France,2015,men,7,1,2,2,3.65,Soumission,Michel Houellebecq,France,3.65,7,1
+Germany,1936,men,1,1,0,1,4.49,Three Comrades,Erich Maria Remarque,Germany,4.49,1,8
+Germany,2000,women,3,1,0,1,4.15,The Search,Charlotte Link,Germany,4.15,3,3
+Germany,2008,men,2,1,0,1,4.22,Noah,Sebastian Fitzek,Germany,4.22,2,2
+Germany,2008,women,3,1,0,1,4.02,Home,Judith Hermann,Germany,4.02,3,3
+Germany,2009,men,3,1,1,1,4.3,The Defector,Siegfried Lenz,Germany,4.3,3,1
+Germany,2010,men,17,2,4,1,3.8,Tschick,Wolfgang Herrndorf,Germany,3.81,12,1
+Germany,2010,mixed,1,1,0,1,3.76,Freedom,Irina Zimmer Paluten; Klaas Kern,Germany; Germany,3.76,1,7
+Germany,2010,women,1,1,0,1,3.57,The Little French Bistro,Nina George,Germany,3.57,1,4
+Germany,2011,men,6,2,0,1,3.9,Taboo,Ferdinand von Schirach,Germany,4.15,4,3
+Germany,2011,women,3,2,0,2,3.79,The Fire,Daniela Krien,Germany,3.86,2,5
+Germany,2012,men,1,1,0,1,4.27,Trapped,Sebastian Fitzek; Michael Tsokos,Germany; Germany,4.27,1,6
+Germany,2013,women,4,2,0,4,3.67,Seduced,Kathryn Taylor,Germany,4.14,1,3
+Germany,2014,men,5,1,3,1,4.24,The Way Home,Sebastian Fitzek,Germany,4.24,5,1
+Germany,2016,men,1,1,0,1,4.43,The Elders,Jan Weiler,Germany,4.43,1,8
+Germany,2016,women,1,1,0,1,4.09,Begin Again,Mona Kasten,Germany,4.09,1,10
+Germany,2018,women,4,1,0,1,4.54,Turning Point,Carmen Korn,Germany,4.54,4,4
+Greece,2017,men,1,1,0,1,4.46,Win,Christos Chomenidis,Greece,4.46,1,8
+Hungary,2007,women,1,1,0,1,4.01,Sugar Daddy,Anita Tomor,Hungary,4.01,1,5
+Iceland,1990,men,1,1,0,1,4.05,Hunger,Stefán Máni,Iceland,4.05,1,9
+Iceland,2011,women,1,1,0,1,4.15,Eden,Auður Ava Ólafsdóttir,Iceland,4.15,1,4
+India,1935,men,1,1,0,1,4.22,Swami and Friends,R. K. Narayan,India,4.22,1,9
+India,1943,men,1,1,0,1,4.21,Malgudi Days,R. K. Narayan,India,4.21,1,7
+India,1950,men,1,1,0,1,4.28,Mahabharata,C. Rajagopalachari,India,4.28,1,5
+India,1998,women,1,1,1,1,3.45,Hullabaloo in the Guava Orchard,Kiran Desai,India,3.45,1,1
+India,2005,women,1,1,0,1,3.43,The Inheritance of Loss,Kiran Desai,India,3.43,1,2
+India,2008,men,1,1,0,1,3.74,The White Tiger,Aravind Adiga,India,3.74,1,8
+India,2009,men,1,1,0,1,3.43,2 States: The Story of My Marriage,Chetan Bhagat,India,3.43,1,3
+India,2010,men,4,1,0,1,4.09,The Immortals of Meluha,Amish Tripathi,India,4.09,4,2
+India,2011,men,2,1,0,1,4.06,The Secret of the Nagas,Amish Tripathi,India,4.06,2,3
+India,2017,women,2,1,0,2,3.5,The Ministry of Utmost Happiness,Arundhati Roy,India,3.5,2,4
+Ireland,2002,men,1,1,0,1,3.59,Snow,John Banville,Ireland,3.59,1,2
+Ireland,2003,men,1,1,0,1,3.76,Love,Roddy Doyle,Ireland,3.76,1,3
+Ireland,2004,women,1,1,0,1,3.94,"Love, Rosie",Cecelia Ahern,Ireland,3.94,1,8
+Ireland,2014,women,2,1,1,2,3.63,The Year I Met You,Cecelia Ahern,Ireland,3.63,2,1
+Ireland,2015,women,1,1,0,1,3.65,The Marble Collector,Cecelia Ahern,Ireland,3.65,1,10
+Ireland,2016,women,1,1,0,1,3.62,The Wonder,Emma Donoghue,Ireland,3.62,1,6
+Ireland,2018,women,7,1,1,7,3.86,Normal People,Sally Rooney,Ireland,3.86,7,1
+Ireland,2020,men,1,1,0,1,4.28,Apeirogon,Colum McCann,Ireland,4.28,1,7
+Israel,1959,women,1,1,0,1,3.92,The Landlady,Noa Yedlin,Israel,3.92,1,10
+Israel,2009,men,1,1,0,1,3.76,Without Warning,Joel C. Rosenberg,"United States, Israel",3.76,1,6
+Israel,2012,women,1,1,0,1,4.0,Shadow and Bone,Leigh Bardugo,"Israel, United States",4.0,1,6
+Israel,2013,women,2,1,0,2,3.98,Siege and Storm,Leigh Bardugo,"Israel, United States",3.98,2,7
+Israel,2014,men,3,2,0,3,4.0,Three,Dror Mishani,Israel,4.07,2,3
+Israel,2014,women,2,1,0,2,4.09,Ruin and Rising,Leigh Bardugo,"Israel, United States",4.09,2,8
+Israel,2015,women,1,1,0,1,4.43,Six of Crows,Leigh Bardugo,"Israel, United States",4.43,1,10
+Italy,1947,men,2,1,1,1,4.01,The Plague,Andrea Camilleri,Italy,4.01,2,1
+Italy,1965,men,1,1,0,1,3.67,The Crocodile,Maurizio De Giovanni,Italy,3.67,1,9
+Italy,1978,men,5,1,2,1,3.85,Women,Andrea Camilleri,Italy,3.85,5,1
+Italy,1979,women,1,1,0,1,4.35,A Man,Oriana Fallaci,Italy,4.35,1,8
+Italy,1980,men,1,1,0,1,4.12,The Name of the Rose,Umberto Eco,Italy,4.12,1,5
+Italy,1983,men,1,1,0,1,4.23,The Red Horse,Eugenio Corti,Italy,4.23,1,7
+Italy,1988,men,1,1,0,1,3.9,Foucault's Pendulum,Umberto Eco,Italy,3.9,1,8
+Italy,1998,men,4,1,0,1,4.34,The Road Home,Fabio Volo,Italy,4.34,4,2
+Italy,2000,men,1,1,0,1,3.23,Lost Girls,Marco Vichi,Italy,3.23,1,9
+Italy,2003,men,3,1,1,1,3.92,Quicksilver,Marco Malvaldi,Italy,3.92,3,1
+Italy,2003,women,1,1,0,1,3.76,Love,Catena Fiorello Galeano,Italy,3.76,1,8
+Italy,2004,men,2,1,0,1,4.09,The Morning After,Mario Calabresi,Italy,4.09,2,6
+Italy,2008,men,5,2,0,1,3.54,Fidelity,Marco Missiroli,Italy,3.58,2,4
+Italy,2009,women,2,1,0,1,3.84,Splendor,Margaret Mazzantini,Italy,3.84,2,3
+Italy,2010,men,3,2,0,2,3.57,Sparks,Federico Pace,Italy,3.8,1,10
+Italy,2010,women,2,1,1,1,4.07,Now,Chiara Gamberale,Italy,4.07,2,1
+Italy,2011,men,4,2,1,1,3.57,Hades,Marcello Fois,Italy,3.96,1,7
+Italy,2011,women,65,2,5,11,3.93,My Brilliant Friend,Elena Ferrante,Italy,3.96,61,1
+Italy,2012,women,19,1,0,4,4.39,The Story of a New Name,Elena Ferrante,Italy,4.39,19,2
+Italy,2013,women,13,1,2,5,4.31,Those Who Leave and Those Who Stay,Elena Ferrante,Italy,4.31,13,1
+Italy,2014,men,5,2,2,1,3.71,Bone,Michele Serra,Italy,4.17,1,4
+Italy,2014,women,13,1,1,3,4.4,The Story of the Lost Child,Elena Ferrante,Italy,4.4,13,1
+Italy,2017,women,1,1,0,1,3.88,I See You,Irene Cao,Italy,3.88,1,7
+Italy,2019,men,2,1,0,1,3.68,The Perfect Wife,Roberto Costantini,Italy,3.68,2,2
+Jamaica,2015,women,1,1,0,1,4.05,"Everything, Everything",Nicola Yoon,"Jamaica, United States",4.05,1,5
+Japan,1927,men,5,1,0,4,3.65,Men Without Women,Haruki Murakami,Japan,3.65,5,2
+Japan,1937,men,1,1,1,1,4.15,Theatre,Naoki Matayoshi,Japan,4.15,1,1
+Japan,1948,men,1,1,0,1,4.12,No Longer Human,Nakahara Chuuya,Japan,4.12,1,8
+Japan,1962,men,1,1,0,1,3.9,Genius,Shintaro Ishihara,Japan,3.9,1,2
+Japan,1987,men,3,1,0,3,4.03,Norwegian Wood,Haruki Murakami,Japan,4.03,3,5
+Japan,1993,men,1,1,0,1,3.86,The Elephant Vanishes,Haruki Murakami,Japan,3.86,1,10
+Japan,1999,men,5,2,0,2,4.22,Journey Under the Midnight Sun,Keigo Higashino,Japan,4.32,4,2
+Japan,2005,men,2,1,0,1,4.13,The Devotion of Suspect X,Keigo Higashino,Japan,4.13,2,4
+Japan,2007,men,1,1,0,1,4.38,White Night,Keigo Higashino,Japan,4.38,1,7
+Japan,2008,men,1,1,0,1,3.87,Underground,Haruki Murakami,Japan,3.87,1,4
+Japan,2011,men,1,1,0,1,4.12,Silence,Shūsaku Endō,Japan,4.12,1,6
+Japan,2013,men,11,1,2,10,3.85,Colorless Tsukuru Tazaki and His Years of Pilgrimage,Haruki Murakami,Japan,3.85,11,1
+Japan,2018,men,1,1,0,1,4.14,Birthday Girl,Haruki Murakami,Japan,4.14,1,7
+Malaysia,2011,men,1,1,0,1,4.12,The Garden of Evening Mists,Tan Twan Eng,Malaysia,4.12,1,6
+Mexico,1955,men,2,1,0,1,4.06,Pedro Páramo,Juan Rulfo,Mexico,4.06,2,7
+Mexico,2002,women,2,1,0,1,3.32,Boulevard,Flor M. Salvador,Mexico,3.32,2,4
+Mexico,2007,men,1,1,0,1,3.37,Sudden Death,Álvaro Enrigue,Mexico,3.37,1,7
+Mexico,2014,women,1,1,0,1,4.16,The Traitor,Anabel Hernández,Mexico,4.16,1,3
+Morocco,2016,women,4,1,0,1,3.39,The Perfect Nanny,Leïla Slimani,Morocco,3.39,4,4
+Netherlands,2009,men,1,1,0,1,3.24,The Dinner,Herman Koch,Netherlands,3.24,1,6
+Netherlands,2018,men,2,1,0,2,4.11,Grand Hotel Europa,Ilja Leonard Pfeijffer,Netherlands,4.11,2,2
+New Zealand,2018,women,9,1,0,9,4.25,The Tattooist of Auschwitz,Heather Morris,New Zealand,4.25,9,2
+Nigeria,1991,men,1,1,0,1,3.73,The Famished Road,Ben Okri,Nigeria,3.73,1,4
+Nigeria,1997,women,1,1,0,1,4.1,The Spider's Web,Dumebi Ezar Ehigiator,Nigeria,4.1,1,5
+Nigeria,2008,women,1,1,0,1,4.24,The Thing Around Your Neck,Chimamanda Ngozi Adichie,Nigeria,4.24,1,6
+Nigeria,2013,women,2,1,0,2,4.31,Americanah,Chimamanda Ngozi Adichie,Nigeria,4.31,2,7
+Norway,1958,men,3,1,0,2,4.01,The Leopard,Jo Nesbø,Norway,4.01,3,6
+Norway,1994,men,1,1,0,1,4.04,Mountains,Jan Kjærstad,Norway,4.04,1,4
+Norway,2006,men,2,1,0,2,3.9,Macbeth,Jo Nesbø,Norway,3.9,2,2
+Norway,2007,men,2,1,0,2,4.01,The Snowman,Jo Nesbø,Norway,4.01,2,4
+Norway,2009,men,6,2,0,5,3.99,Malice,Jørn Lier Horst,Norway,4.12,1,2
+Norway,2010,women,1,1,0,1,3.87,Life,Lisa Aisato Njie Solberg,Norway,3.87,1,6
+Norway,2012,men,4,1,1,4,4.0,The Son,Jo Nesbø,Norway,4.0,4,1
+Norway,2012,women,1,1,0,1,3.92,Freewill,Helga Hjorth,Norway,3.92,1,2
+Norway,2013,men,1,1,0,1,3.6,The Morning Star,Karl Ove Knausgård,Norway,3.6,1,3
+Norway,2020,men,1,1,1,1,3.82,Midnight Sun,Jo Nesbø,Norway,3.82,1,1
+Pakistan,2017,men,1,1,0,1,3.79,Exit West,Mohsin Hamid,Pakistan,3.79,1,9
+Peru,1954,men,4,1,0,2,3.54,Hard Times,Mario Vargas Llosa,Peru,3.54,4,2
+Poland,1993,men,2,1,1,2,4.13,The Last Wish,Andrzej Sapkowski,Poland,4.13,2,1
+Poland,1994,men,1,1,0,1,4.11,Blood of Elves,Andrzej Sapkowski,Poland,4.11,1,5
+Poland,2007,women,2,1,0,2,3.79,Flights,Olga Tokarczuk,Poland,3.79,2,10
+Poland,2009,women,2,2,0,2,3.88,Drive Your Plow Over the Bones of the Dead,Olga Tokarczuk,Poland,3.96,1,6
+Poland,2010,men,1,1,0,1,4.11,The Manuscript Found in Saragossa,Jan Potocki,Poland,4.11,1,5
+Poland,2010,women,1,1,0,1,3.81,The Legacy,Julia Brylewska,Poland,3.81,1,9
+Poland,2011,men,1,1,1,1,4.39,Execution,Remigiusz Mróz,Poland,4.39,1,1
+Poland,2015,men,1,1,0,1,4.21,King,Szczepan Twardoch,Poland,4.21,1,8
+Portugal,1982,men,1,1,0,1,3.93,Baltasar and Blimunda,José Saramago,Portugal,3.93,1,3
+Portugal,1995,men,2,1,0,1,4.13,Blindness,José Saramago,Portugal,4.13,2,3
+Romania,1987,men,1,1,0,1,3.73,Hatchet,Mihail Sadoveanu,Romania,3.73,1,9
+Romania,2014,women,2,1,0,1,3.99,Innocents,Ioana Pârvulescu,Romania,3.99,2,3
+Russia,1957,women,2,1,0,1,3.69,Atlas Shrugged,Ayn Rand,"United States, Russia",3.69,2,2
+Russia,1967,men,1,1,0,1,4.29,The Master and Margarita,Mikhail Bulgakov,Russia,4.29,1,9
+Russia,2007,women,1,1,0,1,3.74,The Garden,Marina Stepnova,Russia,3.74,1,9
+Singapore,2013,men,4,1,0,3,3.85,Crazy Rich Asians,Kevin Kwan,"Singapore, United States",3.85,4,2
+Singapore,2015,men,5,1,0,3,3.82,China Rich Girlfriend,Kevin Kwan,"Singapore, United States",3.82,5,3
+Singapore,2017,men,1,1,0,1,3.93,Rich People Problems,Kevin Kwan,"Singapore, United States",3.93,1,4
+South Africa,1969,men,2,1,1,2,4.16,The Promise,Damon Galgut,South Africa,4.16,2,1
+South Africa,2004,women,1,1,0,1,3.71,The Other Woman,Kristel Loots,South Africa,3.71,1,10
+South Africa,2006,women,1,1,0,1,4.42,Marta,Helena Hugo,South Africa,4.42,1,9
+South Africa,2009,men,1,1,0,1,3.62,Vicious Circle,Wilbur Smith,"United Kingdom, South Africa",3.62,1,4
+South Korea,1997,men,1,1,0,1,3.64,The Invisible Man,Song Sok-ze,South Korea,3.64,1,9
+South Korea,2007,women,2,1,1,2,3.58,The Vegetarian,Han Kang,South Korea,3.58,2,1
+South Korea,2014,women,1,1,0,1,4.17,Human Acts,Han Kang,South Korea,4.17,1,6
+South Korea,2016,women,1,1,0,1,4.0,Paper Princess,Erin Watt,South Korea; Canada,4.0,1,10
+South Korea,2017,women,3,1,0,2,4.26,Pachinko,Min Jin Lee,"South Korea, United States",4.26,3,2
+Spain,1927,men,4,1,0,1,3.07,Eva,Arturo Pérez-Reverte,Spain,3.07,4,3
+Spain,1987,men,1,1,0,1,4.07,The Door,Manel Loureiro,Spain,4.07,1,6
+Spain,1990,men,26,1,9,1,4.24,Homeland,Fernando Aramburu,Spain,4.24,26,1
+Spain,1991,men,1,1,0,1,3.67,The Liar,Mikel Santiago,Spain,3.67,1,9
+Spain,1992,women,1,1,0,1,4.22,Queen,Bebi Fernández,Spain,4.22,1,8
+Spain,2001,men,1,1,1,1,4.27,The Shadow of the Wind,Carlos Ruiz Zafón,Spain,4.27,1,1
+Spain,2001,women,3,1,0,1,3.81,The Family,Sara Mesa,Spain,3.81,3,4
+Spain,2004,men,1,1,0,1,4.06,Natural Law,Ignacio Martínez de Pisón,Spain,4.06,1,7
+Spain,2005,men,4,1,0,1,3.88,Don Quixote,Miguel de Cervantes,Spain,3.88,4,6
+Spain,2006,men,3,1,0,1,4.04,Surrender,Ray Loriga,Spain,4.04,3,6
+Spain,2007,men,3,1,0,1,4.09,Sabotage,Arturo Pérez-Reverte,Spain,4.09,3,2
+Spain,2008,women,3,1,0,2,3.73,Good Luck,Rosa Montero,Spain,3.73,3,5
+Spain,2009,men,1,1,0,1,3.68,Invisible,Eloy Moreno,Spain,3.68,1,8
+Spain,2010,men,3,1,0,1,4.0,Revolution,Arturo Pérez-Reverte,Spain,4.0,3,2
+Spain,2011,men,2,1,0,1,4.04,The Prisoner of Heaven,Carlos Ruiz Zafón,Spain,4.04,2,5
+Spain,2012,men,6,2,1,1,4.11,Independence,Javier Cercas,Spain,4.31,4,1
+Spain,2014,men,6,2,0,1,3.98,Joy,Manuel Vilas,Spain,4.0,2,5
+Spain,2014,women,3,1,0,1,4.3,One Love,Sara Mesa,Spain,4.3,3,8
+Spain,2015,men,15,1,0,1,4.04,Red Queen,Juan Gómez-Jurado,Spain,4.04,15,2
+Spain,2016,men,7,2,3,1,4.19,The Beast,Carmen Mola,Spain; Spain; Spain,4.44,4,1
+Spain,2018,women,1,1,0,1,3.43,Surprise Me,Megan Maxwell,Spain,3.43,1,5
+Spain,2019,women,5,1,0,1,3.95,La cara norte del corazón,Dolores Redondo,Spain,3.95,5,2
+Sweden,1928,men,1,1,0,1,3.69,Quicksand,Henning Mankell,Sweden,3.69,1,5
+Sweden,1997,women,5,1,0,2,4.09,The Lost Boy,Camilla Läckberg,Sweden,4.09,5,2
+Sweden,2003,men,1,1,0,1,4.01,Avenger,Dan Buthler; Dag Ohrlund,Denmark; Sweden,4.01,1,8
+Sweden,2003,women,1,1,0,1,3.73,The Ice Princess,Camilla Läckberg,Sweden,3.73,1,10
+Sweden,2006,women,1,1,0,1,3.44,Theft,Ann-Helén Laestadius,Sweden,3.44,1,2
+Sweden,2012,men,8,1,2,5,4.36,A Man Called Ove,Fredrik Backman,Sweden,4.36,8,1
+Sweden,2012,mixed,2,1,0,2,4.27,Trapped,Camilla Läckberg; Henrik Fexeus,Sweden; Sweden,4.27,2,6
+Sweden,2013,men,16,2,1,10,3.86,My Grandmother Asked Me to Tell You She's Sorry,Fredrik Backman,Sweden,4.05,5,2
+Sweden,2013,women,1,1,0,1,3.56,The Readers of Broken Wheel Recommend,Katarina Bivald,Sweden,3.56,1,8
+Sweden,2015,men,16,1,4,9,3.77,The Girl in the Spider's Web,David Lagercrantz,Sweden,3.77,16,1
+Sweden,2015,mixed,1,1,0,1,3.75,Stalker,Lars Kepler,Sweden,3.75,1,9
+Sweden,2017,men,1,1,0,1,4.33,Us Against You,Fredrik Backman,Sweden,4.33,1,4
+Sweden,2019,men,3,1,0,2,4.35,Anxious People,Fredrik Backman,Sweden,4.35,3,3
+Switzerland,2011,men,1,1,0,1,3.86,The Art of Thinking Clearly,Rolf Dobelli,Switzerland,3.86,1,10
+Tanzania,1991,men,1,1,0,1,4.31,Paradise,Abdulrazak Gurnah,Tanzania,4.31,1,8
+Trinidad and Tobago,2015,men,1,1,0,1,3.79,Fifteen Dogs,Andre Alexis,"Trinidad and Tobago, Canada",3.79,1,2
+Turkey,2009,women,2,1,0,1,4.14,The Forty Rules of Love,Elif Şafak,Turkey,4.14,2,4
+Turkey,2013,women,1,1,0,1,3.97,Three Sisters,İclal Aydın,Turkey,3.97,1,2
+Turkey,2015,women,1,1,0,1,3.96,See Me,Azra Kohen,Turkey,3.96,1,8
+Turkey,2016,men,4,1,0,4,3.71,The Red-Haired Woman,Orhan Pamuk,Turkey,3.71,4,6
+Uganda,2017,men,2,1,0,2,3.69,The Girl Before,J. P. Delaney,"Uganda, United Kingdom",3.69,2,7
+Ukraine,1948,men,1,1,0,1,3.92,Stalingrad,Vasily Grossman,Ukraine,3.92,1,5
+United Kingdom,1932,men,5,1,0,2,3.99,Brave New World,Aldous Huxley,United Kingdom,3.99,5,9
+United Kingdom,1945,men,6,1,0,3,3.95,Animal Farm,George Orwell,United Kingdom,3.95,6,2
+United Kingdom,1962,men,1,1,0,1,3.99,A Clockwork Orange,Anthony Burgess,United Kingdom,3.99,1,6
+United Kingdom,1964,men,1,1,0,1,4.14,Charlie and the Chocolate Factory,Roald Dahl,United Kingdom,4.14,1,2
+United Kingdom,1974,men,5,1,0,4,3.86,The Sentinel,Lee Child; Andrew Child,United Kingdom; United Kingdom,3.86,4,4
+United Kingdom,1991,women,1,1,0,1,3.83,Beauty,Louise Mensch,United Kingdom,3.83,1,3
+United Kingdom,1993,men,1,1,0,1,4.07,A Dangerous Fortune,Ken Follett,United Kingdom,4.07,1,5
+United Kingdom,1993,women,1,1,0,1,4.25,Confusion,Elizabeth Jane Howard,United Kingdom,4.25,1,8
+United Kingdom,1995,men,3,2,0,3,3.77,A Place Called Freedom,Ken Follett,United Kingdom,3.96,1,10
+United Kingdom,1995,women,3,2,0,3,3.57,Casting Off,Elizabeth Jane Howard,United Kingdom,4.28,1,6
+United Kingdom,1996,men,1,1,0,1,3.62,Dark Water,Robert Bryndza,United Kingdom,3.62,1,10
+United Kingdom,1998,men,1,1,0,1,3.43,Heroes,Stephen Fry,United Kingdom,3.43,1,8
+United Kingdom,1998,women,3,1,1,2,4.43,Harry Potter and the Chamber of Secrets,J. K. Rowling,United Kingdom,4.43,3,1
+United Kingdom,1999,women,3,2,0,3,4.35,Harry Potter and the Prisoner of Azkaban,J. K. Rowling,United Kingdom,4.57,2,6
+United Kingdom,2000,women,1,1,0,1,4.56,Harry Potter and the Goblet of Fire,J. K. Rowling,United Kingdom,4.56,1,8
+United Kingdom,2001,women,2,1,1,1,3.98,Fantastic Beasts and Where to Find Them,J. K. Rowling,United Kingdom,3.98,2,1
+United Kingdom,2003,women,1,1,0,1,4.5,Harry Potter and the Order of the Phoenix,J. K. Rowling,United Kingdom,4.5,1,10
+United Kingdom,2004,men,1,1,1,1,3.84,Luna,Ian McDonald,United Kingdom,3.84,1,1
+United Kingdom,2005,women,2,1,0,1,3.66,The It Girl,Ruth Ware,United Kingdom,3.66,2,5
+United Kingdom,2006,women,1,1,0,1,4.26,Revealed,Renee Knight,United Kingdom,4.26,1,6
+United Kingdom,2008,men,1,1,1,1,4.07,Thirteen,Steve Cavanagh,United Kingdom,4.07,1,1
+United Kingdom,2008,women,1,1,0,1,3.84,The Last Concubine,Lesley Downer,United Kingdom,3.84,1,10
+United Kingdom,2009,men,4,2,0,3,3.61,Vicious Circle,Wilbur Smith,"United Kingdom, South Africa",3.62,1,4
+United Kingdom,2009,women,1,1,0,1,3.96,The Horse Dancer,Jojo Moyes,United Kingdom,3.96,1,4
+United Kingdom,2010,men,2,1,1,2,4.08,Whispers of the Dead,Simon Beckett,United Kingdom,4.08,2,1
+United Kingdom,2010,women,4,2,0,2,4.02,The Last Dance,Victoria Hislop,United Kingdom,4.05,3,2
+United Kingdom,2011,men,4,4,0,3,4.05,Last Breath,Robert Bryndza,United Kingdom,4.31,1,5
+United Kingdom,2011,women,28,4,3,8,3.77,Belle,Lesley Pearse,United Kingdom,4.26,1,7
+United Kingdom,2012,men,10,4,1,7,3.78,Night School,Lee Child,United Kingdom,4.03,4,1
+United Kingdom,2012,women,43,9,3,17,3.99,Me Before You,Jojo Moyes,United Kingdom,4.26,12,1
+United Kingdom,2013,men,15,7,3,10,4.06,The Pagan Lord,Bernard Cornwell,United Kingdom,4.33,1,9
+United Kingdom,2013,women,13,8,2,9,3.92,Pride and Prejudice,Jane Austen,United Kingdom,4.26,3,1
+United Kingdom,2014,men,23,8,4,11,4.02,Lamentation,C. J. Sansom,United Kingdom,4.41,1,9
+United Kingdom,2014,women,14,8,4,7,4.03,Before Jamaica Lane,Samantha Young,United Kingdom,4.33,1,4
+United Kingdom,2015,men,1,1,0,1,3.52,The Buried Giant,Kazuo Ishiguro,United Kingdom,3.52,1,6
+United Kingdom,2015,women,98,5,22,21,3.87,Career of Evil,Robert Galbraith,United Kingdom,4.2,2,2
+United Kingdom,2016,men,10,4,0,5,3.86,Us,David Nicholls,United Kingdom,4.36,2,2
+United Kingdom,2016,women,12,5,0,7,3.89,A Thousand Boy Kisses,Tillie Cole,United Kingdom,4.26,3,6
+United Kingdom,2017,men,32,6,2,11,4.1,A Column of Fire,Ken Follett,United Kingdom,4.19,19,1
+United Kingdom,2017,women,14,4,2,7,3.62,My Not So Perfect Life,Sophie Kinsella,United Kingdom,3.8,1,5
+United Kingdom,2018,men,5,1,1,4,4.02,Past Tense,Lee Child,United Kingdom,4.02,5,1
+United Kingdom,2018,women,27,5,3,13,4.04,Lethal White,Robert Galbraith,United Kingdom,4.2,6,1
+United Kingdom,2019,men,4,2,1,2,3.93,Mimic,Daniel Cole,United Kingdom,4.11,1,10
+United Kingdom,2019,women,18,4,1,9,4.3,"Girl, Woman, Other",Bernardine Evaristo,United Kingdom,4.42,3,3
+United Kingdom,2020,women,12,4,4,5,3.92,"Good Girl, Bad Blood",Holly Jackson,United Kingdom,4.52,1,4
+United States,1940,women,1,1,0,1,3.82,The Betrothed,Kiera Cass,United States,3.82,1,6
+United States,1942,men,4,1,0,2,3.98,The Stranger,Harlan Coben,United States,3.98,4,3
+United States,1947,men,1,1,0,1,3.48,The Pearl,John Steinbeck,United States,3.48,1,7
+United States,1951,men,1,1,0,1,3.81,The Catcher in the Rye,J. D. Salinger,United States,3.81,1,8
+United States,1952,men,1,1,0,1,3.78,The Old Man and the Sea,Ernest Hemingway,United States,3.78,1,7
+United States,1953,men,6,2,1,4,4.03,The Long Goodbye,Raymond Chandler,United States,4.21,1,2
+United States,1957,women,2,1,0,1,3.69,Atlas Shrugged,Ayn Rand,"United States, Russia",3.69,2,2
+United States,1960,men,1,1,1,1,4.13,Butcher's Crossing,John Williams,United States,4.13,1,1
+United States,1960,women,10,1,0,7,4.28,To Kill a Mockingbird,Harper Lee,United States,4.28,10,2
+United States,1962,men,1,1,0,1,4.19,One Flew Over the Cuckoo's Nest,Ken Kesey,United States,4.19,1,8
+United States,1963,women,1,1,1,1,3.98,The Collector,Nora Roberts,United States,3.98,1,1
+United States,1965,men,7,2,1,7,4.26,Stoner,John Williams,United States,4.29,4,1
+United States,1968,women,2,1,0,2,4.09,Little Women,Louisa May Alcott,United States,4.09,2,6
+United States,1969,men,2,1,0,2,3.88,Dune Messiah,Frank Herbert,United States,3.88,2,5
+United States,1970,men,10,1,0,4,3.68,The Guardians,John Grisham,United States,3.68,10,2
+United States,1971,women,1,1,0,1,3.86,Nemesis,Catherine Coulter,United States,3.86,1,10
+United States,1976,men,1,1,0,1,3.91,The Adventures of Tom Sawyer,Mark Twain,United States,3.91,1,4
+United States,1977,men,1,1,0,1,4.23,The Shining,Stephen King,United States,4.23,1,3
+United States,1978,men,1,1,0,1,3.85,Women,Charles Bukowski,United States,3.85,1,5
+United States,1983,men,1,1,0,1,3.5,Winter's Tale,Mark Helprin,United States,3.5,1,10
+United States,1984,men,4,2,1,2,3.95,The President's Daughter,Bill Clinton; James Patterson,United States; United States,3.98,3,1
+United States,1986,men,4,1,0,4,4.24,It,Stephen King,United States,4.24,4,3
+United States,1990,men,1,1,0,1,3.92,The Black Book,James Patterson; David Ellis,United States; United States,3.92,1,2
+United States,1991,men,2,2,0,2,4.19,The Waste Lands,Stephen King,United States,4.23,1,8
+United States,1991,women,2,2,0,2,3.95,Outlander,Diana Gabaldon,United States,4.23,1,10
+United States,1992,men,1,1,0,1,4.33,When Nietzsche Wept,Irvin Yalom,United States,4.33,1,5
+United States,1994,men,2,1,0,2,4.13,The Crossing,Michael Connelly,United States,4.13,2,6
+United States,1994,women,1,1,0,1,4.01,Hidden Riches,Nora Roberts,United States,4.01,1,9
+United States,1995,women,2,2,0,1,3.88,All That Glitters,Danielle Steel,United States,3.9,1,6
+United States,1996,men,6,2,0,6,4.35,A Game of Thrones,George R. R. Martin,United States,4.45,5,2
+United States,1996,women,1,1,0,1,3.48,That Summer,Jennifer Weiner,United States,3.48,1,8
+United States,1997,men,2,1,0,1,3.92,American Pastoral,Philip Roth,United States,3.92,2,7
+United States,1998,men,3,1,2,2,4.41,A Clash of Kings,George R. R. Martin,United States,4.41,3,1
+United States,1998,women,3,1,0,2,3.99,Fear Nothing,Lisa Gardner,United States,3.99,3,3
+United States,1999,men,2,1,0,2,4.2,The Perks of Being a Wallflower,Stephen Chbosky,United States,4.2,2,3
+United States,1999,women,2,1,0,2,3.65,The Awakening,Nora Roberts,United States,3.65,2,9
+United States,2000,men,9,5,0,7,4.07,A Storm of Swords,George R. R. Martin,United States,4.53,2,7
+United States,2000,women,2,1,1,2,4.17,The Viscount Who Loved Me,Julia Quinn,United States,4.17,2,1
+United States,2001,men,3,2,0,1,3.54,Hope to Die,James Patterson,United States,3.9,2,3
+United States,2002,men,2,2,0,1,3.73,Liberation Day,George Saunders,United States,3.85,1,10
+United States,2002,women,1,1,0,1,4.18,Romancing Mister Bridgerton,Julia Quinn,United States,4.18,1,5
+United States,2003,men,6,1,2,2,4.3,The Kite Runner,Khaled Hosseini,"United States, Afghanistan",4.3,6,1
+United States,2003,women,2,2,0,2,3.82,"To Sir Phillip, With Love",Julia Quinn,United States,3.89,1,6
+United States,2004,men,5,4,1,2,3.72,The Highwayman,Craig Johnson,United States,3.98,1,10
+United States,2004,women,1,1,0,1,4.03,When He Was Wicked,Julia Quinn,United States,4.03,1,9
+United States,2005,men,2,2,0,2,3.81,Looking for Alaska,John Green,United States,4.02,1,6
+United States,2005,women,5,2,0,2,3.81,Every Breath You Take,Mary Higgins Clark; Alafair Burke,United States; United States,3.89,1,10
+United States,2006,men,3,1,1,2,4.17,Missing You,Harlan Coben,United States,4.17,3,1
+United States,2006,women,5,5,1,4,4.13,Blue,Danielle Steel,United States,4.32,1,1
+United States,2007,men,34,6,7,13,4.09,A Thousand Splendid Suns,Khaled Hosseini,"United States, Afghanistan",4.38,2,1
+United States,2007,women,6,3,0,5,4.04,City of Bones,Cassandra Clare,United States,4.1,3,4
+United States,2008,men,23,8,1,8,3.88,Identical,Scott Turow,United States,4.31,1,4
+United States,2008,women,2,2,0,1,3.96,Exposed,Lisa Scottoline,United States,4.07,1,6
+United States,2009,men,17,9,1,7,3.69,Hot Pursuit,Stuart Woods,United States,4.21,1,10
+United States,2009,women,9,8,1,4,3.98,Undone,Karin Slaughter,United States,4.22,2,5
+United States,2010,men,14,3,2,7,4.2,A Dog's Purpose,W. Bruce Cameron,United States,4.34,2,1
+United States,2010,women,6,6,0,5,3.97,Winter Garden,Kristin Hannah,United States,4.18,1,7
+United States,2011,men,17,7,0,7,4.04,A Monster Calls,Patrick Ness,United States,4.35,2,3
+United States,2011,women,24,8,1,12,4.22,The Song of Achilles,Madeline Miller,United States,4.35,17,1
+United States,2012,men,64,11,11,22,4.09,A Dog's Journey,W. Bruce Cameron,United States,4.41,1,9
+United States,2012,women,32,13,3,13,4.04,Finale,Stephanie Garber,United States,4.18,2,1
+United States,2013,men,78,19,15,25,4.18,The Fallen,David Baldacci,United States,4.43,4,1
+United States,2013,mixed,1,1,0,1,3.78,First Love,James Patterson; Emily Raymond,United States; United States,3.78,1,3
+United States,2013,women,66,23,2,17,3.88,The Mistress,Danielle Steel,United States,4.49,1,5
+United States,2014,men,74,23,4,13,4.19,Words of Radiance,Brandon Sanderson,United States,4.75,1,8
+United States,2014,mixed,1,1,0,1,4.13,The Heist,Janet Evanovich; Lee Goldberg,United States; United States,4.13,1,5
+United States,2014,women,33,18,4,13,3.93,Night Broken,Patricia Briggs,United States,4.42,1,10
+United States,2015,men,33,16,1,10,3.94,The Cartel,Don Winslow,United States,4.31,2,4
+United States,2015,mixed,2,1,1,1,4.07,Never Never,James Patterson; Candice Fox,United States; Australia,4.07,2,1
+United States,2015,women,49,17,3,15,4.0,The Nightingale,Kristin Hannah,United States,4.57,11,4
+United States,2016,men,49,16,5,13,4.1,Gravity Falls: Journal 3,Alex Hirsch,United States,4.69,1,3
+United States,2016,women,42,12,4,21,4.17,It Ends with Us,Colleen Hoover,United States,4.4,22,1
+United States,2017,men,50,17,8,16,3.96,Oathbringer,Brandon Sanderson,United States,4.59,1,1
+United States,2017,women,41,15,0,13,4.2,Silence Fallen,Patricia Briggs,United States,4.39,1,10
+United States,2018,men,38,10,3,11,3.92,Iron Gold,Pierce Brown,United States,4.23,1,3
+United States,2018,mixed,3,2,0,3,3.9,What If It's Us,Becky Albertalli; Adam Silvera,United States,3.91,1,8
+United States,2018,women,45,18,1,15,4.15,Turning Point,Danielle Steel,United States,4.54,1,4
+United States,2019,men,23,6,3,10,4.13,Ambush,James Patterson; James O. Born,United States; United States,4.49,1,5
+United States,2019,mixed,1,1,0,1,3.9,The 19th Christmas,James Patterson; Maxine Paetro,United States,3.9,1,6
+United States,2019,unknown,2,1,0,2,4.23,"Red, White & Royal Blue",Casey McQuiston,United States,4.23,2,4
+United States,2019,women,10,6,0,6,3.93,Legacy,Nora Roberts,United States,4.53,1,7
+United States,2020,men,4,2,0,2,4.56,Mirage,Douglas Kennedy,United States,4.67,2,2
+United States,2020,women,52,12,3,12,4.17,Betty,Tiffany McDaniel,United States,4.5,1,6
+United States,2021,women,5,1,1,2,4.33,The Four Winds,Kristin Hannah,United States,4.33,5,1
+Vietnam,2015,men,1,1,0,1,3.97,The Sympathizer,Viet Thanh Nguyen,Vietnam,3.97,1,8
+Vietnam,2019,men,2,1,0,2,4.05,On Earth We're Briefly Gorgeous,Ocean Vuong,"Vietnam, United States",4.05,2,8
