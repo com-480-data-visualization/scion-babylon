@@ -11,7 +11,6 @@ As we can see, few publishers are close to gender equality.
 
 One factor that seem to impact the ratio quite strongly is the most published book genres, as all publishers with a majority of books published by women have either Romance, Young Adult or both in their top 3.
 
-On the other hand, publishers focusing on Classics/Literature, Science Fiction and Fantasy seem to be publishing men's books overwhelmingly.
 {{< rawhtml >}}
 <style>
   #publisher-chart {
@@ -131,6 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
         .text('Number of books')
         .style('font-size', '12px').style('fill', '#444').style('font-weight', '600');
 
+      // Genre column header
+      svg.append('text')
+        .attr('x', genreStartX - 50)
+        .attr('y', -10)
+        .attr('text-anchor', 'start')
+        .text('Top 3 most published genres')
+        .style('font-size', '12px').style('fill', '#444').style('font-weight', '600');
+
       // Number of books column
       rows.append('text')
         .attr('x', countX - 50)
@@ -173,6 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       // Publisher labels
+      // Publisher column header
+      svg.append('text')
+        .attr('x', -8)
+        .attr('y', -10)
+        .attr('text-anchor', 'end')
+        .text('Publishers')
+        .style('font-size', '12px').style('fill', '#444').style('font-weight', '600');
+      
       svg.append('g')
         .call(d3.axisLeft(y).tickSize(0).tickFormat(p => p))
         .call(ax => ax.select('.domain').remove())

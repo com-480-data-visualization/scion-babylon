@@ -1,5 +1,5 @@
 ---
-title: "Welcome to the publishing industry! :tada:"
+title: "Welcome to the book publishing industry :tada:"
 date: 2026-04-13
 description: "This is a website to host our book visualizations."
 tags: ["d3", "sample", "graph", "shortcodes"]
