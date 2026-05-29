@@ -11,7 +11,7 @@ This deformed map, called a cartogram, shows that as expected most published aut
 
 We looked for other datasets tracking author origin but this was the best available. As a result, African, Central American and Central Asian authors are underrepresented.
 
-*Toggle the button to discover the scaled map !*
+*Toggle the button to discover the scaled map and hover above the countries to see their author counts!*
 <!-- prettier-ignore-start -->
 <script src="https://unpkg.com/topojson@3/dist/topojson.min.js"></script>
 <script src="{{< asset-url "js/cartogram.js" >}}"></script>
@@ -183,7 +183,7 @@ Promise.all([
     .data(cartoFeatures)
     .enter().append("path")
     .attr("class", "carto-country")
-    .attr("d", (d, i) => staticPath(normalFeatures[i]))  
+    .attr("d", (d, i) => staticPath(normalFeatures[i]))
     .attr("fill", color)
     .attr("stroke", congoColors.neutral100)
     .attr("stroke-width", 0.5)
