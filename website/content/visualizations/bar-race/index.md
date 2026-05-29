@@ -11,7 +11,7 @@ Even though the United States publishes more books overall, it does not have the
 
 It is interesting to see the top 3 shift between views: scaled it is Iceland, Norway and Spain, unscaled it is the United States, France and Spain. Spain's author count is high enough that it holds its place in the top 3 either way.
 
-*Toggle the button to see the race with data scaled by inhabitants. Please note that the toggle is disabled while the race is running :)*
+*Toggle the button to see the race with data scaled by inhabitants.*
 <!-- prettier-ignore-start -->
 {{< d3 >}}
 const n = 10;
@@ -135,7 +135,6 @@ d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
     d.year = +d.year;
   });
 
-  // Build flag map from raw rows
   const natToFlag = new Map();
   data.forEach(d => {
     if (!natToFlag.has(d.nationality) && d.alpha2) {
@@ -178,7 +177,6 @@ d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
     return arr;
   }
 
-  // Build keyframes from a given value column
   function buildKeyframes(valueCol) {
     const datevalues = Array.from(
       d3.rollup(data, ([d]) => d[valueCol], d => d.year, d => d.nationality)
@@ -283,7 +281,6 @@ d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
         .attr("opacity", 1));
   }
 
-  // Value tags: inside bar if wide enough, outside if not
   const TAG_MIN_WIDTH = 40;
   function valueTags(svg) {
     let tag = svg.append("g")

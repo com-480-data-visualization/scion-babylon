@@ -119,7 +119,7 @@ Promise.all([
     .filter(d => !problematicIDs.includes(+d.id));
 
   const staticGeometries = topology.objects.countries.geometries
-    .filter(d => problematicIDs.includes(+d.id)); // Russia yes, Antarctica no
+    .filter(d => problematicIDs.includes(+d.id));
 
 
   const values = cartoGeometries.map(d =>  dataById.get(+d.id)?.counts ?? 0);
@@ -183,7 +183,7 @@ Promise.all([
     .data(cartoFeatures)
     .enter().append("path")
     .attr("class", "carto-country")
-    .attr("d", (d, i) => staticPath(normalFeatures[i]))  // ← use staticPath initially
+    .attr("d", (d, i) => staticPath(normalFeatures[i]))  
     .attr("fill", color)
     .attr("stroke", congoColors.neutral100)
     .attr("stroke-width", 0.5)
