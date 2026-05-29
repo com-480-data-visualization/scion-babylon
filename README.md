@@ -87,6 +87,19 @@ The live skeleton is accessible on that [link](https://com-480-data-visualizatio
 
 **80% of the final grade**
 
+### Running locally
+
+The website is built with Hugo. To run it locally, install Hugo if needed, then start the development server from the `website` directory:
+
+```bash
+cd website
+hugo server
+```
+
+The site will be available at the local URL printed by Hugo, usually `http://localhost:1313/scion-babylon/`.
+
+The final version is also deployed at: https://com-480-data-visualization.github.io/scion-babylon/
+
 ## Late policy
 
 - < 24h: 80% of the grade for the milestone
