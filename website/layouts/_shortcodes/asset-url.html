@@ -1,7 +1,1 @@
-{{- $target := .Get 0 -}}
-{{- $path := strings.TrimSuffix "/" (strings.TrimPrefix "/" .Page.RelPermalink) -}}
-{{- $depth := 0 -}}
-{{- if $path -}}
-  {{- $depth = len (split $path "/") -}}
-{{- end -}}
-{{- strings.Repeat $depth "../" -}}{{- $target -}}
+{{- .Get 0 | relURL -}}
