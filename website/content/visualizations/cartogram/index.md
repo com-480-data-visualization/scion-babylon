@@ -5,7 +5,9 @@ description: "Map that scales countries by the number of books published by auth
 tags: ["d3", "visualization"]
 layout: "simple"
 ---
-Toggle the button to discover the scaled map ! 
+This map explores the voices amplified by the publishing industry, by scaling the countries on the map by the number of the authors from these countries. This deformed map, called a cartogram, shows us that as expected most published authors come from European and North America. The United States, Italy and France are some of the countries with the most published authors from our dataset. It should be mentionned that this vizualisation was made with the international bestsellers dataset. This means that it might be skewed towards books published by bigger countries with more reach. We tried finding other datasets with author origin but this one was the best we found. Sadly,  our dataset covered few African, Central American and Central Asian authors.
+
+*Toggle the button to discover the scaled map !*
 <!-- prettier-ignore-start -->
 <script src="https://unpkg.com/topojson@3/dist/topojson.min.js"></script>
 <script src="{{< asset-url "js/cartogram.js" >}}"></script>
@@ -172,12 +174,12 @@ Promise.all([
     .on("mousemove", onMousemove)
     .on("mouseout", onMouseout);
 
-  // Draw cartogram countries
+  // Draw normal map first
   const paths = svg.selectAll(".carto-country")
     .data(cartoFeatures)
     .enter().append("path")
     .attr("class", "carto-country")
-    .attr("d", carto.path)
+    .attr("d", (d, i) => staticPath(normalFeatures[i]))  // ← use staticPath initially
     .attr("fill", color)
     .attr("stroke", congoColors.neutral100)
     .attr("stroke-width", 0.5)

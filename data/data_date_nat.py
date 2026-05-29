@@ -35,6 +35,7 @@ aliases = {
 
 def find_match(nationality, country_names):
     nationality_lower = nationality.lower().strip()
+    country_names.sort(key = len, reverse = True)
     for name in country_names:
         if nationality_lower in name.lower() or name.lower() in nationality_lower:
             return name
@@ -64,7 +65,6 @@ grouped["matched_name"] = grouped["nationality"].apply(
     lambda n: find_match(n, all_names)
 )
 
-# Merge country metadata (without population columns — those are in pop_long)
 country_meta = all_countries[["name", "country-code", "alpha-2"]].copy()
 merged = pd.merge(
     grouped,
@@ -75,11 +75,16 @@ merged = pd.merge(
 )
 merged = merged.rename(columns={"country-code": "ID", "alpha-2":"alpha2"})
 
+def exceptions(series):
+    if series.iloc[0] == "Scotland":
+        return "United Kingdom"
+    return series.iloc[0]
+
 merged_agg = (
     merged
     .groupby(["ID", "alpha2", "year"], dropna=False)
     .agg(
-        nationality=("nationality", "first"),
+        nationality=("nationality", exceptions),
         counts=("counts", "sum"),
     )
     .reset_index()

@@ -28,7 +28,6 @@ def find_match(nationality, country_names):
         return aliases[nationality]
     return None
 
-# TODO: figure out how to map scotland
 nationalities["nationality"] = nationalities["nationality"].apply(lambda n: re.findall(r"[\w'\s]+", str(n))).explode("nationality")
 nationalities["nationality"] = nationalities["nationality"].str.lstrip()
 nationalities = nationalities.groupby(['nationality']).size().reset_index(name='counts')

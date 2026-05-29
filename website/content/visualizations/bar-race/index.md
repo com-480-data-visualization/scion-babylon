@@ -5,7 +5,16 @@ description: "Bar race representing books published by each author nationality o
 tags: ["d3", "visualization"]
 layout: "simple"
 ---
-Toggle the button to see the race with data scaled by inhabitants. Please wait for the race to end to scale the data :)
+This vizualisation represents the amount of authors from a country over time. There is also the possibility to scale it per million of inhabitants. The data spans from 2013 to 2022, that is because these are the ranges available in the international bestsellers dataset.
+We have chosen to only show the first 10 countries.
+
+This allows us to see that even though the United States publish more books, they do not have the biggest ratio of authors per million of inhabitants. Using the scaled view allows us to see tha Iceland has about 32 authors per million inhabitants in 2022, which by far the country with the most authors overall.
+It is good to see the top 3 of countries change, when scaled it is Iceland, Norway and Spain otherwise it is the United States, France and Spain. Spain seems to have a high enough amount of authors that even when scaled it remains in the top 3.
+
+
+
+
+*Toggle the button to see the race with data scaled by inhabitants. Please note that the toggle is disabled while the race is running :)*
 <!-- prettier-ignore-start -->
 {{< d3 >}}
 const n = 10;
@@ -15,17 +24,21 @@ const margin = { top: 20, right: 6, bottom: 6, left: 50 };
 const width = container.clientWidth - margin.left - margin.right;
 const height = margin.top + barSize * n + margin.bottom;
 
+
 const svg = d3.select(container).append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
+d3.select(container).style("position", "relative");
+
 const isDark = document.documentElement.classList.contains("dark");
 const labelColor = isDark ? congoColors.neutral100 : congoColors.neutral700;
 
 // --- Toggle ---
 let useScaled = false;
+let animDuration = 250;
 
 const toggleWrapper = d3.select(container).insert("div", "svg")
   .style("margin-bottom", "10px")
@@ -74,6 +87,43 @@ toggleWrapper.append("span")
   .style("font-size", "15px")
   .style("color", congoColors.neutral700);
 
+toggleWrapper.append("span")
+  .text("Speed:")
+  .style("font-size", "15px")
+  .style("color", congoColors.neutral700)
+  .style("margin-left", "20px");
+
+
+const speedSlider = toggleWrapper.append("input")
+  .attr("type", "range")
+  .attr("min", 50)
+  .attr("max", 1000)
+  .attr("value", 250)
+  .attr("step", 50)
+  .style("accent-color", congoColors.primary300)
+  .style("cursor", "pointer");
+
+
+const speedLabel = toggleWrapper.append("span")
+  .text("1x")
+  .style("font-size", "15px")
+  .style("min-width", "35px")
+  .style("color", congoColors.neutral700);
+
+
+// --- Toggle ---
+const tooltip = d3.select(container).append("div")
+  .style("position", "absolute")
+  .style("background", isDark ? "#333" : "#fff")
+  .style("color", isDark ? "#fff" : "#333")
+  .style("border", "1px solid #ccc")
+  .style("border-radius", "6px")
+  .style("padding", "4px 10px")
+  .style("font-size", "13px")
+  .style("pointer-events", "none")
+  .style("opacity", 0)
+  .style("transition", "opacity 0.15s");
+
 function toFlag(alpha2) {
   if (!alpha2 || alpha2.length !== 2) return "🏳";
   return String.fromCodePoint(
@@ -110,6 +160,16 @@ d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
     .domain(d3.range(n + 1))
     .rangeRound([margin.top, margin.top + barSize * (n + 1 + 0.1)])
     .padding(0.1);
+
+  speedSlider.on("input", function(event) {
+    animDuration = 1050 - +event.target.value;
+    // Invert so higher slider = faster, display as multiplier
+    const mult = (250 / animDuration).toFixed(1);
+    speedLabel.text(`${mult}x`);
+
+    svg.selectAll("*").interrupt();
+    run(keyframes);
+  });
 
   function rank(valueFn) {
     const arr = Array.from(nationalities, nationality => ({
@@ -170,7 +230,17 @@ d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
           .attr("height", y.bandwidth())
           .attr("x", x(0))
           .attr("y", d => y((prev.get(d) || d).rank))
-          .attr("width", d => Math.max(0, x((prev.get(d) || d).counts) - x(0))),
+          .attr("width", d => Math.max(0, x((prev.get(d) || d).counts) - x(0)))
+          .on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1).text(d.nationality);
+          })
+          .on("mousemove", (event) => {
+            const [x, y] = d3.pointer(event, container);
+            tooltip
+              .style("left", `${x + 12}px`)
+              .style("top", `${y - 28}px`);
+          })
+          .on("mouseout", () => tooltip.style("opacity", 0)),
         update => update,
         exit => exit.transition(transition).remove()
           .attr("y", d => y((next.get(d) || d).rank))
@@ -195,11 +265,21 @@ d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
           .attr("dy", "0.35em")
           .attr("text-anchor", "end")
           .attr("opacity", 0)
-          .text(d => natToFlag.get(d.nationality) ?? "🏳"),
-        update => update,
-        exit => exit.transition(transition).remove()
-          .attr("y", d => y((next.get(d) || d).rank) + y.bandwidth() / 2)
-          .attr("opacity", 0)
+          .text(d => natToFlag.get(d.nationality) ?? "🏳")
+          .on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1).text(d.nationality);
+          })
+          .on("mousemove", (event) => {
+            const rect = container.getBoundingClientRect();
+            tooltip
+              .style("left", (event.clientX - rect.left + 12) + "px")
+              .style("top",  (event.clientY - rect.top  - 28) + "px");
+          })
+          .on("mouseout", () => tooltip.style("opacity", 0)),
+          update => update,
+          exit => exit.transition(transition).remove()
+            .attr("y", d => y((next.get(d) || d).rank) + y.bandwidth() / 2)
+            .attr("opacity", 0)
       )
       .call(flag => flag.transition(transition)
         .attr("y", d => y(d.rank) + y.bandwidth() / 2)
@@ -278,23 +358,23 @@ d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
     };
   }
 
-  let running = false;
+  let runId = 0;
 
-  async function run(kf) {
-    if (running) return;
-    running = true;
-    checkbox.attr("disabled", true).style("opacity", "0.4");
-    toggleWrapper.style("opacity", "0.4").style("pointer-events", "none");
-    svg.selectAll("*").remove();
+async function run(kf) {
+  const myId = ++runId;  // claim a unique ID for this run
 
-    const updateBars      = bars(svg);
-    const updateFlags     = flags(svg);
-    const updateValueTags = valueTags(svg);
-    const updateAxis      = axis(svg);
-    const updateTicker    = ticker(svg);
+  svg.selectAll("*").remove();
 
+  const updateBars      = bars(svg);
+  const updateFlags     = flags(svg);
+  const updateValueTags = valueTags(svg);
+  const updateAxis      = axis(svg);
+  const updateTicker    = ticker(svg);
+
+  try {
     for (const keyframe of kf) {
-      const transition = svg.transition().duration(250).ease(d3.easeLinear);
+      if (runId !== myId) break;
+      const transition = svg.transition().duration(animDuration).ease(d3.easeLinear);
       x.domain([0, d3.max(keyframe[1], d => d.counts)]);
       updateAxis(keyframe, transition);
       updateBars(keyframe, transition);
@@ -303,21 +383,22 @@ d3.csv("{{< asset-url "data/nat_date.csv" >}}").then(data => {
       updateTicker(keyframe, transition);
       await transition.end();
     }
-    running = false;
-    checkbox.attr("disabled", null).style("opacity", "1");
-    toggleWrapper.style("opacity", "1").style("pointer-events", "auto");
+  } catch {
   }
+}
 
-  run(keyframes);
+  run(keyframes)
 
-  checkbox.on("change", function() {
-    useScaled = this.checked;
+  checkbox.on("change", function(event) {
+    useScaled = event.target.checked;
     knob.style("background-color", useScaled ? congoColors.primary500 : congoColors.primary300);
     knob.select(".knob-inner").style("transform", useScaled ? "translateX(22px)" : "translateX(0)");
 
     formatNumber = useScaled ? formatScaled : formatRaw;
     keyframes = buildKeyframes(useScaled ? "counts" : "counts_raw");
     ({ prev, next } = getPrevNext(keyframes));
+
+    svg.selectAll("*").interrupt();
     run(keyframes);
   });
 });

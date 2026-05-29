@@ -117,8 +117,8 @@ ID,alpha2,year,nationality,counts,counts_raw
 208,DK,2019,Denmark,0.344,2
 208,DK,2021,Denmark,0.8537,5
 208,DK,2022,Denmark,0.1694,1
-212,DM,2018,Dominican Republic,14.6683,1
-212,DM,2019,Dominican Republic,58.9275,4
+214,DO,2018,Dominican Republic,0.0927,1
+214,DO,2019,Dominican Republic,0.3672,4
 233,EE,2020,Estonia,0.7522,1
 246,FI,2014,Finland,0.1831,1
 246,FI,2015,Finland,0.73,4
@@ -180,15 +180,6 @@ ID,alpha2,year,nationality,counts,counts_raw
 364,IR,2016,Iran,0.0119,1
 364,IR,2021,Iran,0.0113,1
 368,IQ,2016,Iraq,0.026,1
-372,IE,2014,Ireland,1.9323,9
-372,IE,2015,Ireland,1.2761,6
-372,IE,2016,Ireland,1.0498,5
-372,IE,2017,Ireland,0.4143,2
-372,IE,2018,Ireland,0.6125,3
-372,IE,2019,Ireland,0.4019,2
-372,IE,2020,Ireland,1.1905,6
-372,IE,2021,Ireland,0.9784,5
-372,IE,2022,Ireland,1.151,6
 376,IL,2014,Israel,0.4869,4
 376,IL,2015,Israel,0.4773,4
 376,IL,2016,Israel,0.117,1
@@ -251,9 +242,6 @@ ID,alpha2,year,nationality,counts,counts_raw
 508,MZ,2015,Mozambique,0.0377,1
 508,MZ,2016,Mozambique,0.0366,1
 508,MZ,2017,Mozambique,0.0355,1
-512,OM,2020,Romania,0.2211,1
-512,OM,2021,Romania,0.6666,3
-512,OM,2022,Romania,0.2114,1
 528,NL,2013,Netherlands,0.2975,5
 528,NL,2015,Netherlands,0.2361,4
 528,NL,2016,Netherlands,0.2349,4
@@ -267,8 +255,8 @@ ID,alpha2,year,nationality,counts,counts_raw
 554,NZ,2020,New Zealand,0.3943,2
 554,NZ,2021,New Zealand,0.1967,1
 554,NZ,2022,New Zealand,0.1968,1
-562,NE,2015,Nigeria,0.0502,1
-562,NE,2018,Nigeria,0.1803,4
+566,NG,2015,Nigeria,0.0052,1
+566,NG,2018,Nigeria,0.0195,4
 578,NO,2013,Norway,1.3781,7
 578,NO,2014,Norway,1.1679,6
 578,NO,2015,Norway,0.9636,5
@@ -301,6 +289,9 @@ ID,alpha2,year,nationality,counts,counts_raw
 620,PT,2020,Portugal,0.0971,1
 620,PT,2021,Portugal,0.0965,1
 620,PT,2022,Portugal,0.0958,1
+642,RO,2020,Romania,0.0519,1
+642,RO,2021,Romania,0.1569,3
+642,RO,2022,Romania,0.0525,1
 643,RU,2013,Russia,0.0626,9
 643,RU,2014,Russia,0.0416,6
 643,RU,2018,Russia,0.0275,4
@@ -379,15 +370,15 @@ ID,alpha2,year,nationality,counts,counts_raw
 818,EG,2020,Egypt,0.0091,1
 818,EG,2022,Egypt,0.0444,5
 826,GB,2013,United Kingdom,0.3118,20
-826,GB,2014,United Kingdom,0.6964,45
-826,GB,2015,Scotland,0.5685,37
-826,GB,2016,Scotland,0.5182,34
-826,GB,2017,United Kingdom,0.5761,38
-826,GB,2018,United Kingdom,0.4073,27
-826,GB,2019,United Kingdom,0.5853,39
-826,GB,2020,United Kingdom,0.5544,37
-826,GB,2021,United Kingdom,0.4628,31
-826,GB,2022,United Kingdom,0.429,29
+826,GB,2014,Ireland,0.8357,54
+826,GB,2015,Ireland,0.6606,43
+826,GB,2016,Ireland,0.5944,39
+826,GB,2017,Ireland,0.6064,40
+826,GB,2018,Ireland,0.4526,30
+826,GB,2019,Ireland,0.6153,41
+826,GB,2020,Ireland,0.6443,43
+826,GB,2021,Ireland,0.5374,36
+826,GB,2022,Ireland,0.5177,35
 834,TZ,2021,Tanzania,0.0159,1
 840,US,2013,United States,0.2684,85
 840,US,2014,United States,0.4385,140

@@ -36,7 +36,7 @@ fingerprintAlgorithm = "sha256"
   recentLimit = 5
 
 [article]
-  showDate = true
+  showDate = false
   showDateUpdated = false
   showAuthor = true
   showBreadcrumbs = true
@@ -47,8 +47,8 @@ fingerprintAlgorithm = "sha256"
   showHeadingAnchors = true
   showPagination = true
   invertPagination = false
-  showReadingTime = true
-  showTableOfContents = true
+  showReadingTime = false
+  showTableOfContents = false
   showTaxonomies = false
   showWordCount = false
   showComments = false
