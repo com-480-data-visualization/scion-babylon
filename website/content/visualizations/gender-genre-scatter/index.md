@@ -5,6 +5,12 @@ tags: ["d3", "visualization"]
 layout: "simple"
 ---
 
+This scatterplot compares average book price and average rating for male and non-male author groups across genres or author nationalities.
+
+Each point summarizes one category, making it easier to see whether rating and price patterns differ between gender groups for the same part of the dataset.
+
+Use the group selector and the minimum-books slider to clean up the cloud of points, then hover around to spot the categories that behave a little differently from the rest.
+
 <!-- prettier-ignore-start -->
 {{< d3 >}}
 const scatterRoot = d3.select(container)

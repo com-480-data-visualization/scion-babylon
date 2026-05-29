@@ -9,7 +9,7 @@ tags: ["d3", "sample", "graph", "shortcodes"]
 A powerful, lightweight visualization for COM-480 built with Hugo, Tailwind CSS.
 {{< /lead >}}
 
-# Visualizations
+# Visualizations {#visualizations}
 
 ## Project visualizations
 
@@ -21,3 +21,5 @@ A powerful, lightweight visualization for COM-480 built with Hugo, Tailwind CSS.
 - [Languages](visualizations/languages/): see the distribution of books by language as a waffle chart.
 - [Publishers](visualizations/publishers/): compare gender representation across major publishers.
 - [Library](visualizations/library/): browse and filter books on an interactive shelf.
+
+{{< team-profile >}}

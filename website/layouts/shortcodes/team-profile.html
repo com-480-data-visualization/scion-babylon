@@ -1,0 +1,35 @@
+{{ $author := site.Language.Params.Author }}
+{{ $lazy := site.Params.enableImageLazyLoading | default true }}
+
+<section class="not-prose mt-12 flex flex-col items-center text-center">
+  {{ with $author.image }}
+    {{ with resources.Get . }}
+      {{ $teamImage := .Fill "96x96 Center" }}
+      <img
+        src="{{ $teamImage.RelPermalink }}"
+        width="96"
+        height="96"
+        alt="{{ $author.name | default site.Title }}"
+        class="mb-3 rounded-full"
+        style="width: 96px; height: 96px; object-fit: cover;"
+        {{ with $lazy }}loading="lazy" decoding="async"{{ end }}
+      />
+    {{ end }}
+  {{ end }}
+  <h2 class="mb-1 text-2xl font-bold text-neutral-800 dark:text-neutral-100">
+    {{ $author.name | default site.Title }}
+  </h2>
+  {{ with $author.headline }}
+    <p class="mb-1 text-base text-neutral-500 dark:text-neutral-400">
+      {{ . | markdownify | emojify }}
+    </p>
+  {{ end }}
+  {{ with $author.bio }}
+    <p class="mb-2 max-w-xl text-sm text-neutral-600 dark:text-neutral-300">
+      {{ . | markdownify | emojify }}
+    </p>
+  {{ end }}
+  <div class="text-xl">
+    {{ partialCached "author-links.html" . }}
+  </div>
+</section>
