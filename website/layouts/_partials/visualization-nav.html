@@ -1,12 +1,12 @@
 {{ $items := slice
-  (dict "title" "Gender explorer - filtered comparison" "url" "/visualizations/gender-explorer/")
-  (dict "title" "The gender-genre scatter" "url" "/visualizations/gender-genre-scatter/")
-  (dict "title" "Gender explorator" "url" "/visualizations/gender-explorator/")
-  (dict "title" "Cartogram" "url" "/visualizations/cartogram/")
-  (dict "title" "Bar race" "url" "/visualizations/bar-race/")
-  (dict "title" "Languages" "url" "/visualizations/languages/")
-  (dict "title" "Publishers" "url" "/visualizations/publishers/")
-  (dict "title" "Library" "url" "/visualizations/library/")
+  (dict "title" "Gender explorer - filtered comparison" "url" "visualizations/gender-explorer/")
+  (dict "title" "The gender-genre scatter" "url" "visualizations/gender-genre-scatter/")
+  (dict "title" "Gender explorator" "url" "visualizations/gender-explorator/")
+  (dict "title" "Cartogram" "url" "visualizations/cartogram/")
+  (dict "title" "Bar race" "url" "visualizations/bar-race/")
+  (dict "title" "Languages" "url" "visualizations/languages/")
+  (dict "title" "Publishers" "url" "visualizations/publishers/")
+  (dict "title" "Library" "url" "visualizations/library/")
 }}
 
 {{ $current := .RelPermalink }}
@@ -19,7 +19,7 @@
 
 {{ if ge $currentIndex 0 }}
   {{ $lastIndex := sub (len $items) 1 }}
-  {{ $home := dict "title" "Home" "url" "/" }}
+  {{ $home := dict "title" "Home" "url" "" }}
   {{ $previous := cond (eq $currentIndex 0) $home (index $items (sub $currentIndex 1)) }}
   {{ $next := cond (eq $currentIndex $lastIndex) $home (index $items (add $currentIndex 1)) }}
 
