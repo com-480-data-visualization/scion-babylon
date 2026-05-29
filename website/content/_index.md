@@ -9,7 +9,7 @@ tags: ["d3", "sample", "graph", "shortcodes"]
 A powerful, lightweight visualization for COM-480 built with Hugo, Tailwind CSS.
 {{< /lead >}}
 
-# Visualizations
+# Visualizations {#visualizations}
 
 ## Project visualizations
 

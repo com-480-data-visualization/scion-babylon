@@ -1,0 +1,49 @@
+{{ $items := slice
+  (dict "title" "Gender explorer - filtered comparison" "url" "/visualizations/gender-explorer/")
+  (dict "title" "The gender-genre scatter" "url" "/visualizations/gender-genre-scatter/")
+  (dict "title" "Gender explorator" "url" "/visualizations/gender-explorator/")
+  (dict "title" "Cartogram" "url" "/visualizations/cartogram/")
+  (dict "title" "Bar race" "url" "/visualizations/bar-race/")
+  (dict "title" "Languages" "url" "/visualizations/languages/")
+  (dict "title" "Publishers" "url" "/visualizations/publishers/")
+  (dict "title" "Library" "url" "/visualizations/library/")
+}}
+
+{{ $current := .RelPermalink }}
+{{ $currentIndex := -1 }}
+{{ range $index, $item := $items }}
+  {{ if eq $current ($item.url | relURL) }}
+    {{ $currentIndex = $index }}
+  {{ end }}
+{{ end }}
+
+{{ if ge $currentIndex 0 }}
+  {{ $lastIndex := sub (len $items) 1 }}
+  {{ $home := dict "title" "Home" "url" "/" }}
+  {{ $previous := cond (eq $currentIndex 0) $home (index $items (sub $currentIndex 1)) }}
+  {{ $next := cond (eq $currentIndex $lastIndex) $home (index $items (add $currentIndex 1)) }}
+
+  <nav class="not-prose mt-12 flex flex-wrap items-center justify-between gap-8 border-t border-neutral-200 pt-8 dark:border-neutral-700">
+    <a
+      class="group inline-flex max-w-full items-center gap-4 text-neutral-700 transition hover:text-primary-700 dark:text-neutral-200 dark:hover:text-primary-300"
+      href="{{ $previous.url | relURL }}"
+    >
+      <span class="text-5xl leading-none transition group-hover:-translate-x-1" aria-hidden="true">&larr;</span>
+      <span class="min-w-0">
+        <span class="block text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Back</span>
+        <span class="block text-2xl font-bold leading-tight">{{ $previous.title }}</span>
+      </span>
+    </a>
+
+    <a
+      class="group inline-flex max-w-full items-center gap-4 text-right text-primary-800 transition hover:text-primary-950 dark:text-primary-200 dark:hover:text-primary-300"
+      href="{{ $next.url | relURL }}"
+    >
+      <span class="min-w-0">
+        <span class="block text-sm font-semibold uppercase tracking-wide text-primary-600 dark:text-primary-300">Next</span>
+        <span class="block text-2xl font-bold leading-tight">{{ $next.title }}</span>
+      </span>
+      <span class="text-5xl leading-none transition group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+    </a>
+  </nav>
+{{ end }}
