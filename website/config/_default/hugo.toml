@@ -4,7 +4,6 @@
 
 theme = "congo"
 defaultContentLanguage = "en"
-baseURL = "https://com-480-data-visualization.github.io/scion-babylon/"
 
 enableRobotsTXT = true
 summaryLength = 0
