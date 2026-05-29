@@ -119,7 +119,7 @@ Promise.all([
     .filter(d => !problematicIDs.includes(+d.id));
 
   const staticGeometries = topology.objects.countries.geometries
-    .filter(d => problematicIDs.includes(+d.id)); // Russia yes, Antarctica no
+    .filter(d => problematicIDs.includes(+d.id)); 
 
 
   const values = cartoGeometries.map(d =>  dataById.get(+d.id)?.counts ?? 0);
