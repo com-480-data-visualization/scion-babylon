@@ -1,10 +1,10 @@
 ---
-title: "Women's bookshop"
+title: "The Bookshop"
 date: 2026-04-13
 description: "browse and filter books on an interactive shelf"
 layout: "simple"
 ---
-## Welcome to our bookshop ! 
+## Welcome to our bookshop !
 
 Press the button to discover books written exclusively by women from all over the world :)
 

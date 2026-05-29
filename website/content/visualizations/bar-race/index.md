@@ -1,18 +1,15 @@
 ---
-title: "Bar Race"
+title: "The Countries Race"
 date: 2026-04-13
 description: "Bar race representing books published by each author nationality over time, with optional population scaling."
 tags: ["d3", "visualization"]
 layout: "simple"
 ---
-This vizualisation represents the amount of authors from a country over time. There is also the possibility to scale it per million of inhabitants. The data spans from 2013 to 2022, that is because these are the ranges available in the international bestsellers dataset.
-We have chosen to only show the first 10 countries.
+This visualisation represents the number of authors from each country over time, with the option to scale by million inhabitants. The data spans from 2013 to 2022, which corresponds to the range available in the International Bestsellers dataset. We chose to only show the top 10 countries.
 
-This allows us to see that even though the United States publish more books, they do not have the biggest ratio of authors per million of inhabitants. Using the scaled view allows us to see tha Iceland has about 32 authors per million inhabitants in 2022, which by far the country with the most authors overall.
-It is good to see the top 3 of countries change, when scaled it is Iceland, Norway and Spain otherwise it is the United States, France and Spain. Spain seems to have a high enough amount of authors that even when scaled it remains in the top 3.
+Even though the United States publishes more books overall, it does not have the highest ratio of authors per million inhabitants. Switching to the scaled view reveals that Iceland reaches around 32 authors per million inhabitants in 2022, making it by far the most represented country relative to its size.
 
-
-
+It is interesting to see the top 3 shift between views: scaled it is Iceland, Norway and Spain, unscaled it is the United States, France and Spain. Spain's author count is high enough that it holds its place in the top 3 either way.
 
 *Toggle the button to see the race with data scaled by inhabitants. Please note that the toggle is disabled while the race is running :)*
 <!-- prettier-ignore-start -->

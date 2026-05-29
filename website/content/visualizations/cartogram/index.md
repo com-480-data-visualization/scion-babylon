@@ -1,11 +1,15 @@
 ---
-title: "Cartogram"
+title: "Authors Across The World"
 date: 2026-04-13
 description: "Map that scales countries by the number of books published by authors from those countries."
 tags: ["d3", "visualization"]
 layout: "simple"
 ---
-This map explores the voices amplified by the publishing industry, by scaling the countries on the map by the number of the authors from these countries. This deformed map, called a cartogram, shows us that as expected most published authors come from European and North America. The United States, Italy and France are some of the countries with the most published authors from our dataset. It should be mentionned that this vizualisation was made with the international bestsellers dataset. This means that it might be skewed towards books published by bigger countries with more reach. We tried finding other datasets with author origin but this one was the best we found. Sadly,  our dataset covered few African, Central American and Central Asian authors.
+This map explores the voices amplified by the publishing industry by scaling each country by the number of authors from that country.
+
+This deformed map, called a cartogram, shows that as expected most published authors come from Europe and North America. The United States, Italy and France are among the countries with the most published authors in our dataset. It should be noted that this visualisation was built from the International Bestsellers dataset, which may skew results towards larger countries with more global reach.
+
+We looked for other datasets tracking author origin but this was the best available. As a result, African, Central American and Central Asian authors are underrepresented.
 
 *Toggle the button to discover the scaled map !*
 <!-- prettier-ignore-start -->
