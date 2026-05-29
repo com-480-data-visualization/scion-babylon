@@ -100,6 +100,11 @@ The site will be available at the local URL printed by Hugo, usually `http://loc
 
 The final version is also deployed at: https://com-480-data-visualization.github.io/scion-babylon/
 
+### Process book
+The process book can be found [here](screencast.mp4)
+
+### Screencast
+The video presenting our final website can be found [here](report.pdf)
 ## Late policy
 
 - < 24h: 80% of the grade for the milestone
