@@ -1,5 +1,5 @@
 ---
-title: "Bar Race"
+title: "The Countries Race"
 date: 2026-04-13
 description: "Bar race representing books published by each author nationality over time, with optional population scaling."
 tags: ["d3", "visualization"]

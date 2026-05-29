@@ -1,5 +1,5 @@
 ---
-title: "Cartogram"
+title: "Authors Across The World"
 date: 2026-04-13
 description: "Map that scales countries by the number of books published by authors from those countries."
 tags: ["d3", "visualization"]

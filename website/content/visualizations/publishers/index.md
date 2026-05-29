@@ -1,5 +1,5 @@
 ---
-title: "Publishers"
+title: "Equality By Publishers"
 date: 2026-04-13
 description: "compare gender representation across major publishers"
 layout: "simple"
@@ -9,7 +9,7 @@ This charts explores the relationship betwen publishers and authors' gender.
 
 As we can see, few publishers are close to gender equality.
 
-One factor that seem to impact the ratio quite strongly is the most published book genres, as all publishers with a majority of books published by women have either Romance, Young Adult or both in their top 3. 
+One factor that seem to impact the ratio quite strongly is the most published book genres, as all publishers with a majority of books published by women have either Romance, Young Adult or both in their top 3.
 
 On the other hand, publishers focusing on Classics/Literature, Science Fiction and Fantasy seem to be publishing men's books overwhelmingly.
 {{< rawhtml >}}

@@ -1,11 +1,13 @@
 ---
-title: "Bestseller ratings timeline by author gender"
+title: "The Bestseller's Timeline"
 description: "Follow bestseller ratings year by year, with women-led titles above the timeline and men-led titles below."
 tags: ["d3", "visualization", "timeline"]
 layout: "simple"
 ---
 
 This timeline compares Goodreads-style ratings by publication year for books that appeared in the monthly international bestseller rankings, using all author origins together. Drag or swipe horizontally to move through the full timeline.
+
+It is interesting to note that between 1927 and 1990, there are remarkably few women bestsellers. Which seems to match with the historical context of these years. This visualisations allows us to see that there is not real rating disparity between the women's besteller and the men's bestseller for a given year.
 
 <style>
 .bestsellers-timeline .timeline-card {

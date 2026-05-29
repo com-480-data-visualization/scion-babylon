@@ -1,5 +1,5 @@
 ---
-title: "Gender explorator"
+title: "Exploring Gender"
 description: "Explore gender disparity across genres and author nationalities."
 tags: ["d3", "visualization"]
 layout: "simple"
@@ -10,6 +10,8 @@ This view explores gender disparity across book genres and author nationalities 
 Change the sorting and number of rows to highlight the largest categories, the strongest disparities, or the categories closest to parity.
 
 Move the row slider and change the sorting mode to make different stories surface: big categories first, sharpest gaps next, and quieter near-parity cases when you want a closer look.
+
+The different sorting possibilities allow different patterns to emerge. Sorting by most books shows that Romance is the most publsihed genre and it is women-led. Second to Romance, we have Fantansy that is a male-led genre, with around 61% of male authors. It is interesting to note that Classics and Philosophy seem to written mostly by male authors. That could be for historical reasons, for example thinking about George Sand which was a women publishing under a male name.
 
 <!-- prettier-ignore-start -->
 {{< d3 >}}

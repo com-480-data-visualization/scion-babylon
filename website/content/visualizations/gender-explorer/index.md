@@ -1,5 +1,5 @@
 ---
-title: "Gender explorer - filtered comparison"
+title: "Filtering Gender"
 description: "Filter genres or author nationalities and compare male, female, and other authorship totals."
 tags: ["d3", "visualization"]
 layout: "simple"
@@ -10,6 +10,8 @@ This filtered comparison lets you select either book genres or author nationalit
 Use the filters to focus on specific categories and see how the gender distribution changes across different slices of the Goodreads dataset.
 
 Try switching between genres and nationalities, then raise the minimum-books slider to let the small categories step aside and reveal the bigger patterns.
+
+One interesting filter is to filter by Japanese authors, this shows a significant gender disparity with only 5 female authors for 49 male authors.
 
 <!-- prettier-ignore-start -->
 {{< d3 >}}

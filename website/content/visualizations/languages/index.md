@@ -1,5 +1,5 @@
 ---
-title: "Languages"
+title: "The Most Published Languages"
 date: 2026-04-13
 description: "Guide to D3.js usage in Congo"
 layout: "simple"

@@ -1,5 +1,5 @@
 ---
-title: "The gender-genre scatter"
+title: "The Gender Scatter"
 description: "Compare average price and average rating by genre or author nationality and gender group."
 tags: ["d3", "visualization"]
 layout: "simple"
@@ -10,6 +10,8 @@ This scatterplot compares average book price and average rating for male and fem
 Each point summarizes one category, making it easier to see whether rating and price patterns differ between gender groups for the same part of the dataset.
 
 Use the group selector and category filters to clean up the cloud of points, then hover around to spot the categories that behave a little differently from the rest.
+
+Selecting all genres and all nationalities allows us to see that one average women are selling books for a lower price and their books seem to be consitentily rated lower. Across genres the disparity seems more stricking that accross nationalities. It should mentionned that the rating scale does not have a very big range as most books seem to be in the range between 3 to 5.
 
 <!-- prettier-ignore-start -->
 {{< d3 >}}
