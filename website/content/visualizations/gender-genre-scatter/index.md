@@ -5,11 +5,11 @@ tags: ["d3", "visualization"]
 layout: "simple"
 ---
 
-This scatterplot compares average book price and average rating for male and non-male author groups across genres or author nationalities.
+This scatterplot compares average book price and average rating for male and female author groups across genres or author nationalities.
 
 Each point summarizes one category, making it easier to see whether rating and price patterns differ between gender groups for the same part of the dataset.
 
-Use the group selector and the minimum-books slider to clean up the cloud of points, then hover around to spot the categories that behave a little differently from the rest.
+Use the group selector and category filters to clean up the cloud of points, then hover around to spot the categories that behave a little differently from the rest.
 
 <!-- prettier-ignore-start -->
 {{< d3 >}}
@@ -46,6 +46,11 @@ const symbolByGender = {
   "Male authors": d3.symbolCircle,
   "Non-male authors": d3.symbolDiamond,
 };
+const genderLabels = {
+  "Male authors": "Male authors",
+  "Non-male authors": "Female authors",
+};
+const minimumBooks = 2;
 
 const scatterLayout = scatterRoot.append("div")
   .style("display", "grid")
@@ -82,21 +87,6 @@ scatterMode.selectAll("option")
   .attr("value", d => d.value)
   .text(d => d.label);
 
-const scatterMinWrap = scatterControls.append("label")
-  .style("display", "grid")
-  .style("gap", "7px")
-  .style("font-size", "13px")
-  .style("font-weight", 650);
-const scatterMinLabel = scatterMinWrap.append("span");
-const scatterMin = scatterMinWrap.append("input")
-  .attr("type", "range")
-  .attr("min", 2)
-  .attr("max", 50)
-  .attr("value", 5)
-  .attr("step", 1)
-  .style("width", "100%")
-  .style("accent-color", "#bd93f9");
-
 const genderLegend = scatterControls.append("div");
 genderLegend.append("div")
   .style("font-size", "13px")
@@ -123,7 +113,7 @@ const genderOptions = genderLegend.append("div")
     .attr("fill", genderColors[group])
     .attr("stroke", scatterTheme.pointStroke)
     .attr("stroke-width", 1);
-  label.append("span").text(group);
+  label.append("span").text(genderLabels[group]);
 });
 
 const genreFilter = scatterControls.append("fieldset")
@@ -200,14 +190,13 @@ const scatterYTitle = scatterChart.append("text");
 
 function eligibleAttributes(data) {
   const attributeType = scatterMode.property("value");
-  const minimum = +scatterMin.property("value");
   const grouped = d3.group(
     data.filter(d => d.attribute_type === attributeType),
     d => d.attribute
   );
   return new Set(Array.from(grouped, ([attribute, rows]) => {
     const counts = new Map(rows.map(d => [d.gender_group, d.books]));
-    return counts.get("Male authors") >= minimum && counts.get("Non-male authors") >= minimum
+    return counts.get("Male authors") >= minimumBooks && counts.get("Non-male authors") >= minimumBooks
       ? attribute
       : null;
   }).filter(Boolean));
@@ -315,7 +304,6 @@ function drawScatter(data) {
 
   const totalBooks = d3.sum(visible, d => d.books);
   const selectedCount = visible.length ? d3.max(visible, d => d.attributes) : 0;
-  scatterMinLabel.text(`Minimum books in each gender group: ${scatterMin.property("value")}`);
   scatterSummary.text(`${selectedCount} ${attributeType === "genre" ? "genres" : "author nationalities"} combined - ${d3.format(",")(totalBooks)} priced records`);
 
   const points = scatterChart.selectAll(".scatter-point")
@@ -340,7 +328,7 @@ function drawScatter(data) {
         .style("opacity", 1)
         .style("left", `${left + 14}px`)
         .style("top", `${top - 36}px`)
-        .html(`<strong style="color: #111318; font-weight: 750;">${d.gender_group}</strong><br/>Selected categories: ${d.attributes}<br/>Average price: $${d.average_price.toFixed(2)}<br/>Average rating: ${d.average_rating.toFixed(2)}<br/>Books: ${d3.format(",")(d.books)}`);
+        .html(`<strong style="color: #111318; font-weight: 750;">${genderLabels[d.gender_group]}</strong><br/>Selected categories: ${d.attributes}<br/>Average price: $${d.average_price.toFixed(2)}<br/>Average rating: ${d.average_rating.toFixed(2)}<br/>Books: ${d3.format(",")(d.books)}`);
     })
     .on("mouseout", () => scatterTooltip.style("opacity", 0))
     .transition()
@@ -376,10 +364,6 @@ d3.csv("{{< asset-url "data/gender_price_scatter.csv" >}}", d3.autoType).then(da
   drawScatter(data);
   genreOptions.on("change", () => drawScatter(data));
   scatterMode.on("change", () => {
-    populateAttributes(data);
-    drawScatter(data);
-  });
-  scatterMin.on("input", () => {
     populateAttributes(data);
     drawScatter(data);
   });
